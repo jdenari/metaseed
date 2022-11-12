@@ -25,7 +25,7 @@
            <button 
                type="button" 
                class="btn btn-primary w-100"
-               @click="login"
+               @click="loginVerification"
                >Submit
            </button>
            <p>
@@ -49,13 +49,13 @@ export default {
         }
     },
     methods: {
-       login() {
+       loginVerification() {
            this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
            .catch((error) => {
                this.errorText = error
            }).then((user) => {
                //we are signed in
-               redirect ('/client/home')
+               $nuxt.$router.push('/client/home')
            })
         },
     }
