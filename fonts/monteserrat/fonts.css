@@ -1,0 +1,15 @@
+@font-face {
+    
+    font-family: 'Montserrat';
+    src:    url(Montserrat-VariableFont_wght.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+
+    font-family: 'Milionaria';
+    src:    url(../milionaria/milionaria.otf) format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
