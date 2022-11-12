@@ -1,7 +1,8 @@
 <template>
     <div>
-       <form class="w-25 p-3">
-           <div class="mb-3">
+       <form class="w-25 p-3 border m-auto">
+            <h4 class="text-center p-2">Iniciar Sessão</h4>
+            <div class="my-3">
                <label for="exampleInputEmail1" class="form-label">Email address</label>
                <input 
                    type="email" 
@@ -22,16 +23,19 @@
                    v-model="auth.password"
                >
            </div>
-           <button 
-               type="button" 
-               class="btn btn-primary w-100"
-               @click="loginVerification"
-               >Submit
-           </button>
-           <p>
+           <div class="w-100 d-md-flex justify-content-md-end">
+                <button 
+                type="button" 
+                class="btn btn-primary w-25 me-md-2"
+                @click="loginVerification"
+                >Entrar →
+                </button>
+            </div>
+           <div class="p text-center p-3">
                {{ errorText }}
-           </p>
-           <NuxtLink to="/">GO TO LANDING PAGE</NuxtLink>
+           </div>
+           <div class="p">Quer criar uma conta?<NuxtLink to="/"> Entre em contato.</NuxtLink></div>
+           
        </form>
    </div>
 </template>
