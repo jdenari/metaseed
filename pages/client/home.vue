@@ -1,12 +1,15 @@
 <template>
     <div>
-        <h1>client / home</h1>
+      <SideBar />
     </div>
-    
-</template>
+  </template>
 
 <script>
+import SideBar from '../../components/ClientPage/SideBar.vue';
     export default {
+        components: {
+            SideBar
+        },
         middleware: ['auth']
     }
 </script>
