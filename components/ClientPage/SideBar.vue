@@ -1,11 +1,16 @@
 <template>
     <div>
-      	<b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
-      	<b-sidebar id="sidebar-1" visible="true">
+		<aside class="sidebar bg-light p-3">
+			<div class="w-100 d-flex flex-row-reverse p-1 mb-3">
+				<a href="" @click="changeSideBar">
+					<img src="../../static/icons/arrow-bar-left.svg" alt="Ícone de seta a esquerda" class="buttonSideBar">
+				</a>
+			</div>
 			<AccordionSideBar
 				v-for="(item, index) in accordeonItems" 
 				:key="index"
-				:accordeonItem="item">
+				:accordeonItem="item"
+				class="p-1">
 			</AccordionSideBar>
 			<div class="p-3 mt-3 border-top">
 				<FooterSideBarVue
@@ -14,7 +19,7 @@
 					:footerItem="item">
 				</FooterSideBarVue>
 			</div>
-      	</b-sidebar>
+		</aside>
     </div>
 </template>
 
@@ -42,6 +47,16 @@
 			}
 		},
         methods: {
+			changeSideBar() {
+				console.log('ativo')
+			}
         }
     }
 </script>
+
+<style scoped>
+	.sidebar{
+		width: 350px;
+		height: 92vh;
+	}
+</style>

@@ -1,7 +1,10 @@
 <template>
     <div>
-      <!-- <SideBar /> -->
       <MainHeader />
+      <div class="d-flex">
+        <SideBar />
+      </div>
+      
     </div>
   </template>
 
@@ -13,7 +16,7 @@ import MainHeader from '../../components/MainHeader.vue'
             SideBar
             , MainHeader
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 
