@@ -1,16 +1,16 @@
 <template>
      <div class="p-3">
-        <LandingPageHeader />
+        <MainHeader />
         <LoginField />
     </div>
 </template>
 
 <script>
-import LandingPageHeader from '../../components/LandingPage/LandingPageHeader.vue';
+import MainHeader from '../../components/MainHeader.vue';
 import LoginField from '../../components/SigninPage/LoginField.vue';
 export default {
     components: {
-        LandingPageHeader
+        MainHeader
         , LoginField
     },
     methods: {}

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <MainHeader />
         <section class="main-sec p-3">
             <SectionForm />
         </section>
@@ -8,11 +9,13 @@
 
 <script>
 import SectionForm from '../components/LandingPage/Section-Form.vue';
+import MainHeader from '../components/MainHeader.vue';
 
 export default {
     name: "IndexPage",
     components: {
         SectionForm
+        , MainHeader
     }
 }
 </script>

@@ -21,7 +21,7 @@
                    id="exampleInputPassword1"
                    name="password"
                    v-model="auth.password"
-               >
+                >
            </div>
            <div class="w-100 d-md-flex justify-content-md-end">
                 <button 
@@ -55,12 +55,13 @@ export default {
     methods: {
        loginVerification() {
            this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
-           .catch((error) => {
+            .catch((error) => {
                this.errorText = error
-           }).then((user) => {
+            }).then((user) => {
                //we are signed in
+               this.$store.commit('loginIn')
                $nuxt.$router.push('/client/home')
-           })
+            })
         },
     }
 }
