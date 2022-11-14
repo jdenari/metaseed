@@ -1,29 +1,40 @@
 <template>
     <nav class="navbar navbar-expand-xl p-3 bg-dark">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end w-100">
-            <div v-if="!this.$store.state.userLogin">
-                <button class="btn btn-light me-md-2 m-1" type="button">Registrar</button>
+        <img src="../static/logo/logo-metaseed-small.png" alt="" class="px-3">
+        <ul class="navbar-nav lg-auto">
+            <li class="nav-item px-3">
+                <NuxtLink to="/">
+                    <a 
+                        class="nav-link text-light" 
+                        >Home
+                    </a>
+                </NuxtLink>
+            </li>
+        </ul>
+        <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-if="!this.$store.state.userLogin">
+            <li class="nav-item px-3">
+                <a href="#" class="nav-link text-light">Registrar</a>
+            </li>
+            <li class="nav-item px-3">
                 <NuxtLink to="/auth/signin">
                     <button 
-                        class="btn btn-light m-1" 
+                        class="btn btn-outline-light" 
                         type="button"
                         >Entrar
                     </button>
                 </NuxtLink>
-            </div>
-            <div v-else>
-                <b-list-group class="rounded-pill">
-                    <b-list-group-item class="d-flex align-items-center p-2">
-                        <b-avatar 
-                            href="#bar" 
-                            src="../static/perfil/joao-vitor-denari-dos-santos.png"
-                            class="m-1"
-                        ></b-avatar>
-                        <div class="m-1">João Denari</div>
-                    </b-list-group-item>
-                </b-list-group>
-            </div>
-        </div>    
+            </li>
+        </ul>
+        <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-else>
+            <li class="nav-item px-3 d-flex align-items-center">
+                <b-avatar 
+                    href="#bar" 
+                    src="../static/perfil/joao-vitor-denari-dos-santos.png"
+                    class="m-1"
+                ></b-avatar>
+                <div class="m-2 text-light">João Denari</div>
+            </li>
+        </ul>
     </nav>
 </template>
 

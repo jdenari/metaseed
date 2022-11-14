@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-3">
        <form class="w-25 p-3 border m-auto">
             <h4 class="text-center p-2">Iniciar Sessão</h4>
             <div class="my-3">
