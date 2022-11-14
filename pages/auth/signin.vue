@@ -1,8 +1,8 @@
 <template>
-     <div>
+     <div class="main-page"> 
         <MainHeader />
-        <LoginField />
-        <MainFooter />
+        <LoginField class="main-form"/>
+        <MainFooter class="main-footer" />
     </div>
 </template>
 
@@ -20,6 +20,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    .main-page{
+        height: 100vh;
+        position: relative;
+    }
+
+    .main-footer{
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+    }
+    .main-form{
+        margin: 130px;
+    }
 
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div class="p-3">
-       <form class="w-25 p-3 border m-auto">
+       <form class="login-form p-3 border m-auto">
             <h4 class="text-center p-2">Iniciar Sessão</h4>
             <div class="my-3">
-               <label for="exampleInputEmail1" class="form-label">Email address</label>
+               <label for="exampleInputEmail1" class="form-label">Email</label>
                <input 
                    type="email" 
                    class="form-control" 
@@ -14,7 +14,7 @@
                >
            </div>
            <div class="mb-3">
-               <label for="exampleInputPassword1" class="form-label">Password</label>
+               <label for="exampleInputPassword1" class="form-label">Senha</label>
                <input 
                    type="password" 
                    class="form-control" 
@@ -67,6 +67,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    .login-form{
+        width: 450px;
+    }
 
 </style>
