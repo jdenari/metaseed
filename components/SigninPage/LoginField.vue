@@ -57,8 +57,10 @@ export default {
            this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
             .catch((error) => {
                this.errorText = error
+               this.$store.commit('loginOut')
             }).then((user) => {
                //we are signed in
+               console.log('pikachu')
                this.$store.commit('loginIn')
                $nuxt.$router.push('/client/home')
             })
