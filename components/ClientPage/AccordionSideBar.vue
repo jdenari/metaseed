@@ -9,10 +9,13 @@
                     > {{ accordeonItem }}
                 </b-button>
             </b-card-header>
-            <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+            <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-                    <b-card-text>I start opened because <code>visible</code> is <code>true</code></b-card-text>
-                    <b-card-text>{{ text }}</b-card-text>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -23,10 +26,5 @@
 export default {
     name: 'AccordionSideBar',
     props: ['accordeonItem'],
-    data() {
-        return {
-            text: `Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry`
-        }
-    }
 }
 </script>

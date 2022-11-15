@@ -1,23 +1,36 @@
 <template>
     <div>
-		<aside class="sidebar bg-light p-3">
+		<aside class="sideBar bg-light p-3" :class="{'sideBar-small': fullSideBar }">
 			<div class="w-100 d-flex flex-row-reverse p-1 mb-3">
-				<a href="" @click="changeSideBar">
-					<img src="../../static/icons/arrow-bar-left.svg" alt="Ícone de seta a esquerda" class="buttonSideBar">
-				</a>
+				<img 
+					src="../../static/icons/arrow-bar-left.svg" 
+					alt="Ícone de seta a esquerda" 
+					class="pe-auto icon-SideBar" 
+					@click="fullSideBar = !fullSideBar"
+					v-if="!this.fullSideBar"
+				>
+				<img 
+					src="../../static/icons/arrow-bar-right.svg" 
+					alt="Ícone de seta a esquerda" 
+					class="pe-auto icon-SideBar" 
+					@click="fullSideBar = !fullSideBar"
+					v-else
+				>
 			</div>
-			<AccordionSideBar
-				v-for="(item, index) in accordeonItems" 
-				:key="index"
-				:accordeonItem="item"
-				class="p-1">
-			</AccordionSideBar>
-			<div class="p-3 mt-3 border-top">
-				<FooterSideBarVue
-					v-for="(item, index) in footerItems" 
+			<div v-if="!this.fullSideBar">
+				<AccordionSideBar
+					v-for="(item, index) in accordeonItems" 
 					:key="index"
-					:footerItem="item">
-				</FooterSideBarVue>
+					:accordeonItem="item"
+					class="p-1">
+				</AccordionSideBar>
+				<div class="p-3 mt-3 border-top">
+					<FooterSideBarVue
+						v-for="(item, index) in footerItems" 
+						:key="index"
+						:footerItem="item">
+					</FooterSideBarVue>
+				</div>
 			</div>
 		</aside>
     </div>
@@ -43,20 +56,22 @@
 					'Sobre'
 					, 'Documentação'
 					, 'Contato'
-				]
+				],
+				fullSideBar: false,
 			}
 		},
-        methods: {
-			changeSideBar() {
-				console.log('ativo')
-			}
-        }
     }
 </script>
 
 <style scoped>
-	.sidebar{
+	.sideBar{
 		width: 350px;
 		height: 92vh;
+	}
+	.sideBar-small{
+		width: 65px;
+	}
+	.icon-SideBar{
+		cursor: pointer;
 	}
 </style>
