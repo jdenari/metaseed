@@ -67,3 +67,18 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+### `docker push`
+
+- Open Docker Desktop on joaodenari account;
+- Type 'docker build . -t joaodenari/metaseed';
+- Type 'docker run -p 3000:3000 joaodenari/metaseed';
+- Type 'docker push joaodenari/metaseed'
+- Check inside Docker Hub Online if the project was updated;
+
+### `docker push`
+
+- Download the project latest version on Github;
+- Open the Docker Desktop;
+- Open a new terminal;
+- Type 'npm run serve';

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
+    "serve": "docker run -p 3000:3000 joaodenari/metaseed",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "test": "jest"
