@@ -37,7 +37,11 @@ const getters = {
 export default {
     state() {
         return {
-            userLogin: false
+            userLogin: false,
+            authenticated: false,
+            userName: null,
+            token: null,
+            userId: null
         }
     },
     actions,
@@ -47,6 +51,12 @@ export default {
         },
         LoginOut (state) {
             state.userLogin = false
+        },
+        authenticate(state, data) {
+            state.authenticated = true
+            state.token = data.token
+            state.userId = data.userId
+            state.userName = data.userName
         }
     },
     getters,

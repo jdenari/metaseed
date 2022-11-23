@@ -53,16 +53,38 @@ export default {
         }
     },
     methods: {
-       loginVerification() {
-           this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
-            .catch((error) => {
-               this.errorText = error
-               this.$store.commit('loginOut')
-            }).then((user) => {
-               //we are signed in
-               this.$store.commit('loginIn')
-               $nuxt.$router.push('/client/home')
+        async loginVerification(e) {
+            e.preventDefault();
+            const dataObject = {
+                email: this.auth.email,
+                password: this.auth.password
+            }
+            const jsonDataObject = JSON.stringify(dataObject)
+            await fetch("http://localhost:6789/api/auth/login", {
+                method: "POST",
+                headers: {"Content-type": "application/json"},
+                body: jsonDataObject
             })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // let auth = false;
+                if(data.error){
+                    this.errorText = data.error;
+                } else {
+                    $nuxt.$router.push('/client/home')
+                    this.$store.commit("authenticate", {token: data.token, userId: data.userId, userName: data.userName})
+                }
+            })
+
+        //    this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
+        //     .catch((error) => {
+        //        this.errorText = error
+        //        this.$store.commit('loginOut')
+        //     }).then((user) => {
+        //        //we are signed in
+        //        this.$store.commit('loginIn')
+        //        $nuxt.$router.push('/client/home')
+        //     })
         },
     }
 }

@@ -11,7 +11,7 @@
                 </NuxtLink>
             </li>
         </ul>
-        <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-if="!this.$store.state.userLogin">
+        <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-if="!this.$store.state.authenticated">
             <li class="nav-item px-3">
                 <a href="#" class="nav-link text-light">Registrar</a>
             </li>
@@ -32,7 +32,7 @@
                     src="../static/perfil/joao-vitor-denari-dos-santos.png"
                     class="m-1"
                 ></b-avatar>
-                <div class="m-2 text-light">João Denari</div>
+                <div class="m-2 text-light"> {{ $store.state.userName }}</div>
             </li>
         </ul>
     </nav>

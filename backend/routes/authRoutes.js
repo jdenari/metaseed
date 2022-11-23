@@ -88,7 +88,7 @@ router.post("/login", async (req, res) => {
     );
 
 // return token
-res.json({ error: null, msg: "Você está autenticado!", token: token, userId: user._id})
+res.json({ error: null, msg: "Você está autenticado!", token: token, userId: user._id, userName: user.name})
 
 })
 
