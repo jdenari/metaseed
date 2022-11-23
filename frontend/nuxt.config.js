@@ -36,31 +36,6 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
-    [
-      '@nuxtjs/firebase',
-      {
-        config: {
-          apiKey: "AIzaSyB-hJ5nFh17moj2yz6t64MGiONTZN0A7qM",
-          authDomain: "metaseed-auth.firebaseapp.com",
-          projectId: "metaseed-auth",
-          storageBucket: "metaseed-auth.appspot.com",
-          messagingSenderId: "699367014454",
-          appId: "1:699367014454:web:bcbc59bb5af6c83509d897",
-          measurementId: "G-YYJPD81DD6"
-        },
-        services: {
-          auth: {
-            persistence: 'local', // default
-            initialize: {
-              onAuthStateChangedAction: 'onAuthStateChangedAction',
-              subscribeManually: false
-            },
-            ssr: false,
-          }
-        }
-      }
-    ]
-
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
