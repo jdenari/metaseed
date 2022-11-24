@@ -32,7 +32,9 @@
                     src="../static/perfil/joao-vitor-denari-dos-santos.png"
                     class="m-1"
                 ></b-avatar>
-                <div class="m-2 text-light"> {{ $store.state.userName }}</div>
+                <NuxtLink to="/client/profile">
+                    <div class="m-2 text-light"> {{ $store.state.userName }}</div>
+                </NuxtLink>
             </li>
         </ul>
     </nav>

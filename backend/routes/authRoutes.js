@@ -36,6 +36,7 @@ router.post("/register", async (req, res) => {
     const user = new User({
         name: name,
         email: email,
+        phone: phone,
         password: passwordHash
     });
 
@@ -87,9 +88,15 @@ router.post("/login", async (req, res) => {
         "oursecret"
     );
 
-// return token
-res.json({ error: null, msg: "Você está autenticado!", token: token, userId: user._id, userName: user.name})
-
+    // return token
+    res.json({ error: null, msg: "Você está autenticado!", 
+        token: token, 
+        userId: user._id, 
+        userName: user.name, 
+        lastName: user.lastname, 
+        phone: user.phone, 
+        email: user.email
+    })
 })
 
 module.exports = router;
