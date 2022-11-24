@@ -4,7 +4,11 @@
             <label for="inputPassword6" class="col-form-label row justify-content-end">{{ profilePasswordItem }}</label>
         </div>
         <div class="col-8">
-            <input type="password" class="form-control" aria-describedby="passwordHelpInline">
+            <input 
+                class="form-control" 
+                aria-describedby="passwordHelpInline"
+                :value="profilePasswordModel"
+            >
         </div>
     </div>
 </template>
@@ -12,7 +16,7 @@
 <script>
 export default {
     name: 'ProfilePasswordField',
-    props: ['profilePasswordItem']
+    props: ['profilePasswordItem', 'profilePasswordModel'],
 }
 </script>
 

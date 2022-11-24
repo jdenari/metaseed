@@ -7,8 +7,8 @@
                 <ProfileDataField
                     v-for="(item, index) in profileItems" 
                     :key="index"
-                    :profileItem="item"
-                    :profileDataItem="num(item)"
+                    :profileDataItem="item"
+                    :profileDataModel="num(item)"
                     >
                 </ProfileDataField>
             </div>
@@ -18,7 +18,8 @@
                     v-for="(item, index) in profilePasswordItems" 
                     :key="index"
                     :profilePasswordItem="item"
-                    v-model="profilePasswordModels[index]">
+                    v-model="passaword"
+                >
                 </ProfilePasswordField>
             </div>
             <div class="p">{{ errorText }}</div>
@@ -43,7 +44,7 @@ export default {
             profileItems: ['Nome: ', 'Sobrenome: ', 'Empresa', 'E-mail: ', 'Telefone: '],
             profileDataItems: [this.$store.state.firstName, this.$store.state.lastName, this.$store.state.company, this.$store.state.email, this.$store.state.phone],
             profilePasswordItems: ['Senha atual: ', 'Nova senha: ', 'Repita a nova senha: '],
-            profilePasswordModels: [this.teste1, this.teste2, this.teste3],
+            profilePasswordInput: ['a', 'b', 'c'],
             newPassword: '',
             confirmNewPassword: '',
             errorText: 'No error message',
