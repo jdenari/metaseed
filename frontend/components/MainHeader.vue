@@ -33,7 +33,7 @@
                     class="m-1"
                 ></b-avatar>
                 <NuxtLink to="/client/profile">
-                    <div class="m-2 text-light"> {{ $store.state.userName }}</div>
+                    <div class="m-2 text-light"> {{ $store.state.firstName }}</div>
                 </NuxtLink>
             </li>
         </ul>

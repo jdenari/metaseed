@@ -83,9 +83,11 @@ export default {
                     this.$store.commit("authenticate", {
                         token: data.token, 
                         userId: data.userId, 
-                        userName: data.userName, 
-                        userEmail: data.email,
-                        userPhone: data.phone
+                        firstName: data.firstName, 
+                        lastName: data.lastName,
+                        company: data.company, 
+                        email: data.email,
+                        phone: data.phone
                     })
                 }
             })

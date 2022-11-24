@@ -3,10 +3,11 @@ export default {
         return {
             userLogin: false,
             authenticated: false,
-            userName: null,
-            userLastName: null,
-            userPhone: null,
-            userEmail: null,
+            firstName: null,
+            lastName: null,
+            company: null,
+            phone: null,
+            email: null,
             token: null,
             userId: null
         }
@@ -16,10 +17,11 @@ export default {
             state.authenticated = true
             state.token = data.token
             state.userId = data.userId
-            state.userName = data.userName
-            state.userLastName = data.lastName
-            state.userPhone = data.userPhone
-            state.userEmail = data.userEmail
+            state.firstName = data.firstName
+            state.lastName = data.lastName
+            state.company = data.company
+            state.email = data.email
+            state.phone = data.phone
         }
     },
 }

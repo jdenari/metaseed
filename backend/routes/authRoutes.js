@@ -7,13 +7,16 @@ const User = require("../models/user");
 // register and user
 router.post("/register", async (req, res) => {
 
-    const name = req.body.name;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const company = req.body.company;
     const email = req.body.email;
+    const phone = req.body.phone;
     const password = req.body.password;
     const confirmpassword = req.body.confirmpassword
 
     // check for required fields
-    if(name == null || email == null || password == null || confirmpassword == null){
+    if(firstName == null || lastName == null || company == null || email == null || password == null || confirmpassword == null){
         return res.status(400).json({ error: "Por favor, preencha todos os campos!"});
     }
 
@@ -34,14 +37,15 @@ router.post("/register", async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     const user = new User({
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
+        company: company,
         email: email,
         phone: phone,
         password: passwordHash
     });
 
     try{
-
         const newUser = await user.save();
 
         // create token
@@ -54,7 +58,10 @@ router.post("/register", async (req, res) => {
         );
 
     // return token
-    res.json({ error: null, msg: "Você realizou o cadastro com sucesso!", token: token, userId: newUser._id})
+    res.json({  error: null, 
+                msg: "Você realizou o cadastro com sucesso!", 
+                token: token, 
+                userId: newUser._id})
         
     } catch(error){
         res.status(400).json({ error })
@@ -63,7 +70,12 @@ router.post("/register", async (req, res) => {
 
 // Login and user
 router.post("/login", async (req, res) => {
+    
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const company = req.body.company;
     const email = req.body.email;
+    const phone = req.body.phone;
     const password = req.body.password;
 
     const user = await User.findOne({ email: email });
@@ -92,10 +104,11 @@ router.post("/login", async (req, res) => {
     res.json({ error: null, msg: "Você está autenticado!", 
         token: token, 
         userId: user._id, 
-        userName: user.name, 
-        lastName: user.lastname, 
-        phone: user.phone, 
-        email: user.email
+        firstName: user.firstName, 
+        lastName: user.lastName, 
+        company: user.company,
+        email: user.email,
+        phone: user.phone
     })
 })
 

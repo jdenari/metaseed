@@ -3,7 +3,7 @@
         <form class="col-6 p-3 border m-auto">
             <div class="h1">Perfil</div>
             <div class="m-1 my-2 p-3 border">
-                <div class="h4">Dados Pessoais</div>
+                <div class="h4">Alterar Dados Pessoais</div>
                 <ProfileDataField
                     v-for="(item, index) in profileItems" 
                     :key="index"
@@ -35,7 +35,7 @@ export default {
     data (){
         return{
             profileItems: ['Nome: ', 'Sobrenome: ', 'Empresa', 'E-mail: ', 'Telefone: '],
-            profileDataItems: [this.$store.state.userName, this.$store.state.userEmail, this.$store.state.userPhone, 'Denari', 'João'],
+            profileDataItems: [this.$store.state.firstName, this.$store.state.lastName, this.$store.state.company, this.$store.state.email, this.$store.state.phone],
             profilePasswordItems: ['Senha atual: ', 'Nova senha: ', 'Repita a nova senha: ']
         }
     },
