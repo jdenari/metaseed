@@ -9,7 +9,9 @@ export default {
             phone: null,
             email: null,
             token: null,
-            userId: null
+            userId: null,
+            newPassword: null,
+            confirmNewPasssword: null
         }
     },
     mutations: {
@@ -22,7 +24,13 @@ export default {
             state.company = data.company
             state.email = data.email
             state.phone = data.phone
-        }
+        },
+        updatePassword(state, data) {
+            state.token = data.token
+            state.userId = data.userId
+            state.newPassword = data.newPassword
+            state.confirmNewPassword = data.confirmNewPassword
+        },
     },
 }
   

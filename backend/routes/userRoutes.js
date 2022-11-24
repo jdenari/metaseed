@@ -27,8 +27,8 @@ router.put("/", verifyToken, async (req, res) =>{
     const token = req.header("auth-token");
     const user = await getUserByToken(token);
     const userReqId = req.body.id;
-    const password = req.body.password;
-    const confirmpassword = req.body.confirmpassword;
+    const password = req.body.newPassword;
+    const confirmpassword = req.body.confirmNewPassword;
 
     const userId = user._id.toString();
 
@@ -37,8 +37,11 @@ router.put("/", verifyToken, async (req, res) =>{
     }
 
     const updateData = {
-        name: req.body.name,
-        email: req.body.email
+        firstName: req.body.firstName,
+        lastName: req.body.lastName, 
+        company: user.company,
+        email: user.email,
+        phone: user.phone
     };
 
     // check if the password match
