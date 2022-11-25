@@ -5,12 +5,15 @@
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>
                 <ProfileDataField
-                    v-for="(item, index) in profileItems" 
+                    v-for="(item, index) in profileDataItems" 
                     :key="index"
-                    :profileDataItem="item"
-                    :profileDataModel="num(item)"
+                    :profileDataItem="profileItems[index]"
+                    v-model="item.model"
                 >
                 </ProfileDataField>
+                <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary me-md-2" type="button" @click="updateProfileData">Atualizar Dados</button>
+                </div>
             </div>
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Senha</div>
@@ -21,11 +24,11 @@
                     v-model="item.model"
                 >
                 </ProfilePasswordField>
+                <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary me-md-2" type="button" @click="updatePassword">Atualizar Senha</button>
+                </div>
             </div>
             <div class="p">{{ errorText }}</div>
-            <div class="m-1 my-3 d-grid d-md-flex justify-content-md-end">
-                <button class="btn btn-primary me-md-2" type="button" @click="updatePassword">Atualizar</button>
-            </div>
         </form>
     </div>
 </template>
@@ -48,11 +51,11 @@ export default {
                 'E-mail: ',
                 'Telefone: '],
             profileDataItems: [
-                this.$store.state.firstName, 
-                this.$store.state.lastName, 
-                this.$store.state.company, 
-                this.$store.state.email, 
-                this.$store.state.phone
+                { model: this.$store.state.firstName },
+                { model: this.$store.state.lastName },
+                { model: this.$store.state.company },
+                { model: this.$store.state.email },
+                { model: this.$store.state.phone },                
             ],
             profilePasswordItems: [
                 'Senha atual: ', 
@@ -66,12 +69,50 @@ export default {
                 { model: "" },
             ],
             payloadPassword: [],
+            payloadProfileData: [],
         }
     },
     methods: {
-        num(val) {
-            return this.profileDataItems[this.profileItems.findIndex(i => i === val)]
+
+        async updateProfileData(){
+            // e.preventDefault();
+
+            this.profileDataItems.forEach((item) => {
+                this.payloadProfileData.push(item.model);
+            });
+
+            const dataObject = {
+                id: this.$store.state.userId,
+                firstName: this.payloadProfileData[0],
+                lastName: this.payloadProfileData[1],
+                company: this.payloadProfileData[2],
+                email: this.payloadProfileData[3],
+                phone: this.payloadProfileData[4]
+            }
+            const jsonDataObject = JSON.stringify(dataObject)
+            await fetch("http://localhost:8000/api/user/profile", {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": this.$store.state.token
+                },
+                body: jsonDataObject
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                this.errorText = data.error;
+                this.$store.commit("authenticate", {
+                    token: data.data.token, 
+                    userId: data.data.userId, 
+                    firstName: data.data.firstName, 
+                    lastName: data.data.lastName,
+                    company: data.data.company, 
+                    email: data.data.email,
+                    phone: data.data.phone
+                })
+            })
         },
+
         async updatePassword(e){
 
             e.preventDefault();
@@ -89,7 +130,7 @@ export default {
                 confirmNewPassword: this.payloadPassword[2]
             }
             const jsonDataObject = JSON.stringify(dataObject)
-            await fetch("http://localhost:8000/api/user", {
+            await fetch("http://localhost:8000/api/user/password", {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",

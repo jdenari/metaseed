@@ -23,7 +23,37 @@ router.get("/:id", verifyToken, async (req, res) => {
 });
 
 // update an user
-router.put("/", verifyToken, async (req, res) =>{
+router.put("/profile", verifyToken, async (req, res) =>{
+    const token = req.header("auth-token");
+    const user = await getUserByToken(token);
+    const userReqId = req.body.id;
+
+    const userId = user._id.toString();
+
+    if(userId != userReqId){
+        res.status(401).json({error: "Acesso Negado!"});
+    }
+
+    const updateData = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName, 
+        company: req.body.company,
+        email: req.body.email,
+        phone: req.body.phone
+    };
+
+    console.log(updateData)
+
+    try {
+        const updateUser = await User.findOneAndUpdate({ _id: userId }, { $set: updateData }, {new: true});
+        res.json({ error : "Usuário atualizado com sucesso!", data: updateUser})
+    } catch(error) {
+        res.status(400).json({ error })
+    }
+
+})
+
+router.put("/password", verifyToken, async (req, res) =>{
     const token = req.header("auth-token");
     const user = await getUserByToken(token);
     const userReqId = req.body.id;

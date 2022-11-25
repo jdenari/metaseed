@@ -1,14 +1,13 @@
 <template>
     <div class="row p-1 g-3 align-items-center">
         <div class="col-4">
-            <label for="inputPassword6" class="col-form-label row justify-content-end">{{ profilePasswordItem }}</label>
+            <label class="col-form-label row justify-content-end">{{ profileDataItem }}</label>
         </div>
         <div class="col-8">
             <input 
+                type="text" 
                 class="form-control" 
-                aria-describedby="passwordHelpInline"
-                type="password"
-                :value="value" 
+                :value="value"
                 @input="$emit('input', $event.target.value)"
             >
         </div>
@@ -17,15 +16,14 @@
 
 <script>
 export default {
-    name: 'ProfilePasswordField',
-    props: ['profilePasswordItem'],
+    name: 'ProfileDataField',
     props: {
-        value: {
-            required: true 
+        profileDataItem: {
+            required: true
         },
-        profilePasswordItem: {
-            required: true 
-        }
+        value: {
+            required: true
+        },
     }
 }
 </script>
