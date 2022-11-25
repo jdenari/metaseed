@@ -8,7 +8,15 @@
 <script>
 export default {
     name: 'HighlightCard',
-    props: ['cardVariable', 'cardNumber']
+    props: {
+        cardVariable:{
+            type: String,
+            required: true 
+        }, 
+        cardNumber:{
+            type: String,
+            required: true 
+        }}
 }
 </script>
 

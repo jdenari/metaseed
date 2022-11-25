@@ -25,6 +25,10 @@
 <script>
 export default {
     name: 'AccordionSideBar',
-    props: ['accordeonItem'],
+    props: {
+        accordeonItem: {
+            type: String,
+            required: true 
+        }},
 }
 </script>

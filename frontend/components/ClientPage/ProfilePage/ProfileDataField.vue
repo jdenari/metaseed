@@ -19,6 +19,7 @@ export default {
     name: 'ProfileDataField',
     props: {
         profileDataItem: {
+            type: String,
             required: true
         },
         value: {

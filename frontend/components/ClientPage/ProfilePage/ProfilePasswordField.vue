@@ -20,9 +20,11 @@ export default {
     name: 'ProfilePasswordField',
     props: {
         value: {
+            type: String,
             required: true 
         },
         profilePasswordItem: {
+            type: String,
             required: true 
         }
     }

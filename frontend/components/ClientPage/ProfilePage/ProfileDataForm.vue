@@ -13,7 +13,34 @@
                 >
                 </ProfileDataField>
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary me-md-2" type="button" @click="updateProfileData">Atualizar Dados</button>
+                    <b-button 
+                        v-b-modal.modal-1
+                        class="btn btn-primary me-md-2"
+                        type="button"
+                        variant="primary"
+                        >Atualizar Senha
+                    </b-button>
+                    <b-modal 
+                        id="modal-1" 
+                        title="Atenção!" 
+                        hide-footer v-model="showModalDataProfile"
+                    >
+                        <p class="my-4">Tem certeza que quer mudar o seu cadastro?</p>
+                        <div class="d-flex flex-row-reverse w-100">
+                            <button 
+                                type="button" 
+                                class="btn btn-primary m-1" 
+                                @click="updateProfileData();hideMessageWarning();showModalDataProfile=false"
+                                >Sim
+                            </button>
+                            <button 
+                                type="button" 
+                                class="btn btn-secondary m-1" 
+                                @click="showModalDataProfile=false"
+                                >Voltar
+                            </button>
+                        </div>
+                    </b-modal>
                 </div>
             </div>
             <div class="m-1 my-2 p-3 border">
@@ -27,11 +54,38 @@
                 >
                 </ProfilePasswordField>
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary me-md-2" type="button" @click="updatePassword">Atualizar Senha</button>
+                    <b-button 
+                        v-b-modal.modal-2
+                        class="btn btn-primary me-md-2"
+                        type="button"
+                        variant="primary"
+                        >Atualizar Senha
+                    </b-button>
+                    <b-modal 
+                        id="modal-2" 
+                        title="Atenção!" 
+                        hide-footer v-model="showModalPassword"
+                    >
+                        <p class="my-4">Tem certeza que quer mudar a sua senha?</p>
+                        <div class="d-flex flex-row-reverse w-100">
+                            <button 
+                                type="button" 
+                                class="btn btn-primary m-1" 
+                                @click="updatePassword();hideMessageWarning();showModalPassword=false"
+                                >Sim
+                            </button>
+                            <button 
+                                type="button" 
+                                class="btn btn-secondary m-1" 
+                                @click="showModalPassword=false"
+                                >Voltar
+                            </button>
+                        </div>
+                    </b-modal>
                 </div>
             </div>
             <!-- message error for all situations -->
-            <div class="p">{{ errorText }}</div>
+            <MessageWarning :messageWarning="messageWarning"/>
         </form>
     </div>
 </template>
@@ -39,15 +93,16 @@
 <script>
 import ProfileDataField from './ProfileDataField.vue';
 import ProfilePasswordField from './ProfilePasswordField.vue';
+import MessageWarning from '../../MessageWarning.vue'
 export default {
     name: 'ProfileDataForm',
     components: {
         ProfileDataField
         , ProfilePasswordField
+        , MessageWarning
     }, 
     data (){
         return{
-
             // all the data needed from data profile field
             profileItems: [
                 'Nome: ',
@@ -77,13 +132,17 @@ export default {
                 { model: "" },
             ],
             payloadPassword: [],
+            showModalPassword: false,
+            showModalDataProfile: false,
+            messageWarning: null,
+            messageWarningClass: null
         }
     },
     methods: {
 
         async updateProfileData(e){
             // it does not let the page reaload
-            e.preventDefault();
+            // e.preventDefault();
             this.profileDataItems.forEach((item) => {
                 this.payloadProfileData.push(item.model);
             });
@@ -111,7 +170,7 @@ export default {
             .then((resp) => resp.json())
             .then((data) => {
                 // it prints the message from the backend and it commits all changes made
-                this.errorText = data.error;
+                this.messageWarning = data.error;
                 this.$store.commit("authenticate", {
                     token: data.data.token, 
                     userId: data.data.userId, 
@@ -126,7 +185,7 @@ export default {
 
         async updatePassword(e){
             // it does not let the page reaload
-            e.preventDefault();
+            // e.preventDefault();
 
             // it creates the object that will be use on API
             this.listPassword.forEach((item) => {
@@ -155,9 +214,15 @@ export default {
             .then((data) => {
 
                 // it prints the message from the backend
-                this.errorText = data.error;
+                this.messageWarning = data.error;
             })
         },
+
+        hideMessageWarning(){
+            setTimeout(() => { 
+                this.messageWarning = null
+            }, 5000)
+        }
     }
 }
 </script>
