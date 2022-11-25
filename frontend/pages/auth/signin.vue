@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MainHeader from '../../components/MainHeader.vue';
+import MainHeader from '../../components/MainHeader.vue'
 import LoginField from '../../components/SigninPage/LoginField.vue';
 import MainFooter from '../../components/MainFooter.vue';
 export default {

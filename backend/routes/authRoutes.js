@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
-// register and user
+// register a new user
 router.post("/register", async (req, res) => {
 
     const firstName = req.body.firstName;
@@ -68,7 +68,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// Login and user
+// it allows the user to make a login
 router.post("/login", async (req, res) => {
     
     const firstName = req.body.firstName;

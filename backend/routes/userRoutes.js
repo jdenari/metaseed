@@ -22,18 +22,20 @@ router.get("/:id", verifyToken, async (req, res) => {
     
 });
 
-// update an user
+// update the data profile of user
 router.put("/profile", verifyToken, async (req, res) =>{
+    
+    // it checks if the user can modify the data
     const token = req.header("auth-token");
     const user = await getUserByToken(token);
     const userReqId = req.body.id;
-
     const userId = user._id.toString();
 
     if(userId != userReqId){
         res.status(401).json({error: "Acesso Negado!"});
     }
 
+    // creating the object to update the data
     const updateData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName, 
@@ -42,30 +44,33 @@ router.put("/profile", verifyToken, async (req, res) =>{
         phone: req.body.phone
     };
 
-    console.log(updateData)
-
     try {
+        // update the data inside the mongoDB
         const updateUser = await User.findOneAndUpdate({ _id: userId }, { $set: updateData }, {new: true});
         res.json({ error : "Usuário atualizado com sucesso!", data: updateUser})
     } catch(error) {
+        // it returns an error
         res.status(400).json({ error })
     }
 
 })
 
+// update the password profile of user
 router.put("/password", verifyToken, async (req, res) =>{
+   
+    // it checks if the user can modify the data
     const token = req.header("auth-token");
     const user = await getUserByToken(token);
     const userReqId = req.body.id;
     const password = req.body.newPassword;
     const confirmpassword = req.body.confirmNewPassword;
-
     const userId = user._id.toString();
 
     if(userId != userReqId){
         res.status(401).json({error: "Acesso Negado!"});
     }
 
+    // creating the object to update the data
     const updateData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName, 
@@ -80,14 +85,15 @@ router.put("/password", verifyToken, async (req, res) =>{
     } else if (password == confirmpassword && password != null){
         const salt = await bcrypt.genSalt(12);
         const passwordHash = await bcrypt.hash(password, salt)
-
         updateData.password = passwordHash;
     }
 
     try {
+        // update the data inside the mongoDB
         const updateUser = await User.findOneAndUpdate({ _id: userId }, { $set: updateData }, {new: true});
         res.json({ error : "Usuário atualizado com sucesso!", data: updateUser})
     } catch(error) {
+        // it returns an error
         res.status(400).json({ error })
     }
 

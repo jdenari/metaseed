@@ -1,6 +1,7 @@
 <template>
     <div class="p-3">
         <form class="login-form p-3 border m-auto">
+            <!-- all the components when the user is not logged -->
             <div v-if="!$store.state.authenticated">
                 <h4 class="text-center p-2">Iniciar Sessão</h4>
                 <div class="my-3">
@@ -33,10 +34,11 @@
                         </button>
                 </div>
                 <div class="p text-center p-3">
-                {{ errorText }}
+                    {{ errorText }}
                 </div>
                 <div class="p">Quer criar uma conta?<NuxtLink to="/"> Entre em contato.</NuxtLink></div>
             </div>
+            <!-- if the user is logged -->
             <div v-else>
                 <h4 class="text-center p-2">Você já está logado!</h4>
                 <div class="p-3 d-flex justify-content-center">
@@ -62,7 +64,10 @@ export default {
     },
     methods: {
         async loginVerification(e) {
+            // it does not let the page reaload
             e.preventDefault();
+
+            // it creates the object that will be use on API
             const dataObject = {
                 email: this.auth.email,
                 password: this.auth.password
@@ -74,12 +79,15 @@ export default {
                 body: jsonDataObject
             })
             .then((resp) => resp.json())
+
+            // it access the api to update the profile data using token and the object
             .then((data) => {
                 if(data.error){
+                    // it prints the error
                     this.errorText = data.error;
                 } else {
+                    // it takes to the dashboard page and commit all the page with the user info
                     $nuxt.$router.push('/client/home')
-                    console.log(data)
                     this.$store.commit("authenticate", {
                         token: data.token, 
                         userId: data.userId, 

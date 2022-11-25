@@ -12,11 +12,11 @@
     </div>
 </template>
 <script>
-import SideBar from '../../components/ClientPage/SideBar.vue';
+import SideBar from '../../components/ClientPage/HomePage/SideBar/SideBar.vue';
 import MainHeader from '../../components/MainHeader.vue'
 import MainFooter from '../../components/MainFooter.vue'
-import TopDashboard from '../../components/ClientPage/TopDashboard.vue'
-import MainDashboard from '../../components/ClientPage/MainDashboard.vue'
+import TopDashboard from '../../components/ClientPage/HomePage/Dashboard/TopDashboard.vue'
+import MainDashboard from '../../components/ClientPage/HomePage/Dashboard/MainDashboard.vue'
     export default {
         components: {
             SideBar

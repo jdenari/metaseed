@@ -4,6 +4,7 @@
             <div class="h1">Perfil</div>
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>
+                <!-- looping for data profile field-->
                 <ProfileDataField
                     v-for="(item, index) in profileDataItems" 
                     :key="index"
@@ -17,6 +18,7 @@
             </div>
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Senha</div>
+                <!-- looping for password field-->
                 <ProfilePasswordField
                     v-for="(item, index) in listPassword" 
                     :key="index"
@@ -28,6 +30,7 @@
                     <button class="btn btn-primary me-md-2" type="button" @click="updatePassword">Atualizar Senha</button>
                 </div>
             </div>
+            <!-- message error for all situations -->
             <div class="p">{{ errorText }}</div>
         </form>
     </div>
@@ -44,6 +47,8 @@ export default {
     }, 
     data (){
         return{
+
+            // all the data needed from data profile field
             profileItems: [
                 'Nome: ',
                 'Sobrenome: ',
@@ -57,6 +62,9 @@ export default {
                 { model: this.$store.state.email },
                 { model: this.$store.state.phone },                
             ],
+            payloadProfileData: [],
+
+            // all the data needed from password field
             profilePasswordItems: [
                 'Senha atual: ', 
                 'Nova senha: ', 
@@ -69,18 +77,18 @@ export default {
                 { model: "" },
             ],
             payloadPassword: [],
-            payloadProfileData: [],
         }
     },
     methods: {
 
-        async updateProfileData(){
-            // e.preventDefault();
-
+        async updateProfileData(e){
+            // it does not let the page reaload
+            e.preventDefault();
             this.profileDataItems.forEach((item) => {
                 this.payloadProfileData.push(item.model);
             });
 
+            // it creates the object that will be use on API
             const dataObject = {
                 id: this.$store.state.userId,
                 firstName: this.payloadProfileData[0],
@@ -90,6 +98,8 @@ export default {
                 phone: this.payloadProfileData[4]
             }
             const jsonDataObject = JSON.stringify(dataObject)
+
+            // it access the api to update the profile data using token and the object
             await fetch("http://localhost:8000/api/user/profile", {
                 method: "PUT",
                 headers: {
@@ -100,6 +110,7 @@ export default {
             })
             .then((resp) => resp.json())
             .then((data) => {
+                // it prints the message from the backend and it commits all changes made
                 this.errorText = data.error;
                 this.$store.commit("authenticate", {
                     token: data.data.token, 
@@ -114,13 +125,13 @@ export default {
         },
 
         async updatePassword(e){
-
+            // it does not let the page reaload
             e.preventDefault();
-                        
+
+            // it creates the object that will be use on API
             this.listPassword.forEach((item) => {
                 this.payloadPassword.push(item.model);
             });
-
             const dataObject = {
                 id: this.$store.state.userId,
                 firstName: this.$store.state.firstName,
@@ -130,6 +141,8 @@ export default {
                 confirmNewPassword: this.payloadPassword[2]
             }
             const jsonDataObject = JSON.stringify(dataObject)
+
+            // it access the api to update the password using token and the object
             await fetch("http://localhost:8000/api/user/password", {
                 method: "PUT",
                 headers: {
@@ -140,11 +153,9 @@ export default {
             })
             .then((resp) => resp.json())
             .then((data) => {
-                if(data.error){
-                    this.errorText = data.error;
-                } else {
-                    this.errorText = data.error;
-                }
+
+                // it prints the message from the backend
+                this.errorText = data.error;
             })
         },
     }

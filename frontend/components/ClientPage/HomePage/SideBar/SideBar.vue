@@ -3,14 +3,14 @@
 		<aside class="sideBar bg-light p-3" :class="{'sideBar-small': fullSideBar }">
 			<div class="w-100 d-flex flex-row-reverse p-1 mb-3">
 				<img 
-					src="../../static/icons/arrow-bar-left.svg" 
+					src="../../../../static/icons/arrow-bar-left.svg" 
 					alt="Ícone de seta a esquerda" 
 					class="pe-auto icon-SideBar" 
 					@click="fullSideBar = !fullSideBar"
 					v-if="!this.fullSideBar"
 				>
 				<img 
-					src="../../static/icons/arrow-bar-right.svg" 
+					src="../../../../static/icons/arrow-bar-right.svg" 
 					alt="Ícone de seta a esquerda" 
 					class="pe-auto icon-SideBar" 
 					@click="fullSideBar = !fullSideBar"

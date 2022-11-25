@@ -27,6 +27,7 @@ export default {
         }
     },
     methods: {
+        // this methods allows to use 2 props in the same component
         num(val) {
             return this.cardNumbers[this.cardVariables.findIndex(i => i === val)]
         }
