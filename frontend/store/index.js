@@ -28,6 +28,7 @@ export default {
         updatePassword(state, data) {
             state.token = data.token
             state.userId = data.userId
+            state.email = data.email
             state.newPassword = data.newPassword
             state.confirmNewPassword = data.confirmNewPassword
         },

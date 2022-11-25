@@ -7,7 +7,9 @@
             <input 
                 class="form-control" 
                 aria-describedby="passwordHelpInline"
-                :value="profilePasswordModel"
+                type="password"
+                :value="value" 
+                @input="$emit('input', $event.target.value)"
             >
         </div>
     </div>
@@ -16,7 +18,15 @@
 <script>
 export default {
     name: 'ProfilePasswordField',
-    props: ['profilePasswordItem', 'profilePasswordModel'],
+    props: ['profilePasswordItem'],
+    props: {
+        value: {
+            required: true 
+        },
+        profilePasswordItem: {
+            required: true 
+        }
+    }
 }
 </script>
 

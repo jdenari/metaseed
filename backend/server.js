@@ -11,7 +11,7 @@ const userRouter = require("./routes/userRoutes.js");
 
 // config
 const dbName = "databaseMetaseed"
-const port = 6789;
+const port = 8000;
 
 const app = express();
 

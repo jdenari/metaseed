@@ -68,7 +68,7 @@ export default {
                 password: this.auth.password
             }
             const jsonDataObject = JSON.stringify(dataObject)
-            await fetch("http://localhost:6789/api/auth/login", {
+            await fetch("http://localhost:8000/api/auth/login", {
                 method: "POST",
                 headers: {"Content-type": "application/json"},
                 body: jsonDataObject

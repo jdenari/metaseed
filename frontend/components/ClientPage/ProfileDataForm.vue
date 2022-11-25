@@ -9,16 +9,16 @@
                     :key="index"
                     :profileDataItem="item"
                     :profileDataModel="num(item)"
-                    >
+                >
                 </ProfileDataField>
             </div>
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Senha</div>
                 <ProfilePasswordField
-                    v-for="(item, index) in profilePasswordItems" 
+                    v-for="(item, index) in listPassword" 
                     :key="index"
-                    :profilePasswordItem="item"
-                    v-model="passaword"
+                    :profilePasswordItem="profilePasswordItems[index]"
+                    v-model="item.model"
                 >
                 </ProfilePasswordField>
             </div>
@@ -41,49 +41,70 @@ export default {
     }, 
     data (){
         return{
-            profileItems: ['Nome: ', 'Sobrenome: ', 'Empresa', 'E-mail: ', 'Telefone: '],
-            profileDataItems: [this.$store.state.firstName, this.$store.state.lastName, this.$store.state.company, this.$store.state.email, this.$store.state.phone],
-            profilePasswordItems: ['Senha atual: ', 'Nova senha: ', 'Repita a nova senha: '],
-            profilePasswordInput: ['a', 'b', 'c'],
-            newPassword: '',
-            confirmNewPassword: '',
+            profileItems: [
+                'Nome: ',
+                'Sobrenome: ',
+                'Empresa',
+                'E-mail: ',
+                'Telefone: '],
+            profileDataItems: [
+                this.$store.state.firstName, 
+                this.$store.state.lastName, 
+                this.$store.state.company, 
+                this.$store.state.email, 
+                this.$store.state.phone
+            ],
+            profilePasswordItems: [
+                'Senha atual: ', 
+                'Nova senha: ', 
+                'Repita a nova senha: '
+            ],
             errorText: 'No error message',
+            listPassword: [
+                { model: "" },
+                { model: "" },
+                { model: "" },
+            ],
+            payloadPassword: [],
         }
     },
     methods: {
         num(val) {
-        return this.profileDataItems[this.profileItems.findIndex(i => i === val)]
+            return this.profileDataItems[this.profileItems.findIndex(i => i === val)]
         },
-        async updatePassword(){
+        async updatePassword(e){
+
             e.preventDefault();
-            console.log(this.teste1)
-            console.log(this.teste2)
-            // const dataObject = {
-            //     newPassword: this.newPassword,
-            //     confirmNewPassword: this.confirmNewPassword
-            // }
-            // const jsonDataObject = JSON.stringify(dataObject)
-            // await fetch("http://localhost:6789/api/auth/login", {
-            //     method: "POST",
-            //     headers: {"Content-type": "application/json"},
-            //     body: jsonDataObject
-            // })
-            // .then((resp) => resp.json())
-            // .then((data) => {
-            //     if(data.error){
-            //         this.errorText = data.error;
-            //     } else {
-            //         this.$store.commit("updatePassword", {
-            //             token: data.token, 
-            //             userId: data.userId, 
-            //             firstName: data.firstName, 
-            //             lastName: data.lastName,
-            //             company: data.company, 
-            //             email: data.email,
-            //             phone: data.phone
-            //         })
-            //     }
-            // })
+                        
+            this.listPassword.forEach((item) => {
+                this.payloadPassword.push(item.model);
+            });
+
+            const dataObject = {
+                id: this.$store.state.userId,
+                firstName: this.$store.state.firstName,
+                lastName: this.$store.state.lastName,
+                email: this.$store.state.email,
+                newPassword: this.payloadPassword[1],
+                confirmNewPassword: this.payloadPassword[2]
+            }
+            const jsonDataObject = JSON.stringify(dataObject)
+            await fetch("http://localhost:8000/api/user", {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": this.$store.state.token
+                },
+                body: jsonDataObject
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                if(data.error){
+                    this.errorText = data.error;
+                } else {
+                    this.errorText = data.error;
+                }
+            })
         },
     }
 }
