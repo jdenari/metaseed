@@ -10,6 +10,14 @@
                     </a>
                 </NuxtLink>
             </li>
+            <li class="nav-item px-3">
+                <NuxtLink to="/client/process">
+                    <a 
+                        class="nav-link text-light" 
+                        >Process
+                    </a>
+                </NuxtLink>
+            </li>
         </ul>
         <!-- if the user it is not logged -->
         <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-if="!this.$store.state.authenticated">
