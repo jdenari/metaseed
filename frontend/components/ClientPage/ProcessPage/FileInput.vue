@@ -1,14 +1,23 @@
 <template>
-    <div class="w-50 m-auto">
-        <form enctype="multipart/form-data" @submit.prevent="sendFile">
-            <div class="">
-                <label for="file">Upload File</label>
-                <input type="file" ref="file" @change="selectFile">
-                <div class="btn btn-primary" @click="selectFile"> 1 </div>
-                <div class="btn btn-secondary" @click="sendFile"> 2 </div>
-            </div>
+    <div class="w-50 m-auto p-3">
+        <form enctype="multipart/form-data" @submit.prevent="sendFile" class="input-group">
+                <input 
+                    type="file" 
+                    ref="file" 
+                    class="form-control" 
+                    id="inputGroupFile04" 
+                    aria-describedby="inputGroupFileAddon04" 
+                    aria-label="Upload" 
+                    @change="selectFile"
+                >
+                <button 
+                    class="btn btn-outline-secondary" 
+                    type="button" 
+                    id="inputGroupFileAddon04" 
+                    @click="sendFile"
+                >Button</button>
         </form>
-        <MessageWarning :messageWarning="messageWarning"/>
+        <MessageWarning :messageWarning="messageWarning" class="p-3"/>
     </div>
     
 </template>
@@ -23,7 +32,7 @@ import { read, readFile, utils } from 'xlsx';
         data(){
             return {
                 file: "",
-                messageWarning: 'oi'
+                messageWarning: 'Aguardando Resposta '
             }
         },
         methods: {

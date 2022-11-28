@@ -12,7 +12,7 @@ export default ({
     name: 'MessageWarning',
     props: {
         messageWarning: {
-            type: String
+            type: [String, Array]
         }
     }
 })
