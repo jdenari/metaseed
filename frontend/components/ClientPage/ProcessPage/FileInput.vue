@@ -1,45 +1,60 @@
 <template>
-    <form class="input-group w-50 p-3 m-auto" enctype="multipart/form-data">
-        <input 
-            type="file" 
-            for="file"
-            ref="file"
-            class="form-control" 
-            id="inputGroupFile04" 
-            aria-describedby="inputGroupFileAddon04" 
-            aria-label="Upload"
-            @change="selectFile"
-        >
-        <button 
-            class="btn btn-outline-secondary" 
-            type="button" 
-            id="inputGroupFileAddon04"
-            @click="sendFile"
-            >Enviar
-        </button>
-    </form>
+    <div class="w-50 m-auto">
+        <form enctype="multipart/form-data" @submit.prevent="sendFile">
+            <div class="">
+                <label for="file">Upload File</label>
+                <input type="file" ref="file" @change="selectFile">
+                <div class="btn btn-primary" @click="selectFile"> 1 </div>
+                <div class="btn btn-secondary" @click="sendFile"> 2 </div>
+            </div>
+        </form>
+        <MessageWarning :messageWarning="messageWarning"/>
+    </div>
+    
 </template>
 <script>
+import MessageWarning from '../../MessageWarning.vue'
+import { read, readFile, utils } from 'xlsx';
     export default {
         name: 'FileInput',
+        components: {
+            MessageWarning
+        },
         data(){
             return {
-                file: ""
+                file: "",
+                messageWarning: 'oi'
             }
         },
         methods: {
             selectFile(){
                 this.file = this.$refs.file.files[0];
             },
-            async sendFile(){
-                let formData = new FormData();
-                formData.append('file', this.file)
-                let res = await fetch(`http://localhost:8000/uploads`, {
-                    method: 'POST',
-                    body: formData,
-                });
-                let data = await res.json();
-                console.log(data);
+            async sendFile(){       
+                
+                const data = await this.file.arrayBuffer();
+
+                const workbook = read(data);
+
+                const fileObject = utils.sheet_to_json(workbook.Sheets.Sheet1);
+
+                const file = JSON.stringify(fileObject)
+
+                console.log(file)
+
+                await fetch("http://localhost:8000/api/automatization/uploads", {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": this.$store.state.token
+                },
+                body: file
+                })
+                .then((resp) => resp.json())
+                .then((data) => {
+                    // it prints the message from the backend
+                    this.messageWarning = data;
+                })
             }
         }
     }

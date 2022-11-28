@@ -1,3 +1,13 @@
+import { readFile, utils } from 'xlsx';
+
+// This will be called when the files change
+const parseSheet = (file, { path }) => {
+  // `path` is a path that can be read with `XLSX.readFile`
+  const wb = readFile(path);
+  const o = wb.SheetNames.map(name => ({ name, data: utils.sheet_to_json(wb.Sheets[name])}));
+  return { data: o };
+}
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -37,6 +47,7 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    '@nuxt/content'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

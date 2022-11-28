@@ -205,8 +205,7 @@ export default {
             await fetch("http://localhost:8000/api/user/password", {
                 method: "PUT",
                 headers: {
-                    "Content-type": "application/json",
-                    "auth-token": this.$store.state.token
+                    "Content-type": "application/json"
                 },
                 body: jsonDataObject
             })
