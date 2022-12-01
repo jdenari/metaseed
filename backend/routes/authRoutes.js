@@ -13,7 +13,7 @@ router.post("/register", async (req, res) => {
     const email = req.body.email;
     const phone = req.body.phone;
     const password = req.body.password;
-    const confirmpassword = req.body.confirmpassword
+    const confirmpassword = req.body.confirmpassword;
 
     // check for required fields
     if(firstName == null || lastName == null || company == null || email == null || password == null || confirmpassword == null){

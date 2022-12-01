@@ -49,8 +49,6 @@ import { read, readFile, utils } from 'xlsx';
 
                 const file = JSON.stringify(fileObject)
 
-                console.log(file)
-
                 await fetch("http://localhost:8000/api/automatization/uploads", {
                 method: "PUT",
                 headers: {
