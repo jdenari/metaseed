@@ -2,7 +2,7 @@
     <div>
         <MainHeader />
         <ProfileDataForm />
-        <MainFooter />
+        <MainFooter class="footer-profile"/>
     </div>
 </template>
 
@@ -16,9 +16,13 @@ export default {
         MainHeader
         , MainFooter
         , ProfileDataForm
-    }
+    },
+    middleware: ['auth']
 }
 </script>
 
 <style scoped>
+    .footer-profile{
+        margin-top: 40px;
+    }
 </style>

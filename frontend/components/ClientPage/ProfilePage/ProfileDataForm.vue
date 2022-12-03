@@ -13,13 +13,10 @@
                 >
                 </ProfileDataField>
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
-                    <b-button 
+                    <SmallButton 
+                        smallButtonText="Alterar Dados"
                         v-b-modal.modal-1
-                        class="btn btn-primary me-md-2"
-                        type="button"
-                        variant="primary"
-                        >Atualizar Senha
-                    </b-button>
+                    />
                     <b-modal 
                         id="modal-1" 
                         title="Atenção!" 
@@ -54,13 +51,10 @@
                 >
                 </ProfilePasswordField>
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
-                    <b-button 
-                        v-b-modal.modal-2
-                        class="btn btn-primary me-md-2"
-                        type="button"
-                        variant="primary"
-                        >Atualizar Senha
-                    </b-button>
+                    <SmallButton 
+                        smallButtonText="Alterar Senha"
+                        v-b-modal.modal-2 
+                    />
                     <b-modal 
                         id="modal-2" 
                         title="Atenção!" 
@@ -94,12 +88,14 @@
 import ProfileDataField from './ProfileDataField.vue';
 import ProfilePasswordField from './ProfilePasswordField.vue';
 import MessageWarning from '../../MessageWarning.vue'
+import SmallButton from '../../SmallButton.vue'
 export default {
     name: 'ProfileDataForm',
     components: {
         ProfileDataField
         , ProfilePasswordField
         , MessageWarning
+        , SmallButton
     }, 
     data (){
         return{
@@ -216,7 +212,6 @@ export default {
                 this.messageWarning = data.error;
             })
         },
-
         hideMessageWarning(){
             setTimeout(() => { 
                 this.messageWarning = null

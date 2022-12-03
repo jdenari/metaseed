@@ -11,7 +11,7 @@ export default {
             token: null,
             userId: null,
             newPassword: null,
-            confirmNewPasssword: null
+            confirmNewPasssword: null,
         }
     },
     mutations: {

@@ -4,32 +4,22 @@
             <!-- all the components when the user is not logged -->
             <div v-if="!$store.state.authenticated">
                 <h4 class="text-center p-2">Iniciar Sessão</h4>
-                <div class="my-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input 
-                    type="email" 
-                    class="form-control" 
-                    id="exampleInputEmail1" 
-                    aria-describedby="emailHelp"
-                    name="login"
-                    v-model="auth.email"
-                >
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Senha</label>
-                    <input 
-                        type="password" 
-                        class="form-control" 
-                        id="exampleInputPassword1"
-                        name="password"
+                    <FormField
+                        formFieldItem="E-mail"
+                        v-model="auth.email"
+                        textAttributeValue="email"
+                        placeholderAttributeValue="nome@minhaempresa.com.br"
+                    />
+                    <FormField
+                        formFieldItem="Senha"
                         v-model="auth.password"
-                        >
-                </div>
+                        textAttributeValue="password"
+                        placeholderAttributeValue="********"
+                    />
                 <div class="w-100 d-md-flex justify-content-md-end">
-                        <MainButton @click.native="loginVerification"/>
-                </div>
-                <div class="p text-center p-3">
-                    {{ errorText }}
+                    <MainButton 
+                        @click.native="loginVerification"
+                    />
                 </div>
                 <div class="p">Quer criar uma conta?<NuxtLink to="/"> Entre em contato.</NuxtLink></div>
             </div>
@@ -47,10 +37,12 @@
 
 <script>
 import MainButton from '../MainButton.vue'
+import FormField from '../FormField.vue'
 export default {
     name: 'LoginField',
     components: {
         MainButton
+        , FormField
     },
     data() {
        return {
