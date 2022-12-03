@@ -31,9 +31,15 @@ export default {
 
 <style>
 
+:root{
+    --dark-black: #212529;
+    --light-white: #F8F9FA;
+    --light-red: rgba(255, 0, 0, 0.6);
+}
+
 @font-face {
     font-family: 'monteserrat';
-    src: url(../fonts/monteserrat/Montserrat-VariableFont_wght.ttf) format('truetype');
+    src: url(../fonts/Karla/Karla-VariableFont_wght.ttf) format('truetype');
     font-weight: normal; 
     font-style: normal; 
 }
@@ -41,6 +47,11 @@ export default {
 body{
     zoom: 1;
     font-family: 'monteserrat';
+}
+
+.no-underline{
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
 </style>

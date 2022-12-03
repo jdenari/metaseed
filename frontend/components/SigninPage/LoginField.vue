@@ -26,12 +26,7 @@
                         >
                 </div>
                 <div class="w-100 d-md-flex justify-content-md-end">
-                        <button 
-                        type="button" 
-                        class="btn btn-primary w-25 me-md-2"
-                        @click="loginVerification"
-                        >Entrar →
-                        </button>
+                        <MainButton @click.native="loginVerification"/>
                 </div>
                 <div class="p text-center p-3">
                     {{ errorText }}
@@ -51,8 +46,12 @@
 </template>
 
 <script>
+import MainButton from '../MainButton.vue'
 export default {
     name: 'LoginField',
+    components: {
+        MainButton
+    },
     data() {
        return {
            errorText: 'No error message',
