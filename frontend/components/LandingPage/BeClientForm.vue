@@ -1,45 +1,59 @@
 <template>
-    <section class="main-sec p-03">
-        <div class="main-div col-flex w-50 text-center p-3">
-            <div class="form-div p-3 m-auto">
-                <div class="logo-div p-3">
-                    <img src="../../static/logo/empresa-milionaria.png" alt="Logo tipo da Base da Empresa Milionária" class="img-fluid">
-                </div>
-                <h2>O ponto de partida para sua empresa ter sucesso!</h2>
-                <h4 class="p-3">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</h4>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    placeholder="Preencha com o seu nome" 
-                    aria-label="First name"
-                >
-                <input 
-                    type="email" 
-                    class="form-control mt-1" 
-                    placeholder="Preencha com o seu e-mail" 
-                    aria-label="E-mail"
-                >
-                <button type="button" class="btn btn-danger w-100 mt-1">QUERO CONSTRUIR UMA EMPRESA MILIONÁRIA!</button>
-                <p class="m-1">RECEBA O MÉTODO 100% GRATUITO</p>
+    <section class="m-auto">
+        <div class="w-75 m-auto p-5">
+            <div class="h1 my-2">O seu ponto de partida!</div>
+            <div class="h3 my-5">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
+            <FormField
+                formFieldItem="Nome"
+                v-model="auth.nome"
+                textAttributeValue="text"
+                placeholderAttributeValue="Como você gostaria de ser chamado"
+            />
+            <FormField
+                formFieldItem="E-mail"
+                v-model="auth.email"
+                textAttributeValue="email"
+                placeholderAttributeValue="nome@minhaempresa.com.br"
+            />
+            <FormField
+                formFieldItem="Telefone"
+                v-model="auth.telefone"
+                textAttributeValue="number"
+                placeholderAttributeValue="Número com DD para contato"
+            />
+            <div class="w-100 d-md-flex justify-content-md-end">
+                <SmallButton smallButtonText="Quero ser cliente →"/>
             </div>
         </div>
+        
     </section>
 </template>
 
 <script>
+import FormField from '../FormField.vue'
+import SmallButton from '../SmallButton.vue'
 export default {
     name: 'BeClientForm',
+    components: {
+        FormField,
+        SmallButton
+    },
+    data (){
+        return {
+            auth: {
+                nome: null,
+                email: null,
+                phone: null
+            }
+        }
+    },
     methods: {
     }
 }
 </script>
 
 <style scoped>
-div.form-div{
-    background-color: rgba(255, 255, 255, 0.5);
-    max-width: 460px;
-    border-radius: 15px;
-}
+
 
 </style> 
 
