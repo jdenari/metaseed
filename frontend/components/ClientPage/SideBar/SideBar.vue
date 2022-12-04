@@ -3,14 +3,14 @@
 		<aside class="sideBar bg-light p-3" :class="{'sideBar-small': fullSideBar }">
 			<div class="w-100 d-flex flex-row-reverse p-1 mb-3">
 				<img 
-					src="../../../../static/icons/arrow-bar-left.svg" 
+					src="../../../static/icons/arrow-bar-left.svg" 
 					alt="Ícone de seta a esquerda" 
 					class="pe-auto icon-SideBar" 
 					@click="fullSideBar = !fullSideBar"
 					v-if="!this.fullSideBar"
 				>
 				<img 
-					src="../../../../static/icons/arrow-bar-right.svg" 
+					src="../../../static/icons/arrow-bar-right.svg" 
 					alt="Ícone de seta a esquerda" 
 					class="pe-auto icon-SideBar" 
 					@click="fullSideBar = !fullSideBar"
@@ -21,11 +21,12 @@
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
-							<img src="../../../../static/icons/gear.svg" alt="" class="mx-2">
+							<img src="../../../static/icons/gear.svg" alt="" class="mx-2">
 							<b-button 
 								block v-b-toggle.accordion-1 
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
+								@click="$store.commit('changeContentToAutomatization')"
 								> Automatizações
 							</b-button>
 						</b-card-header>
@@ -34,11 +35,12 @@
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
-							<img src="../../../../static/icons/laptop.svg" alt="" class="mx-2">
+							<img src="../../../static/icons/laptop.svg" alt="" class="mx-2">
 							<b-button 
 								block v-b-toggle.accordion-2 
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
+								@click="$store.commit('changeContentToDashboard')"
 								> Dashboards
 							</b-button>
 						</b-card-header>
@@ -47,7 +49,7 @@
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
-							<img src="../../../../static/icons/person.svg" alt="" class="mx-2">
+							<img src="../../../static/icons/person.svg" alt="" class="mx-2">
 							<b-button 
 								block v-b-toggle.accordion-3
 								variant="light"
@@ -58,8 +60,10 @@
 						<b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
 							<b-card-body>
 								<ul class="list-group list-group-flush">
-									<nuxt-link to="/client/profile" class="no-underline"><li class="list-group-item">Alterar Perfil</li></nuxt-link>
-									<li class="list-group-item">Sair</li>
+									<li class="list-group-item stretched-link border-0 p-0 my-1"
+										@click="$store.commit('changeContentToProfile')"
+									>Alterar Perfil</li>
+									<li class="list-group-item p-0 my-1">Sair</li>
 								</ul>
 							</b-card-body>
 						</b-collapse>

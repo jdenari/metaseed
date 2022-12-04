@@ -12,7 +12,7 @@
 </template>
   
 <script>
-import SmallButton from '../../../SmallButton.vue'
+import SmallButton from '../../SmallButton.vue'
 export default {
     name: 'FieldAutomatization',
     components: {

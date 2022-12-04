@@ -1,7 +1,7 @@
 <template>
     <section class="p-3">
         <div class="d-flex align-items-center">
-            <img src="../../../../static/icons/gear.svg" alt="" class="icon-image m-2 mx-3">
+            <img src="../../../static/icons/gear.svg" alt="" class="icon-image m-2 mx-3">
             <div class="h1 m-0">AUTOMATIZAÇÕES</div>
         </div>
         <AddLessButton />

@@ -12,6 +12,7 @@ export default {
             userId: null,
             newPassword: null,
             confirmNewPasssword: null,
+            homeClientContent: 'automatizationContent'
         }
     },
     mutations: {
@@ -31,6 +32,15 @@ export default {
             state.email = data.email
             state.newPassword = data.newPassword
             state.confirmNewPassword = data.confirmNewPassword
+        },
+        changeContentToDashboard (state){
+            state.homeClientContent = 'dashboardContent'
+        },
+        changeContentToProfile (state){
+            state.homeClientContent = 'profileContent'
+        },
+        changeContentToAutomatization (state){
+            state.homeClientContent = 'automatizationContent'
         },
     },
 }

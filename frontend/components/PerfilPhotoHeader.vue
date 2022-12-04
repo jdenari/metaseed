@@ -5,9 +5,7 @@
             src="../static/perfil/joao-vitor-denari-dos-santos.png"
             class="m-1"
         ></b-avatar>
-        <NuxtLink to="/client/profile" class="no-underline">
-            <div class="m-2 text-dark"> {{ $store.state.firstName }}</div>
-        </NuxtLink>
+        <div class="m-2 text-dark"> {{ $store.state.firstName }}</div>
     </li>
 </template>
 <script>
