@@ -1,7 +1,7 @@
 <template>
     <section class="m-auto">
         <div class="w-75 m-auto p-5">
-            <div class="h1 my-2">O seu ponto de partida!</div>
+            <div class="h1 my-2">O SEU PONTO DE PARTIDA!</div>
             <div class="h3 my-5">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
             <FormField
                 formFieldItem="Nome"

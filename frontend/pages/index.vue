@@ -5,7 +5,10 @@
             <BeClientForm class="client-form p-3" />
             <img src="../static/images/business-desk.png" alt="" class="main-img">
         </div>
+        <MetaseedValues />
         <SucessPillars />
+        <MessageForm />
+        <MainFooter />
     </div>
 </template>
 
@@ -13,13 +16,18 @@
 import BeClientForm from '../components/LandingPage/BeClientForm.vue';
 import MainHeader from '../components/MainHeader.vue';
 import SucessPillars from '../components/LandingPage/SucessPillars.vue'
-
+import MetaseedValues from '../components/LandingPage/MetaseedValues.vue'
+import MessageForm from '../components/LandingPage/MessageForm.vue'
+import MainFooter from '../components/MainFooter.vue'
 export default {
     name: "IndexPage",
     components: {
         BeClientForm
         , MainHeader
         , SucessPillars
+        , MetaseedValues
+        , MessageForm
+        , MainFooter
     }
 }
 </script>
@@ -30,6 +38,7 @@ export default {
     --dark-black: #212529;
     --light-white: #F8F9FA;
     --light-red: rgba(255, 0, 0, 0.6);
+    --light-gray: #e5e5e5;
 }
 @font-face {
     font-family: 'monteserrat';
