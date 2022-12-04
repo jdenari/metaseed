@@ -18,18 +18,52 @@
 				>
 			</div>
 			<div v-if="!this.fullSideBar">
-				<AccordionSideBar
-					v-for="(item, index) in accordeonItems" 
-					:key="index"
-					:accordeonItem="item"
-					class="p-1">
-				</AccordionSideBar>
-				<div class="p-3 mt-3 border-top">
-					<FooterSideBarVue
-						v-for="(item, index) in footerItems" 
-						:key="index"
-						:footerItem="item">
-					</FooterSideBarVue>
+				<div class="accordion" role="tablist">
+					<b-card no-body class="mb-1">
+						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
+							<img src="../../../../static/icons/gear.svg" alt="" class="mx-2">
+							<b-button 
+								block v-b-toggle.accordion-1 
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								> Automatizações
+							</b-button>
+						</b-card-header>
+					</b-card>
+				</div>
+				<div class="accordion" role="tablist">
+					<b-card no-body class="mb-1">
+						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
+							<img src="../../../../static/icons/laptop.svg" alt="" class="mx-2">
+							<b-button 
+								block v-b-toggle.accordion-2 
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								> Dashboards
+							</b-button>
+						</b-card-header>
+					</b-card>
+				</div>
+				<div class="accordion" role="tablist">
+					<b-card no-body class="mb-1">
+						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
+							<img src="../../../../static/icons/person.svg" alt="" class="mx-2">
+							<b-button 
+								block v-b-toggle.accordion-3
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								> Perfil
+							</b-button>
+						</b-card-header>
+						<b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+							<b-card-body>
+								<ul class="list-group list-group-flush">
+									<nuxt-link to="/client/profile" class="no-underline"><li class="list-group-item">Alterar Perfil</li></nuxt-link>
+									<li class="list-group-item">Sair</li>
+								</ul>
+							</b-card-body>
+						</b-collapse>
+					</b-card>
 				</div>
 			</div>
 		</aside>
@@ -37,30 +71,23 @@
 </template>
 
 <script>
-	import AccordionSideBar from './AccordionSideBar.vue'
-	import FooterSideBarVue from './FooterSideBar.vue';
-    export default {
-        name: 'BodyScrolling',
-		components: {
-			AccordionSideBar
-			, FooterSideBarVue
-		},
-		data (){
-			return {
-				accordeonItems: [
-					'Perfil'
-					, 'Dashboards'
-					, 'Formulários'
-				],
-				footerItems: [
-					'Sobre'
-					, 'Documentação'
-					, 'Contato'
-				],
-				fullSideBar: false,
-			}
-		},
-    }
+import FooterSideBarVue from './FooterSideBar.vue';
+export default {
+	name: 'BodyScrolling',
+	components: {
+		FooterSideBarVue
+	},
+	data (){
+		return {
+			footerItems: [
+				'Sobre'
+				, 'Documentação'
+				, 'Contato'
+			],
+			fullSideBar: false,
+		}
+	},
+}
 </script>
 
 <style scoped>
