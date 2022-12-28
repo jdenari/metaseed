@@ -5,32 +5,38 @@
             <div class="h3 my-5">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
             <FormField
                 formFieldItem="Nome"
-                v-model="auth.nome"
+                v-model="lead.name"
                 textAttributeValue="text"
                 placeholderAttributeValue="Como você gostaria de ser chamado"
             />
             <FormField
                 formFieldItem="E-mail"
-                v-model="auth.email"
+                v-model="lead.email"
                 textAttributeValue="email"
                 placeholderAttributeValue="nome@minhaempresa.com.br"
             />
             <FormField
                 formFieldItem="Telefone"
-                v-model="auth.telefone"
+                v-model="lead.phone"
                 textAttributeValue="number"
                 placeholderAttributeValue="Número com DD para contato"
             />
             <div class="w-100 d-md-flex justify-content-md-end">
                 <SmallButton 
                     smallButtonText="Quero ser cliente →"
-                    v-b-modal.modalSuccess
+                    @event="sendLeadResponse();hideMessageWarning()"
+                    id="show-btn"
                 />
             </div>
-            <ModalSuccess 
-                textModalYesNo="Seu registro foi confirmado com sucesso! Vamos entrar em contato assim que possível."
-                idModalYesNo="modalSuccess"
+            <MessageWarning 
+                :messageWarning="messageWarning"
+                class="mt-3"
             />
+            <b-modal 
+                ref="modalSuccess" 
+                ok-only
+            > Obrigado pelo interesse! Em breve entraremos em contato. 
+            </b-modal>
         </div>
     </section>
 </template>
@@ -38,24 +44,56 @@
 <script>
 import FormField from '../FormField.vue'
 import SmallButton from '../SmallButton.vue'
-import ModalSuccess from '../ModalSuccess.vue'
+import MessageWarning from '../MessageWarning.vue'
 export default {
     name: 'BeClientForm',
     components: {
         FormField
         , SmallButton
-        , ModalSuccess
+        , MessageWarning
     },
     data (){
         return {
-            auth: {
-                nome: null,
+            lead: {
+                name: null,
                 email: null,
-                phone: null
-            }
+                phone: null,
+                comment: ""
+            },
+            messageWarning: null,
         }
     },
     methods: {
+        async sendLeadResponse(){
+            // it creates the object that will be use on API
+            const dataObject = {
+                fullName: this.lead.name,
+                email: this.lead.email,
+                phone: this.lead.phone,
+                comment: this.lead.comment
+            }
+            const jsonDataObject = JSON.stringify(dataObject)
+
+            // it access the api to update the profile data using token and the object
+            await fetch("http://localhost:8000/api/lead/leadResponse", {
+                method: "POST",
+                headers: {"Content-type": "application/json"},
+                body: jsonDataObject
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                if (data.error) {
+                    this.messageWarning = data.error;
+                } else {
+                    this.$refs['modalSuccess'].show()
+                }
+            })
+        },
+        hideMessageWarning(){
+            setTimeout(() => { 
+                this.messageWarning = null
+            }, 5000)
+        }
     }
 }
 </script>

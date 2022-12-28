@@ -8,7 +8,7 @@ const metaseedSchema = new mongoose.Schema({
     description: {
         type: String
     },
-    userID:{
+    leadID:{
         type: mongoose.ObjectId
     }
 });

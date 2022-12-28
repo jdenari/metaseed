@@ -115,8 +115,6 @@ export default {
                 this.payloadProfileData.push(item.model);
             });
 
-            console.log(this.payloadProfileData)
-
             // it creates the object that will be use on API
             const dataObject = {
                 id: this.$store.state.userId,

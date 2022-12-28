@@ -1,5 +1,10 @@
 <template>
-    <button type="button" class="btn main-btn p-2 px-4"> {{ smallButtonText }}</button>
+    <button 
+        type="button" 
+        class="btn main-btn p-2 px-4"
+        @click="event"
+    > {{ smallButtonText }} 
+    </button>
 </template>
 <script>
     export default {
@@ -8,6 +13,11 @@
             smallButtonText:{
                 type: String,
                 required: true 
+            },
+        },
+        methods: {
+            event(){
+                this.$emit("event");
             },
         }
     }

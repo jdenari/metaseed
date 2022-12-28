@@ -8,6 +8,7 @@ const multer = require("multer");
 // routes
 const authRouter = require("./routes/authRoutes.js");
 const userRouter = require("./routes/userRoutes.js");
+const leadRouter = require("./routes/leadRoutes.js");
 const automatizationRouter = require("./routes/automatizationRoutes.js");
 
 // config
@@ -22,6 +23,7 @@ app.use(express.static("public"));
 
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
+app.use("/api/lead", leadRouter)
 app.use("/api/automatization", automatizationRouter)
 
 // mongoDB connection
