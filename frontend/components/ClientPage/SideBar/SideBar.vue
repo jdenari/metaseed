@@ -60,10 +60,10 @@
 						<b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
 							<b-card-body>
 								<ul class="list-group list-group-flush">
-									<li class="list-group-item stretched-link border-0 p-0 my-1"
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
 										@click="$store.commit('changeContentToProfile')"
 									>Alterar Perfil</li>
-									<li class="list-group-item p-0 my-1">Sair</li>
+									<li class="no-underline list-group-item p-0 my-1" @click="$store.commit('deauthenticate')">Sair</li>
 								</ul>
 							</b-card-body>
 						</b-collapse>

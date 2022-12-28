@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink to="/auth/signin" class="d-flex align-items-center" style="text-decoration: none; color: inherit;">
+    <NuxtLink to="/auth/signin" class="no-underline d-flex align-items-center">
         <button type="button" class="btn main-btn p-2 px-4">Entrar</button>
     </NuxtLink>
 </template>

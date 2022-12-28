@@ -26,6 +26,17 @@ export default {
             state.email = data.email
             state.phone = data.phone
         },
+        deauthenticate(state) {
+            state.authenticated = false
+            state.token = null
+            state.userId = null
+            state.firstName = null
+            state.lastName = null
+            state.company = null
+            state.email = null
+            state.phone = null
+            $nuxt.$router.push('/')
+        },
         updatePassword(state, data) {
             state.token = data.token
             state.userId = data.userId

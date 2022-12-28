@@ -25,10 +25,10 @@
             placeholderAttributeValue:{
                 type: String,
                 required: true 
-            }
-        },
-        value: {
-            required: true
+            },
+            value: {
+                type: String
+            },
         },
         methods: {
             onInput(event) {

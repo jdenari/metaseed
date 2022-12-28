@@ -58,7 +58,8 @@
                     <b-modal 
                         id="modal-2" 
                         title="Atenção!" 
-                        hide-footer v-model="showModalPassword"
+                        hide-footer 
+                        v-model="showModalPassword"
                     >
                         <p class="my-4">Tem certeza que quer mudar a sua senha?</p>
                         <div class="d-flex flex-row-reverse w-100">
@@ -142,6 +143,8 @@ export default {
             this.profileDataItems.forEach((item) => {
                 this.payloadProfileData.push(item.model);
             });
+
+            console.log(this.payloadProfileData)
 
             // it creates the object that will be use on API
             const dataObject = {

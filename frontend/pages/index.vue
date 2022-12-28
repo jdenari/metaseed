@@ -53,6 +53,7 @@ body{
 .no-underline{
     text-decoration: none !important;
     color: inherit !important;
+    cursor: pointer;
 }
 
 </style>
