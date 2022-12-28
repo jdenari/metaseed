@@ -31,12 +31,20 @@
             <textarea class="form-control form-control-coment" name="comentario" required></textarea>
         </div>
         <div class="w-100 d-md-flex justify-content-md-end my-3 p-1">
-            <SmallButton smallButtonText="Enviar comentário"/>
+            <SmallButton 
+                smallButtonText="Enviar comentário"
+                v-b-modal.modalSuccessFeedback
+            />
         </div>
+        <ModalSuccess 
+            textModalYesNo="Muito obrigado! Em breve entraremos em contato."
+            idModalYesNo="modalSuccessFeedback"
+        />
     </div>
 </template>
 
 <script>
+import ModalSuccess from '../ModalSuccess.vue';
 import FormField from '../FormField.vue'
 import SmallButton from '../SmallButton.vue';
 export default {
@@ -44,6 +52,7 @@ export default {
     components: {
         FormField
         , SmallButton
+        , ModalSuccess
     },
     methods: {
     }

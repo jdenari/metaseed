@@ -21,7 +21,7 @@
                         @click.native="loginVerification"
                     />
                 </div>
-                <div class="p">Quer criar uma conta?<NuxtLink to="/"> Entre em contato.</NuxtLink></div>
+                <div class="p">Quer criar uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
             </div>
             <!-- if the user is logged -->
             <div v-else>

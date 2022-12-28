@@ -22,21 +22,29 @@
                 placeholderAttributeValue="Número com DD para contato"
             />
             <div class="w-100 d-md-flex justify-content-md-end">
-                <SmallButton smallButtonText="Quero ser cliente →"/>
+                <SmallButton 
+                    smallButtonText="Quero ser cliente →"
+                    v-b-modal.modalSuccess
+                />
             </div>
+            <ModalSuccess 
+                textModalYesNo="Seu registro foi confirmado com sucesso! Vamos entrar em contato assim que possível."
+                idModalYesNo="modalSuccess"
+            />
         </div>
-        
     </section>
 </template>
 
 <script>
 import FormField from '../FormField.vue'
 import SmallButton from '../SmallButton.vue'
+import ModalSuccess from '../ModalSuccess.vue'
 export default {
     name: 'BeClientForm',
     components: {
-        FormField,
-        SmallButton
+        FormField
+        , SmallButton
+        , ModalSuccess
     },
     data (){
         return {
