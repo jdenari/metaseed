@@ -8,6 +8,7 @@ router.post("/leadResponse", async (req, res) => {
     const email = req.body.email;
     const phone = req.body.phone;
     const comment = req.body.comment
+    const date = req.body.date
 
     // check for required fields
     if(fullName == null || email == null || phone == null || comment == null ){
@@ -15,6 +16,7 @@ router.post("/leadResponse", async (req, res) => {
     }
 
     const lead = new Lead({
+        date: date,
         fullName: fullName,
         email: email,
         phone: phone,

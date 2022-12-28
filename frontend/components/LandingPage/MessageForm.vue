@@ -82,6 +82,7 @@ export default {
         async sendLeadResponse(){
         // it creates the object that will be use on API
         const dataObject = {
+            date: new Date(),
             fullName: this.lead.name,
             email: this.lead.email,
             phone: this.lead.phone,

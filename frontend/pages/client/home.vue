@@ -28,7 +28,7 @@ import MainFooter from '../../components/MainFooter.vue'
             , MainDashboard
             , MainFooter
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 

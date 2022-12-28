@@ -5,15 +5,16 @@ let responseScript
 router.put("/uploads", async (req, res) => {
 
     let options = {
-        scriptPath: "scripts",
+        scriptPath: "../scripts",
         args: JSON.stringify(req.body)
     };
-    PythonShell.run("first-test.py", options, (error, res) => {
-        if (error) {
-            console.log(error);
+    PythonShell.run("first-test.py", options, (err, res) => {
+        if (err) {
+            console.log(err);
         }
         if (res) {
             responseScript = JSON.parse(res)
+            console.log(responseScript)
         }
     });
     

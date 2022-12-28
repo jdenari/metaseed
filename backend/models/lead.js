@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const leadSchema = new mongoose.Schema({
+    date: {
+        type: String,
+        required: true
+    },
     fullName: {
         type: String
     },
