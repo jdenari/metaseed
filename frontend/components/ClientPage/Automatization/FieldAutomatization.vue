@@ -58,7 +58,7 @@ export default {
 
             const workbook = read(data);
 
-            const fileObject = utils.sheet_to_json(workbook.Sheets.Planilha5)
+            const fileObject = utils.sheet_to_json(workbook.Sheets.Planilha)
 
             const file = JSON.stringify(fileObject)
 
@@ -66,7 +66,6 @@ export default {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
-                "auth-token": this.$store.state.token
             },
             body: file
             })
