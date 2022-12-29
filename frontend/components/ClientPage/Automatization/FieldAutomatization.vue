@@ -4,14 +4,14 @@
             <div class="w-50 d-flex flex-row">
                 <label 
                     for="file" 
-                    class="label border px-5 w-50"
+                    class="label border w-75"
                     > 
                 {{ fileName }}
                 </label>
-                <select class="bg-light border" id="script-function" @click="changeScriptFunction">
-                    <option value="script-01" selected @click="changeScriptFunction">Script 01</option>
-                    <option value="script-02" @click="changeScriptFunction">Script 02</option>
-                    <option value="script-03" @click="changeScriptFunction">Script 03</option>
+                <select class="bg-light border w-25" id="script-function" @change="changeScriptFunction">
+                    <option value="script-01" selected >Script 01</option>
+                    <option value="script-02" >Script 02</option>
+                    <option value="script-03" >Script 03</option>
                 </select>
                 <input 
                     id="file" 
@@ -33,7 +33,10 @@
                 />
             </div>
         </form>
-        <MessageWarning :messageWarning="messageWarning"/>
+        <MessageWarning 
+            :messageWarning="messageWarning"
+            class="text-start m-0 w-75"
+        />
     </div>
 </template>
 <script>
@@ -53,7 +56,7 @@ export default {
             selected: null,
             file: "",
             fileName: "Selecione Arquivo",
-            messageWarning: 'oi',
+            messageWarning: 'result',
             scriptFunction: "script-01"
         }
     },
@@ -70,15 +73,10 @@ export default {
             this.fileName = "Selecione Arquivo"
         },
         async sendFile(){   
-
             const data = await this.file.arrayBuffer();
-
             const workbook = read(data);
-
             const fileObject = utils.sheet_to_json(workbook.Sheets.Planilha)
-
             const file = JSON.stringify(fileObject)
-
 
             await fetch(`http://localhost:8000/api/automatization/uploads/${this.scriptFunction}`, {
             method: "PUT",
@@ -104,12 +102,12 @@ input[type='file'] {
 label{
     margin: 0px;
     padding: 8px;
-    border-radius: 20px 0px 0px 20px
+    border-radius: 12px 0px 0px 12px
 }
 select{
     height: 42px;
     padding: 8px;
     border: 0px;
-    border-radius: 0px 20px 20px 0px
+    border-radius: 0px 12px 12px 0px
 }
 </style>
