@@ -1,13 +1,12 @@
 <template>
     <div>
         <MainHeader />
-        <div class="d-flex">
+        <div class="d-block d-lg-flex">
             <SideBar />
             <div class="w-100">
                 <MainAutomatization v-if="this.$store.state.homeClientContent === 'automatizationContent'"/>
                 <ProfileDataForm v-if="this.$store.state.homeClientContent === 'profileContent'"/>
                 <MainDashboard v-if="this.$store.state.homeClientContent === 'dashboardContent'"/>
-                <MainFooter class="footer"/>
             </div>
         </div>
     </div>
@@ -28,7 +27,7 @@ import MainFooter from '../../components/MainFooter.vue'
             , MainDashboard
             , MainFooter
         },
-        // middleware: ['auth']
+        middleware: ['auth']
     }
 </script>
 

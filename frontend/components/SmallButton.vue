@@ -3,7 +3,7 @@
         type="button" 
         class="btn main-sml-btn p-2 px-4"
         @click="event"
-    > {{ smallButtonText }} 
+        > {{ smallButtonText }} 
     </button>
 </template>
 <script>

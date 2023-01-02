@@ -1,6 +1,6 @@
 <template>
     <div class="p-3">
-        <form class="login-form p-3 border m-auto">
+        <form class="login-form col-10 p-3 col-xl-3 col-md-6 border m-auto">
             <!-- all the components when the user is not logged -->
             <div v-if="!$store.state.authenticated">
                 <h4 class="text-center p-2">Iniciar Sessão</h4>
@@ -21,7 +21,7 @@
                         @click.native="loginVerification"
                     />
                 </div>
-                <div class="p">Quer criar uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
+                <div class="p mt-3">Quer criar uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
             </div>
             <!-- if the user is logged -->
             <div v-else>
@@ -96,8 +96,4 @@ export default {
 </script>
 
 <style scoped>
-    .login-form{
-        width: 450px;
-    }
-
 </style>

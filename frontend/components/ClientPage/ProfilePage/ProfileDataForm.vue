@@ -1,6 +1,6 @@
 <template>
-    <div class="p-3">
-        <form class="col-6 p-3 border m-auto">
+    <div class="p-3 m-xl-0 mt-5">
+        <form class="col-10 col-xl-6 p-3 border m-auto">
             <div class="h1">Perfil</div>
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>
@@ -12,7 +12,7 @@
                     v-model="item.model"
                 >
                 </ProfileDataField>
-                <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
+                <div class="m-1 my-2 d-grid d-md-flex justify-content-end">
                     <SmallButton 
                         smallButtonText="Alterar Dados"
                         v-b-modal.modalProfileData
@@ -35,7 +35,7 @@
                     v-model="item.model"
                 >
                 </ProfilePasswordField>
-                <div class="m-1 my-2 d-grid d-md-flex justify-content-md-end">
+                <div class="m-1 my-2 d-grid d-md-flex justify-content-end">
                     <SmallButton 
                         smallButtonText="Alterar Dados"
                         v-b-modal.modalPassword
@@ -194,5 +194,5 @@ export default {
 </script>
 
 <style scoped>
-    
+
 </style>

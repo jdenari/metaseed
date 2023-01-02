@@ -1,7 +1,7 @@
 <template>
     <div>
 		<aside class="sideBar bg-light p-3" :class="{'sideBar-small': fullSideBar }">
-			<div class="w-100 d-flex flex-row-reverse p-1 mb-3">
+			<!-- <div class="w-100 d-flex flex-row-reverse p-1 mb-3">
 				<img 
 					src="../../../static/icons/arrow-bar-left.svg" 
 					alt="Ícone de seta a esquerda" 
@@ -16,8 +16,8 @@
 					@click="fullSideBar = !fullSideBar"
 					v-else
 				>
-			</div>
-			<div v-if="!this.fullSideBar">
+			</div> -->
+			<div v-if="!this.fullSideBar" class="p-1">
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
@@ -90,19 +90,30 @@ export default {
 			],
 			fullSideBar: false,
 		}
-	},
+	},	
 }
 </script>
 
 <style scoped>
+.sideBar{
+	width: 350px;
+	height: 92vh;
+}
+.sideBar-small{
+	width: 65px;
+}
+.icon-SideBar{
+	cursor: pointer;
+}
+</style>
+
+<style scoped>
+
+/*------------------------------------768px-md-------------------------------------------*/
+@media screen and (max-width: 992px) {
 	.sideBar{
-		width: 350px;
-		height: 92vh;
+		width: 100vw;
+		height: auto;
 	}
-	.sideBar-small{
-		width: 65px;
-	}
-	.icon-SideBar{
-		cursor: pointer;
-	}
+}
 </style>

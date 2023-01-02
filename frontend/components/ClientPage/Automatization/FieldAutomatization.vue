@@ -1,14 +1,14 @@
 <template>
     <div class="in p-3 w-100">    
         <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
-            <div class="w-50 d-flex flex-row">
+            <div class="w-75 d-flex flex-row">
                 <label 
                     for="file" 
-                    class="label border w-75"
+                    class="label border col-7"
                     > 
                 {{ fileName }}
                 </label>
-                <select class="bg-light border w-25" id="script-function" @change="changeScriptFunction">
+                <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
                     <option value="script-01" selected >Script 01</option>
                     <option value="script-02" >Script 02</option>
                     <option value="script-03" >Script 03</option>

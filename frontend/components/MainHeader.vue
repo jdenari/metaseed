@@ -5,7 +5,7 @@
                 <img src="../static/logo/logo-metaseed-small.png" alt="" class="px-3">
             </NuxtLink>
             <NuxtLink to="/" class="d-flex align-items-center no-underline">
-                <div class="logo-name h3 m-0 mx-2 ">Metaseed.Co</div>
+                <div class="logo-name h4 m-0 mx-2 ">Metaseed.Co</div>
             </NuxtLink>
         </div>
 

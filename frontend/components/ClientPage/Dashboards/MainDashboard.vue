@@ -1,5 +1,5 @@
 <template>
-    <section class="d-flex align-items-center h-75">
+    <section class="d-flex align-items-center h-75 mt-5">
         <div class="d-block m-auto">
             <div class="h1 text-center">
                 A seu empresa não possui Dashboard Cadastrado!

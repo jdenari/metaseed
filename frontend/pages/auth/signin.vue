@@ -1,7 +1,7 @@
 <template>
      <div class="main-page"> 
         <MainHeader />
-        <LoginField class="main-form"/>
+        <LoginField class="main-form m-5"/>
         <MainFooter class="main-footer" />
     </div>
 </template>
@@ -32,8 +32,8 @@ export default {
         left: 50%;
         transform: translate(-50%, -100%);
     }
-    .main-form{
-        margin: 130px;
-    }
 
+    .main-form{
+        margin-top: 130px !important;
+    }
 </style>
