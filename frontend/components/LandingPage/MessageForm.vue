@@ -1,5 +1,5 @@
 <template>
-    <div class="message-form-div container p-3">
+    <div class="message-form-div container p-5">
         <div class="h1 p-1">DEIXE-ME SABER COMO POSSO TE AJUDAR?</div>
         <div class="container text-center">
             <div class="row text-left">
@@ -118,8 +118,8 @@ export default {
 
 <style scoped>
 .message-form-div{
-    margin-top: 80px;
-    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 textarea.form-control-coment{
     height: 200px !important;

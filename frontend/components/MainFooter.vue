@@ -12,7 +12,7 @@
         >
             <img src="../static/icons/instagram.png" 
             alt="" 
-            class="p-2" 
+            class="p-2 col-12 col-md" 
             >
         </a>
         <a  href="https://www.instagram.com/metaseed.co/" 
@@ -21,7 +21,7 @@
         >
             <img src="../static/icons/linkedin.png"
             alt="" 
-            class="p-2" 
+            class="p-2 col-12 col-md" 
             >
         </a>
         <a  href="https://www.instagram.com/metaseed.co/" 
@@ -30,7 +30,7 @@
         >
             <img src="../static/icons/envelope.png"
             alt="" 
-            class="p-2" 
+            class="p-2 col-12 col-md" 
             >
         </a>
     </div>
