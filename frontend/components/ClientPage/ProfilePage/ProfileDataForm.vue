@@ -93,7 +93,6 @@ export default {
                 'Nova senha: ', 
                 'Repita a nova senha: '
             ],
-            errorText: 'No error message',
             listPassword: [
                 { model: "" },
                 { model: "" },
@@ -108,9 +107,9 @@ export default {
     },
     methods: {
 
-        async updateProfileData(e){
-            // it does not let the page reaload
-            // e.preventDefault();
+        async updateProfileData(){
+
+            this.payloadProfileData = []
             this.profileDataItems.forEach((item) => {
                 this.payloadProfileData.push(item.model);
             });
@@ -139,9 +138,7 @@ export default {
             .then((data) => {
                 // it prints the message from the backend and it commits all changes made
                 this.messageWarning = data.error;
-                this.$store.commit("authenticate", {
-                    token: data.data.token, 
-                    userId: data.data.userId, 
+                this.$store.commit("updateProfileData", { 
                     firstName: data.data.firstName, 
                     lastName: data.data.lastName,
                     company: data.data.company, 

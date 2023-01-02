@@ -24,7 +24,7 @@
             class="p-2 col-12 col-md" 
             >
         </a>
-        <a  href="https://www.instagram.com/metaseed.co/" 
+        <a  href="mailto:jeanlopess11@gmail.com" 
             class="" 
             target="_blank" 
         >

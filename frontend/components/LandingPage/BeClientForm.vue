@@ -18,7 +18,7 @@
             <FormField
                 formFieldItem="Telefone"
                 v-model="lead.phone"
-                textAttributeValue="number"
+                textAttributeValue="text"
                 placeholderAttributeValue="Número com DD para contato"
             />
             <div class="w-100 d-md-flex justify-content-md-end">
@@ -58,7 +58,7 @@ export default {
                 name: null,
                 email: null,
                 phone: null,
-                comment: ""
+                comment: "Quero ser cliente!"
             },
             messageWarning: null,
         }
@@ -83,11 +83,8 @@ export default {
             })
             .then((resp) => resp.json())
             .then((data) => {
-                if (data.error) {
-                    this.messageWarning = data.error;
-                } else {
-                    this.$refs['modalSuccess'].show()
-                }
+                if (data.error) {this.messageWarning = data.error;}
+                else {this.$refs['modalSuccess'].show()}
             })
         },
         hideMessageWarning(){

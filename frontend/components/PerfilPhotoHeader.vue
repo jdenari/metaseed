@@ -5,18 +5,31 @@
                 <b-avatar 
                     href="#bar" 
                     src="../static/perfil/joao-vitor-denari-dos-santos.png"
-                    class="m-1"
+                    class="m-1 bg-white"
                 ></b-avatar>
                 <div class="m-2 text-dark"> {{ $store.state.firstName }}</div>
             </li>
         </template>
         <b-dropdown-item href="#" @click="$store.commit('changeContentToProfile')">Alterar Perfil</b-dropdown-item>
-        <b-dropdown-item @click="$store.commit('deauthenticate')">Sair</b-dropdown-item>
+        <b-dropdown-item 
+            v-b-modal.modalPassword
+            >Sair
+        </b-dropdown-item>
+        <ModalYesNo 
+            textModalYesNo="Tem certeza que quer sair da sua conta?"
+            idModalYesNo="modalPassword"
+            @eventYes="$store.commit('deauthenticate');$bvModal.hide('modalPassword');hideMessageWarning()"
+            @eventNo="$bvModal.hide('modalPassword')"
+        />
   </b-dropdown>
 </template>
 <script>
+import ModalYesNo from './ModalYesNo.vue';
 export default {
     name: 'PerfilPhotoHeader',
+    components: {
+        ModalYesNo
+    }
 }
 </script>
 <style scoped>

@@ -4,24 +4,28 @@
             <!-- all the components when the user is not logged -->
             <div v-if="!$store.state.authenticated">
                 <h4 class="text-center p-2">Iniciar Sessão</h4>
-                    <FormField
-                        formFieldItem="E-mail"
-                        v-model="auth.email"
-                        textAttributeValue="email"
-                        placeholderAttributeValue="nome@minhaempresa.com.br"
-                    />
-                    <FormField
-                        formFieldItem="Senha"
-                        v-model="auth.password"
-                        textAttributeValue="password"
-                        placeholderAttributeValue="********"
-                    />
+                <MessageWarning 
+                    :messageWarning="messageWarning"
+                    class="p-3"
+                />
+                <FormField
+                    formFieldItem="E-mail"
+                    v-model="auth.email"
+                    textAttributeValue="email"
+                    placeholderAttributeValue="nome@minhaempresa.com.br"
+                />
+                <FormField
+                    formFieldItem="Senha"
+                    v-model="auth.password"
+                    textAttributeValue="password"
+                    placeholderAttributeValue="********"
+                />
                 <div class="w-100 d-md-flex justify-content-md-end">
                     <MainButton 
                         @click.native="loginVerification"
                     />
                 </div>
-                <div class="p mt-3">Quer criar uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
+                <div class="p mt-3">Não possui uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
             </div>
             <!-- if the user is logged -->
             <div v-else>
@@ -38,15 +42,17 @@
 <script>
 import MainButton from '../MainButton.vue'
 import FormField from '../FormField.vue'
+import MessageWarning from '../MessageWarning.vue'
 export default {
     name: 'LoginField',
     components: {
         MainButton
         , FormField
+        , MessageWarning
     },
     data() {
        return {
-           errorText: 'No error message',
+            messageWarning: null,
            auth: {
                email: '',
                password: ''
@@ -75,7 +81,7 @@ export default {
             .then((data) => {
                 if(data.error){
                     // it prints the error
-                    this.errorText = data.error;
+                    this.messageWarning = data.error;
                 } else {
                     // it takes to the dashboard page and commit all the page with the user info
                     $nuxt.$router.push('/client/home')
@@ -91,6 +97,11 @@ export default {
                 }
             })
         },
+        hideMessageWarning(){
+            setTimeout(() => { 
+                this.messageWarning = null
+            }, 5000)
+        }
     }
 }
 </script>

@@ -63,12 +63,21 @@
 									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
 										@click="$store.commit('changeContentToProfile')"
 									>Alterar Perfil</li>
-									<li class="no-underline list-group-item p-0 my-1" @click="$store.commit('deauthenticate')">Sair</li>
+									<li class="no-underline list-group-item p-0 my-1"
+										v-b-modal.modalPassword
+										>Sair
+									</li>
 								</ul>
 							</b-card-body>
 						</b-collapse>
 					</b-card>
 				</div>
+				<ModalYesNo 
+					textModalYesNo="Tem certeza que quer sair da sua conta?"
+					idModalYesNo="modalPassword"
+					@eventYes="$store.commit('deauthenticate');$bvModal.hide('modalPassword');hideMessageWarning()"
+					@eventNo="$bvModal.hide('modalPassword')"
+				/>
 			</div>
 		</aside>
     </div>
@@ -76,10 +85,12 @@
 
 <script>
 import FooterSideBarVue from './FooterSideBar.vue';
+import ModalYesNo from '../../ModalYesNo.vue';
 export default {
 	name: 'BodyScrolling',
 	components: {
 		FooterSideBarVue
+		, ModalYesNo
 	},
 	data (){
 		return {

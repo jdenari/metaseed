@@ -35,12 +35,17 @@ export default {
             state.company = null
             state.email = null
             state.phone = null
+            state.homeClientContent = 'dashboardContent'
             $nuxt.$router.push('/')
         },
-        updatePassword(state, data) {
-            state.token = data.token
-            state.userId = data.userId
+        updateProfileData(state, data){
+            state.firstName = data.firstName
+            state.lastName = data.lastName
+            state.company = data.company
             state.email = data.email
+            state.phone = data.phone
+        },
+        updatePassword(state, data) {
             state.newPassword = data.newPassword
             state.confirmNewPassword = data.confirmNewPassword
         },
