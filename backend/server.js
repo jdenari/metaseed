@@ -1,4 +1,5 @@
 // modules
+require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -15,6 +16,9 @@ const automatizationRouter = require("./routes/automatizationRoutes.js");
 const dbName = "databaseMetaseed"
 const port = 8000;
 
+const DB_USER = process.env.DB_USER
+const DB_PASS = process.env.DB_PASS
+
 const app = express();
 
 app.use(cors());
@@ -28,9 +32,9 @@ app.use("/api/automatization", automatizationRouter)
 
 // mongoDB connection
 mongoose.connect(
-    `mongodb://localhost/${dbName}`,
+    `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.cpdotrm.mongodb.net/databaseMetaseed?retryWrites=true&w=majority`,
 );
 
 app.listen(port, () => {
-    console.log(`backend rodando na porta ${port}`)
+    console.log(`backend rodando na porta ${port} e ${process.env.MY_VARIABLE}`)
 })
