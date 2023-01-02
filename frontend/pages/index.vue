@@ -2,8 +2,8 @@
     <div>
         <MainHeader />
         <div class="d-flex">
-            <BeClientForm class="client-form p-3" />
-            <img src="../static/images/business-desk.png" alt="" class="main-img">
+            <BeClientForm class="client-form w-100 p-3" />
+            <img src="../static/images/business-desk.png" alt="" class="main-img d-none d-xl-block">
         </div>
         <MetaseedValues />
         <SucessPillars />
@@ -66,3 +66,42 @@ body{
     width: 55%;
 }
 </style>
+
+<style>
+/*------------------------------------1600px----------------------------------------------*/ 
+@media screen and (max-width: 1600px) {
+
+}
+/*-----------------------------------1400px-xxl------------------------------------------*/ 
+@media screen and (max-width: 1400px) {
+    html{
+        font-size: 90.0%;
+    }
+
+}
+/*-----------------------------------1200px-xl-------------------------------------------*/ 
+@media screen and (max-width: 1200px) {
+    .client-form{
+        background-image:url(../static/images/business-desk.png);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+    }
+}
+/*------------------------------------992px-lg-------------------------------------------*/ 
+@media screen and (max-width: 992px) {
+    html{
+        font-size: 85.0%;
+    }
+}
+/*------------------------------------768px-md-------------------------------------------*/
+@media screen and (max-width: 768px) {
+
+}
+/*------------------------------------576px-sm-------------------------------------------*/
+@media screen and (max-width: 576px) {
+    html{
+        font-size: 75.0%;
+    }
+}</style>

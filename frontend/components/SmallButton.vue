@@ -1,7 +1,7 @@
 <template>
     <button 
         type="button" 
-        class="btn main-btn p-2 px-4"
+        class="btn main-sml-btn p-2 px-4"
         @click="event"
     > {{ smallButtonText }} 
     </button>
@@ -23,14 +23,24 @@
     }
 </script>
 <style scoped>
-    .main-btn{
+    .main-sml-btn{
         color: white;
         background-color: red;
         font-size: 16px;
         border-radius: 20px;
     }
-    .main-btn:hover{
+    .main-sml-btn:hover{
         transition: 0.3s;
         background-color: var(--light-red)
     }
+</style>
+
+<style>
+/*------------------------------------768px-md-------------------------------------------*/
+@media screen and (max-width: 768px) {
+    .main-sml-btn{
+        font-size: 12px !important;
+    }
+}
+
 </style>

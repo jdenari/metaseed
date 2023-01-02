@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-xl p-2 py-3">
+    <nav class="navbar navbar-expand p-2 py-3">
         <div class="d-flex">
             <NuxtLink to="/">
                 <img src="../static/logo/logo-metaseed-small.png" alt="" class="px-3">
@@ -10,11 +10,11 @@
         </div>
 
         <!-- if the user it is not logged -->
-        <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-if="!this.$store.state.authenticated">
+        <ul class="navbar-nav lg-auto d-flex justify-content-end w-100" v-if="!this.$store.state.authenticated">
             <MainButton />
         </ul>
         <!-- if the user it is logged -->
-        <ul class="navbar-nav lg-auto d-md-flex justify-content-md-end w-100" v-else>
+        <ul class="navbar-nav lg-auto d-flex justify-content-end w-100" v-else>
             <PerfilPhotoHeader />
         </ul>
     </nav>

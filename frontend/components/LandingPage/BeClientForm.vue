@@ -1,6 +1,6 @@
 <template>
     <section class="m-auto">
-        <div class="w-75 m-auto p-5">
+        <div class="form-bg col-10 col-xxl-9 m-auto p-5 bg-white">
             <div class="h1 my-2">O SEU PONTO DE PARTIDA!</div>
             <div class="h3 my-5">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
             <FormField
@@ -100,7 +100,10 @@ export default {
 </script>
 
 <style scoped>
-
+.form-bg{
+    border-radius: 30px;
+    margin: 50px auto !important;
+}
 
 </style> 
 
