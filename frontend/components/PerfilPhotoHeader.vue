@@ -12,14 +12,14 @@
         </template>
         <b-dropdown-item href="#" @click="$store.commit('changeContentToProfile')">Alterar Perfil</b-dropdown-item>
         <b-dropdown-item 
-            v-b-modal.modalPassword
+            v-b-modal.modalExitHeader
             >Sair
         </b-dropdown-item>
         <ModalYesNo 
             textModalYesNo="Tem certeza que quer sair da sua conta?"
-            idModalYesNo="modalPassword"
-            @eventYes="$store.commit('deauthenticate');$bvModal.hide('modalPassword');hideMessageWarning()"
-            @eventNo="$bvModal.hide('modalPassword')"
+            idModalYesNo="modalExitHeader"
+            @eventYes="$store.commit('deauthenticate');$bvModal.hide('modalExitHeader');hideMessageWarning()"
+            @eventNo="$bvModal.hide('modalExitHeader')"
         />
   </b-dropdown>
 </template>

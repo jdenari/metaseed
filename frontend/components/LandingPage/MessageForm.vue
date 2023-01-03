@@ -105,6 +105,10 @@ export default {
                     this.messageWarning = data.error;
                 } else {
                     this.$refs['modalSuccess'].show()
+                    this.lead.name = null
+                    this.lead.email = null
+                    this.lead.phone = null
+                    this.lead.comment = null
                 }
             })
         },

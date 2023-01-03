@@ -37,7 +37,7 @@
                 </ProfilePasswordField>
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-end">
                     <SmallButton 
-                        smallButtonText="Alterar Dados"
+                        smallButtonText="Alterar Senha"
                         v-b-modal.modalPassword
                     />
                     <ModalYesNo 

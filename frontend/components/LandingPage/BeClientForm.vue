@@ -85,7 +85,13 @@ export default {
             .then((resp) => resp.json())
             .then((data) => {
                 if (data.error) {this.messageWarning = data.error;}
-                else {this.$refs['modalSuccess'].show()}
+                else {
+                    this.$refs['modalSuccess'].show()
+                    this.lead.name = null
+                    this.lead.email = null
+                    this.lead.phone = null
+                    this.lead.comment = null
+                }
             })
         },
         hideMessageWarning(){

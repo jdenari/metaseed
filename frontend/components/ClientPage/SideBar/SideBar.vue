@@ -64,7 +64,7 @@
 										@click="$store.commit('changeContentToProfile')"
 									>Alterar Perfil</li>
 									<li class="no-underline list-group-item p-0 my-1"
-										v-b-modal.modalPassword
+										v-b-modal.modalExitSideBar
 										>Sair
 									</li>
 								</ul>
@@ -74,9 +74,9 @@
 				</div>
 				<ModalYesNo 
 					textModalYesNo="Tem certeza que quer sair da sua conta?"
-					idModalYesNo="modalPassword"
-					@eventYes="$store.commit('deauthenticate');$bvModal.hide('modalPassword');hideMessageWarning()"
-					@eventNo="$bvModal.hide('modalPassword')"
+					idModalYesNo="modalExitSideBar"
+					@eventYes="$store.commit('deauthenticate');$bvModal.hide('modalExitSideBar');hideMessageWarning()"
+					@eventNo="$bvModal.hide('modalExitSideBar')"
 				/>
 			</div>
 		</aside>

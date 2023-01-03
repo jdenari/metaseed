@@ -8,6 +8,7 @@
                 class="form-control" 
                 aria-describedby="passwordHelpInline"
                 type="password"
+                id="disabledTextInput"
                 :value="value" 
                 @input="$emit('input', $event.target.value)"
             >
