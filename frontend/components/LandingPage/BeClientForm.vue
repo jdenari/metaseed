@@ -76,7 +76,8 @@ export default {
             const jsonDataObject = JSON.stringify(dataObject)
 
             // it access the api to update the profile data using token and the object
-            await fetch("http://localhost:8000/api/lead/leadResponse", {
+            await fetch("https://metaseed.online/api/lead/leadResponse", {
+            // await fetch("http://localhost:5000/api/lead/leadResponse", {
                 method: "POST",
                 headers: {"Content-type": "application/json"},
                 body: jsonDataObject

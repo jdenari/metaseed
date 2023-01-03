@@ -126,7 +126,8 @@ export default {
             const jsonDataObject = JSON.stringify(dataObject)
 
             // it access the api to update the profile data using token and the object
-            await fetch("http://localhost:8000/api/user/profile", {
+            await fetch("https://metaseed.online/api/user/profile", {
+            // await fetch("http://localhost:5000/api/user/profile", {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",
@@ -167,7 +168,8 @@ export default {
             const jsonDataObject = JSON.stringify(dataObject)
 
             // it access the api to update the password using token and the object
-            await fetch("http://localhost:8000/api/user/password", {
+            await fetch("https://metaseed.online/api/user/password", {
+            // await fetch("http://localhost:5000/api/user/password", {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"

@@ -78,7 +78,8 @@ export default {
             const fileObject = utils.sheet_to_json(workbook.Sheets.Planilha)
             const file = JSON.stringify(fileObject)
 
-            await fetch(`http://localhost:8000/api/automatization/uploads/${this.scriptFunction}`, {
+            await fetch(`https://metaseed.online/api/automatization/uploads/${this.scriptFunction}`, {
+            // await fetch(`http://localhost:5000/api/automatization/uploads/${this.scriptFunction}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

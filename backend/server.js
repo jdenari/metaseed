@@ -14,7 +14,7 @@ const automatizationRouter = require("./routes/automatizationRoutes.js");
 
 // config
 const dbName = "databaseMetaseed"
-const port = 8000;
+const port = 5000;
 
 const DB_USER = process.env.DB_USER
 const DB_PASS = process.env.DB_PASS
@@ -29,6 +29,10 @@ app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
 app.use("/api/lead", leadRouter)
 app.use("/api/automatization", automatizationRouter)
+
+app.get("/", (req, res) => {
+    res.json({ message: "Rota teste"})
+})
 
 // mongoDB connection
 mongoose.connect(
