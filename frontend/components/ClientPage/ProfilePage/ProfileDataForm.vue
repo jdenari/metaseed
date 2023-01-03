@@ -89,12 +89,10 @@ export default {
 
             // all the data needed from password field
             profilePasswordItems: [
-                'Senha atual: ', 
                 'Nova senha: ', 
                 'Repita a nova senha: '
             ],
             listPassword: [
-                { model: "" },
                 { model: "" },
                 { model: "" },
             ],
@@ -149,10 +147,10 @@ export default {
             })
         },
 
-        async updatePassword(e){
+        async updatePassword(){
             // it does not let the page reaload
             // e.preventDefault();
-
+            this.payloadPassword = []
             // it creates the object that will be use on API
             this.listPassword.forEach((item) => {
                 this.payloadPassword.push(item.model);
@@ -162,8 +160,8 @@ export default {
                 firstName: this.$store.state.firstName,
                 lastName: this.$store.state.lastName,
                 email: this.$store.state.email,
-                newPassword: this.payloadPassword[1],
-                confirmNewPassword: this.payloadPassword[2]
+                newPassword: this.payloadPassword[0],
+                confirmNewPassword: this.payloadPassword[1]
             }
             const jsonDataObject = JSON.stringify(dataObject)
 
@@ -172,15 +170,19 @@ export default {
             // await fetch("http://localhost:5000/api/user/password", {
                 method: "PUT",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "auth-token": this.$store.state.token
                 },
                 body: jsonDataObject
             })
             .then((resp) => resp.json())
             .then((data) => {
-
                 // it prints the message from the backend
                 this.messageWarning = data.error;
+                this.listPassword = [
+                    { model: "" },
+                    { model: "" },
+                ]
             })
         },
         hideMessageWarning(){
