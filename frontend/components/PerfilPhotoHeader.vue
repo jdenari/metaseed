@@ -10,7 +10,7 @@
                 <div class="m-2 text-dark"> {{ $store.state.firstName }}</div>
             </li>
         </template>
-        <b-dropdown-item href="#" @click="$store.commit('changeContentToProfile')">Alterar Perfil</b-dropdown-item>
+        <b-dropdown-item href="#" @click="$store.commit('CHANGE_CONTENT_TO_PROFILE')">Alterar Perfil</b-dropdown-item>
         <b-dropdown-item 
             v-b-modal.modalExitHeader
             >Sair
@@ -18,7 +18,7 @@
         <ModalYesNo 
             textModalYesNo="Tem certeza que quer sair da sua conta?"
             idModalYesNo="modalExitHeader"
-            @eventYes="$store.commit('deauthenticate');$bvModal.hide('modalExitHeader');hideMessageWarning()"
+            @eventYes="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitHeader');hideMessageWarning()"
             @eventNo="$bvModal.hide('modalExitHeader')"
         />
   </b-dropdown>

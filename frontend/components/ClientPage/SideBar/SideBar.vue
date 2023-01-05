@@ -26,7 +26,7 @@
 								block v-b-toggle.accordion-1 
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
-								@click="$store.commit('changeContentToAutomatization')"
+								@click="$store.commit('CHANGE_CONTENT_TO_AUTOMATIZATION')"
 								> Automatizações
 							</b-button>
 						</b-card-header>
@@ -40,7 +40,7 @@
 								block v-b-toggle.accordion-2 
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
-								@click="$store.commit('changeContentToDashboard')"
+								@click="$store.commit('CHANGE_CONTENT_TO_DASHBOARD')"
 								> Dashboards
 							</b-button>
 						</b-card-header>
@@ -61,7 +61,7 @@
 							<b-card-body>
 								<ul class="list-group list-group-flush">
 									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
-										@click="$store.commit('changeContentToProfile')"
+										@click="$store.commit('CHANGE_CONTENT_TO_PROFILE')"
 									>Alterar Perfil</li>
 									<li class="no-underline list-group-item p-0 my-1"
 										v-b-modal.modalExitSideBar
@@ -75,7 +75,7 @@
 				<ModalYesNo 
 					textModalYesNo="Tem certeza que quer sair da sua conta?"
 					idModalYesNo="modalExitSideBar"
-					@eventYes="$store.commit('deauthenticate');$bvModal.hide('modalExitSideBar');hideMessageWarning()"
+					@eventYes="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitSideBar');hideMessageWarning()"
 					@eventNo="$bvModal.hide('modalExitSideBar')"
 				/>
 			</div>

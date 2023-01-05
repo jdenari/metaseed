@@ -20,7 +20,7 @@
                     <ModalYesNo 
                         textModalYesNo="Tem certeza que quer mudar o seu cadastro?"
                         idModalYesNo="modalProfileData"
-                        @eventYes="updateProfileData();$bvModal.hide('modalProfileData');hideMessageWarning()"
+                        @eventYes="UPDATE_PROFILE_DATA();$bvModal.hide('modalProfileData');hideMessageWarning()"
                         @eventNo="$bvModal.hide('modalProfileData')"
                     />
                 </div>
@@ -43,7 +43,7 @@
                     <ModalYesNo 
                         textModalYesNo="Tem certeza que quer mudar a sua senha?"
                         idModalYesNo="modalPassword"
-                        @eventYes="updatePassword();$bvModal.hide('modalPassword');hideMessageWarning()"
+                        @eventYes="UPDATE_PASSWORD();$bvModal.hide('modalPassword');hideMessageWarning()"
                         @eventNo="$bvModal.hide('modalPassword')"
                     />
                 </div>
@@ -105,7 +105,7 @@ export default {
     },
     methods: {
 
-        async updateProfileData(){
+        async UPDATE_PROFILE_DATA(){
 
             this.payloadProfileData = []
             this.profileDataItems.forEach((item) => {
@@ -137,7 +137,7 @@ export default {
             .then((data) => {
                 // it prints the message from the backend and it commits all changes made
                 this.messageWarning = data.error;
-                this.$store.commit("updateProfileData", { 
+                this.$store.commit("UPDATE_PROFILE_DATA", { 
                     firstName: data.data.firstName, 
                     lastName: data.data.lastName,
                     company: data.data.company, 
@@ -147,7 +147,7 @@ export default {
             })
         },
 
-        async updatePassword(){
+        async UPDATE_PASSWORD(){
             // it does not let the page reaload
             // e.preventDefault();
             this.payloadPassword = []

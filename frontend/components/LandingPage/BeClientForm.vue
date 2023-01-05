@@ -24,12 +24,12 @@
             <div class="w-100 d-md-flex justify-content-md-end">
                 <SmallButton 
                     smallButtonText="Quero ser cliente →"
-                    @event="sendLeadResponse();hideMessageWarning()"
+                    @event="createLeadObject();$store.dispatch('hideMessageWarning')"
                     id="show-btn"
                 />
             </div>
             <MessageWarning 
-                :messageWarning="messageWarning"
+                :messageWarning="this.$store.state.messageWarning"
                 class="mt-3"
             />
             <b-modal 
@@ -60,45 +60,19 @@ export default {
                 phone: null,
                 comment: "Quero ser cliente!"
             },
-            messageWarning: null,
         }
     },
     methods: {
-        async sendLeadResponse(){
-            // it creates the object that will be use on API
-            const dataObject = {
+        createLeadObject(){
+            const dataLeadObject = {
                 date: new Date(),
                 fullName: this.lead.name,
                 email: this.lead.email,
                 phone: this.lead.phone,
                 comment: this.lead.comment
             }
-            const jsonDataObject = JSON.stringify(dataObject)
-
-            // it access the api to update the profile data using token and the object
-            await fetch("https://metaseed.online/api/lead/leadResponse", {
-            // await fetch("http://localhost:5000/api/lead/leadResponse", {
-                method: "POST",
-                headers: {"Content-type": "application/json"},
-                body: jsonDataObject
-            })
-            .then((resp) => resp.json())
-            .then((data) => {
-                if (data.error) {this.messageWarning = data.error;}
-                else {
-                    this.$refs['modalSuccess'].show()
-                    this.lead.name = null
-                    this.lead.email = null
-                    this.lead.phone = null
-                    this.lead.comment = null
-                }
-            })
+            this.$store.dispatch('sendLeadResponse', dataLeadObject)
         },
-        hideMessageWarning(){
-            setTimeout(() => { 
-                this.messageWarning = null
-            }, 5000)
-        }
     }
 }
 </script>

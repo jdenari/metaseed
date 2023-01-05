@@ -86,7 +86,7 @@ export default {
                 } else {
                     // it takes to the dashboard page and commit all the page with the user info
                     $nuxt.$router.push('/client/home')
-                    this.$store.commit("authenticate", {
+                    this.$store.commit("AUTHENTICATE", {
                         token: data.token, 
                         userId: data.userId, 
                         firstName: data.firstName, 
