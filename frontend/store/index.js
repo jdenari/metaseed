@@ -21,10 +21,10 @@ export default {
             homeClientContent: 'automatizationContent',
 
             lead: {
-                name: null,
-                email: null,
-                phone: null,
-                comment: null,
+                name: '',
+                email: '',
+                phone: '',
+                comment: '',
             },
         }
     },
@@ -75,7 +75,7 @@ export default {
             state.homeClientContent = 'automatizationContent'
         },
         // message mutations
-        MESSAGE_LEAD_RESPONSE(state, data){
+        MESSAGE_RESPONSE(state, data){
             state.messageWarning = data
         },
         RESET_MESSAGE_WARNING(state){
@@ -83,10 +83,10 @@ export default {
         },
         RESET_LEAD_RESPONSE(state){
             state.lead = {
-                name: null,
-                email: null,
-                phone: null,
-                comment: null,
+                name: '',
+                email: '',
+                phone: '',
+                comment: '',
             }
         },
     },
@@ -102,11 +102,42 @@ export default {
             .then((resp) => resp.json())
             .then((data) => {
                 if (data.error) { 
-                    commit('MESSAGE_LEAD_RESPONSE', data.error)
+                    commit('MESSAGE_RESPONSE', data.error)
                 }
                 else {
                     commit('RESET_LEAD_RESPONSE')
                     this.$refs['modalSuccess'].show()
+                }
+            })
+        },
+        async loginVerification({commit}, data){
+            console.log(data)
+            const jsonDataObject = JSON.stringify(data)
+            await fetch("https://metaseed.online/api/auth/login", {
+            // await fetch("http://localhost:5000/api/auth/login", {
+                method: "POST",
+                headers: {"Content-type": "application/json"},
+                body: jsonDataObject
+            })
+            .then((resp) => resp.json())
+
+            // it access the api to update the profile data using token and the object
+            .then((data) => {
+                if (data.error) { 
+                    commit('MESSAGE_RESPONSE', data.error)
+                }
+                else {
+                    // it takes to the dashboard page and commit all the page with the user info
+                    $nuxt.$router.push('/client/home')
+                    this.$store.commit("AUTHENTICATE", {
+                        token: data.token, 
+                        userId: data.userId, 
+                        firstName: data.firstName, 
+                        lastName: data.lastName,
+                        company: data.company, 
+                        email: data.email,
+                        phone: data.phone
+                    })
                 }
             })
         },

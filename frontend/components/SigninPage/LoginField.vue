@@ -5,7 +5,7 @@
             <div v-if="!$store.state.authenticated">
                 <h4 class="text-center p-2">Iniciar Sessão</h4>
                 <MessageWarning 
-                    :messageWarning="messageWarning"
+                :messageWarning="this.$store.state.messageWarning"
                     class="p-3"
                 />
                 <FormField
@@ -63,46 +63,14 @@ export default {
         async loginVerification(e) {
             // it does not let the page reaload
             e.preventDefault();
-
             // it creates the object that will be use on API
             const dataObject = {
                 email: this.auth.email,
                 password: this.auth.password
             }
-            const jsonDataObject = JSON.stringify(dataObject)
-            await fetch("https://metaseed.online/api/auth/login", {
-            // await fetch("http://localhost:5000/api/auth/login", {
-                method: "POST",
-                headers: {"Content-type": "application/json"},
-                body: jsonDataObject
-            })
-            .then((resp) => resp.json())
-
-            // it access the api to update the profile data using token and the object
-            .then((data) => {
-                if(data.error){
-                    // it prints the error
-                    this.messageWarning = data.error;
-                } else {
-                    // it takes to the dashboard page and commit all the page with the user info
-                    $nuxt.$router.push('/client/home')
-                    this.$store.commit("AUTHENTICATE", {
-                        token: data.token, 
-                        userId: data.userId, 
-                        firstName: data.firstName, 
-                        lastName: data.lastName,
-                        company: data.company, 
-                        email: data.email,
-                        phone: data.phone
-                    })
-                }
-            })
+            this.$store.dispatch('loginVerification', dataObject)
+            this.$store.dispatch('hideMessageWarning')
         },
-        hideMessageWarning(){
-            setTimeout(() => { 
-                this.messageWarning = null
-            }, 5000)
-        }
     }
 }
 </script>

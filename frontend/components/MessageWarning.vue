@@ -2,7 +2,7 @@
     <div>
         <div 
             class="p w-100 m-auto text-center" 
-            v-if="messageWarning"> {{ messageWarning }} </div>
+            v-if="this.$store.state.messageWarning"> {{ messageWarning }} </div>
     </div>
 </template>
 

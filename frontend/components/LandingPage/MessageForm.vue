@@ -6,7 +6,7 @@
                 <div class="col p-1">
                     <FormField
                         formFieldItem="Nome"
-                        v-model="$store.state.lead.name"
+                        v-model="lead.name"
                         textAttributeValue="text"
                         placeholderAttributeValue="Como você gostaria de ser chamado"
                     />
@@ -14,7 +14,7 @@
                 <div class="col p-1">
                     <FormField
                     formFieldItem="E-mail"
-                    v-model="$store.state.lead.email"
+                    v-model="lead.email"
                     textAttributeValue="email"
                     placeholderAttributeValue="nome@minhaempresa.com.br"
                 />
@@ -22,7 +22,7 @@
                 <div class="col p-1">
                     <FormField
                     formFieldItem="Telefone"
-                    v-model="$store.state.lead.phone"
+                    v-model="lead.phone"
                     textAttributeValue="number"
                     placeholderAttributeValue="Número com DD para contato"
                 />
@@ -35,7 +35,7 @@
                 class="form-control form-control-coment" 
                 name="comentario" 
                 required
-                v-model="$store.state.lead.comment"
+                v-model="lead.comment"
             ></textarea>
         </div>
         <div class="w-100 d-md-flex justify-content-md-end my-3 p-1">
@@ -67,14 +67,24 @@ export default {
         , SmallButton
         , MessageWarning
     },
+    data (){
+        return {
+            lead: {
+                name: this.$store.state.lead.name,
+                email: this.$store.state.lead.email,
+                phone: this.$store.state.lead.phone,
+                comment: this.$store.state.lead.comment
+            },
+        }
+    },
     methods: {
         createLeadObject(){
             const dataLeadObject = {
                 date: new Date(),
-                fullName: $store.state.lead.name,
-                email: $store.state.lead.email,
-                phone: $store.state.lead.phone,
-                comment: $store.state.lead.comment
+                fullName: this.lead.name,
+                email: this.lead.email,
+                phone: this.lead.phone,
+                comment: this.lead.comment
             }
             this.$store.dispatch('sendLeadResponse', dataLeadObject)
         }

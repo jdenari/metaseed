@@ -24,7 +24,7 @@
             <div class="w-100 d-md-flex justify-content-md-end">
                 <SmallButton 
                     smallButtonText="Quero ser cliente →"
-                    @event="createLeadObject();$store.dispatch('hideMessageWarning')"
+                    @event="createLeadObject()"
                     id="show-btn"
                 />
             </div>
@@ -55,10 +55,10 @@ export default {
     data (){
         return {
             lead: {
-                name: null,
-                email: null,
-                phone: null,
-                comment: "Quero ser cliente!"
+                name: this.$store.state.lead.name,
+                email: this.$store.state.lead.email,
+                phone: this.$store.state.lead.phone,
+                comment: this.$store.state.lead.comment
             },
         }
     },
@@ -72,6 +72,7 @@ export default {
                 comment: this.lead.comment
             }
             this.$store.dispatch('sendLeadResponse', dataLeadObject)
+            this.$store.dispatch('hideMessageWarning')
         },
     }
 }
