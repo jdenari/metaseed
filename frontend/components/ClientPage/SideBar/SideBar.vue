@@ -64,7 +64,7 @@
 										@click="$store.commit('CHANGE_CONTENT_TO_PROFILE')"
 									>Alterar Perfil</li>
 									<li class="no-underline list-group-item p-0 my-1"
-										v-b-modal.modalExitSideBar
+										@click="$bvModal.show('modalExitSideBar')"
 										>Sair
 									</li>
 								</ul>
@@ -72,12 +72,28 @@
 						</b-collapse>
 					</b-card>
 				</div>
-				<ModalYesNo 
-					textModalYesNo="Tem certeza que quer sair da sua conta?"
-					idModalYesNo="modalExitSideBar"
-					@eventYes="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitSideBar');hideMessageWarning()"
-					@eventNo="$bvModal.hide('modalExitSideBar')"
-				/>
+				<b-modal 
+					id="modalExitSideBar" 
+					ref="modalExitSideBar"
+					ok-only
+					hide-footer
+					>
+					<div class="d-block">Tem certeza que quer sair da sua conta? </div>
+					<div class="d-flex flex-row-reverse w-100 mt-4">
+						<button 
+							@click="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitSideBar')"
+							class="btn btn-primary m-1"
+							type="button"  
+							>Sim
+						</button>
+						<button 
+							@click="$bvModal.hide('modalExitSideBar')"
+							class="btn btn-secondary m-1"
+							type="button" 
+							>Voltar
+						</button>
+            		</div>
+        		</b-modal>
 			</div>
 		</aside>
     </div>
@@ -85,12 +101,10 @@
 
 <script>
 import FooterSideBarVue from './FooterSideBar.vue';
-import ModalYesNo from '../../ModalYesNo.vue';
 export default {
 	name: 'BodyScrolling',
 	components: {
 		FooterSideBarVue
-		, ModalYesNo
 	},
 	data (){
 		return {

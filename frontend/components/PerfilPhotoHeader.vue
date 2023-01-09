@@ -12,23 +12,37 @@
         </template>
         <b-dropdown-item href="#" @click="$store.commit('CHANGE_CONTENT_TO_PROFILE')">Alterar Perfil</b-dropdown-item>
         <b-dropdown-item 
-            v-b-modal.modalExitHeader
+            @click="$bvModal.show('modalExitHeader')"
             >Sair
         </b-dropdown-item>
-        <ModalYesNo 
-            textModalYesNo="Tem certeza que quer sair da sua conta?"
-            idModalYesNo="modalExitHeader"
-            @eventYes="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitHeader');hideMessageWarning()"
-            @eventNo="$bvModal.hide('modalExitHeader')"
-        />
+        <b-modal 
+            id="modalExitHeader" 
+            ref="modalExitHeader"
+            ok-only
+            hide-footer
+            >
+            <div class="d-block">Tem certeza que quer sair da sua conta? </div>
+            <div class="d-flex flex-row-reverse w-100 mt-4">
+                <button 
+                    @click="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitHeader')"
+                    class="btn btn-primary m-1"
+                    type="button"  
+                    >Sim
+                </button>
+                <button 
+                    @click="$bvModal.hide('modalExitHeader')"
+                    class="btn btn-secondary m-1"
+                    type="button" 
+                    >Voltar
+                </button>
+            </div>
+        </b-modal>
   </b-dropdown>
 </template>
 <script>
-import ModalYesNo from './ModalYesNo.vue';
 export default {
     name: 'PerfilPhotoHeader',
     components: {
-        ModalYesNo
     }
 }
 </script>

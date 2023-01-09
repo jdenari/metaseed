@@ -15,14 +15,30 @@
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-end">
                     <SmallButton 
                         smallButtonText="Alterar Dados"
-                        v-b-modal.modalProfileData
+                        @event="$bvModal.show('modalProfileData')"
                     />
-                    <ModalYesNo 
-                        textModalYesNo="Tem certeza que quer mudar o seu cadastro?"
-                        idModalYesNo="modalProfileData"
-                        @eventYes="updateProfileData();$bvModal.hide('modalProfileData')"
-                        @eventNo="$bvModal.hide('modalProfileData')"
-                    />
+                    <b-modal 
+                        id="modalProfileData" 
+                        ref="modalProfileData"
+                        ok-only
+                        hide-footer
+                        >
+                        <div class="d-block">Tem certeza que quer alterar os dados da conta? </div>
+                        <div class="d-flex flex-row-reverse w-100 mt-4">
+                            <button 
+                                @click="updateProfileData();$bvModal.hide('modalProfileData')"
+                                class="btn btn-primary m-1" 
+                                type="button"
+                                >Sim
+                            </button>
+                            <button 
+                                @click="$bvModal.hide('modalProfileData')"
+                                class="btn btn-secondary m-1"
+                                type="button"
+                                >Voltar
+                            </button>
+                        </div>
+                    </b-modal>
                 </div>
             </div>
             <div class="m-1 my-2 p-3 border">
@@ -38,14 +54,30 @@
                 <div class="m-1 my-2 d-grid d-md-flex justify-content-end">
                     <SmallButton 
                         smallButtonText="Alterar Senha"
-                        v-b-modal.modalPassword
+                        @event="$bvModal.show('modalPassword')"
                     />
-                    <ModalYesNo 
-                        textModalYesNo="Tem certeza que quer mudar a sua senha?"
-                        idModalYesNo="modalPassword"
-                        @eventYes="updatePassword();$bvModal.hide('modalPassword')"
-                        @eventNo="$bvModal.hide('modalPassword')"
-                    />
+                    <b-modal 
+                        id="modalPassword" 
+                        ref="modalPassword"
+                        ok-only
+                        hide-footer
+                        >
+                        <div class="d-block">Tem certeza que quer alterar a senha da conta? </div>
+                        <div class="d-flex flex-row-reverse w-100 mt-4">
+                            <button 
+                                @click="updatePassword();$bvModal.hide('modalPassword')"
+                                class="btn btn-primary m-1" 
+                                type="button"
+                                >Sim
+                            </button>
+                            <button 
+                                @click="$bvModal.hide('modalPassword')"
+                                class="btn btn-secondary m-1"
+                                type="button"
+                                >Voltar
+                            </button>
+                        </div>
+                    </b-modal>
                 </div>
             </div>
             <!-- message error for all situations -->
@@ -59,7 +91,6 @@ import ProfileDataField from './ProfileDataField.vue';
 import ProfilePasswordField from './ProfilePasswordField.vue';
 import MessageWarning from '../../MessageWarning.vue'
 import SmallButton from '../../SmallButton.vue'
-import ModalYesNo from '../../ModalYesNo.vue';
 export default {
     name: 'ProfileDataForm',
     components: {
@@ -67,7 +98,6 @@ export default {
         , ProfilePasswordField
         , MessageWarning
         , SmallButton
-        , ModalYesNo
     }, 
     data (){
         return{
