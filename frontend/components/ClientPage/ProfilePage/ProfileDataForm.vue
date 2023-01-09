@@ -20,7 +20,7 @@
                     <ModalYesNo 
                         textModalYesNo="Tem certeza que quer mudar o seu cadastro?"
                         idModalYesNo="modalProfileData"
-                        @eventYes="UPDATE_PROFILE_DATA();$bvModal.hide('modalProfileData');hideMessageWarning()"
+                        @eventYes="updateProfileData();$bvModal.hide('modalProfileData')"
                         @eventNo="$bvModal.hide('modalProfileData')"
                     />
                 </div>
@@ -43,7 +43,7 @@
                     <ModalYesNo 
                         textModalYesNo="Tem certeza que quer mudar a sua senha?"
                         idModalYesNo="modalPassword"
-                        @eventYes="UPDATE_PASSWORD();$bvModal.hide('modalPassword');hideMessageWarning()"
+                        @eventYes="updatePassword();$bvModal.hide('modalPassword')"
                         @eventNo="$bvModal.hide('modalPassword')"
                     />
                 </div>
@@ -97,21 +97,15 @@ export default {
                 { model: "" },
             ],
             payloadPassword: [],
-            showModalPassword: false,
-            showModalDataProfile: false,
-            messageWarning: null,
-            messageWarningClass: null
         }
     },
     methods: {
 
-        async UPDATE_PROFILE_DATA(){
-
+        async updateProfileData(){
             this.payloadProfileData = []
             this.profileDataItems.forEach((item) => {
                 this.payloadProfileData.push(item.model);
             });
-
             // it creates the object that will be use on API
             const dataObject = {
                 id: this.$store.state.userId,
@@ -121,35 +115,11 @@ export default {
                 email: this.payloadProfileData[3],
                 phone: this.payloadProfileData[4]
             }
-            const jsonDataObject = JSON.stringify(dataObject)
-
-            // it access the api to update the profile data using token and the object
-            await fetch("https://metaseed.online/api/user/profile", {
-            // await fetch("http://localhost:5000/api/user/profile", {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json",
-                    "auth-token": this.$store.state.token
-                },
-                body: jsonDataObject
-            })
-            .then((resp) => resp.json())
-            .then((data) => {
-                // it prints the message from the backend and it commits all changes made
-                this.messageWarning = data.error;
-                this.$store.commit("UPDATE_PROFILE_DATA", { 
-                    firstName: data.data.firstName, 
-                    lastName: data.data.lastName,
-                    company: data.data.company, 
-                    email: data.data.email,
-                    phone: data.data.phone
-                })
-            })
+            this.$store.dispatch('updateProfileData', dataObject)
+            this.$store.dispatch('hideMessageWarning')
         },
 
-        async UPDATE_PASSWORD(){
-            // it does not let the page reaload
-            // e.preventDefault();
+        async updatePassword(){
             this.payloadPassword = []
             // it creates the object that will be use on API
             this.listPassword.forEach((item) => {
@@ -163,33 +133,13 @@ export default {
                 newPassword: this.payloadPassword[0],
                 confirmNewPassword: this.payloadPassword[1]
             }
-            const jsonDataObject = JSON.stringify(dataObject)
-
-            // it access the api to update the password using token and the object
-            await fetch("https://metaseed.online/api/user/password", {
-            // await fetch("http://localhost:5000/api/user/password", {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json",
-                    "auth-token": this.$store.state.token
-                },
-                body: jsonDataObject
-            })
-            .then((resp) => resp.json())
-            .then((data) => {
-                // it prints the message from the backend
-                this.messageWarning = data.error;
-                this.listPassword = [
-                    { model: "" },
-                    { model: "" },
-                ]
-            })
+            this.$store.dispatch('updatePassword', dataObject)
+            this.$store.dispatch('hideMessageWarning')
+            this.listPassword = [
+                { model: "" },
+                { model: "" },
+            ]
         },
-        hideMessageWarning(){
-            setTimeout(() => { 
-                this.messageWarning = null
-            }, 5000)
-        }
     }
 }
 </script>

@@ -45,13 +45,13 @@
             />
         </div>
         <MessageWarning 
-                :messageWarning="this.$store.state.messageWarning"
-                class="mt-3"
-            />
+            :messageWarning="this.$store.state.messageWarning"
+            class="mt-3"
+        />
         <b-modal 
-                ref="modalSuccess" 
-                ok-only
-            > Obrigado pelo comentário! Em breve entraremos em contato. 
+            ref="modalSuccess" 
+            ok-only
+        > Obrigado pelo interesse! Em breve entraremos em contato. 
         </b-modal>
     </div>
 </template>
@@ -78,7 +78,7 @@ export default {
         }
     },
     methods: {
-        createLeadObject(){
+         async createLeadObject(){
             const dataLeadObject = {
                 date: new Date(),
                 fullName: this.lead.name,
@@ -86,7 +86,17 @@ export default {
                 phone: this.lead.phone,
                 comment: this.lead.comment
             }
-            this.$store.dispatch('sendLeadResponse', dataLeadObject)
+            const response = await this.$store.dispatch('sendLeadResponse', dataLeadObject);
+            // if response is 'true', show modal
+            if (response) {
+                this.$refs['modalSuccess'].show();
+                this.lead = {
+                    name: '',
+                    email: '',
+                    phone: '',
+                    comment: ''
+                }
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
     <b-modal 
         :id="idModalYesNo"
         title="Atenção!" 
-        hide-footer 
+        hide-footer
     >
         <p class="my-4">{{ textModalYesNo }}</p>
         <div class="d-flex flex-row-reverse w-100">
@@ -31,7 +31,6 @@ export default {
         },
         idModalYesNo: {
             type: String,
-            required: true
         }
     },
     methods:{

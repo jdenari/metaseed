@@ -32,11 +32,13 @@
                 :messageWarning="this.$store.state.messageWarning"
                 class="mt-3"
             />
-            <b-modal 
-                ref="modalSuccess" 
-                ok-only
-            > Obrigado pelo interesse! Em breve entraremos em contato. 
-            </b-modal>
+            <div>
+                <b-modal 
+                    ref="modalSuccess" 
+                    ok-only
+                > Obrigado pelo interesse! Em breve entraremos em contato. 
+                </b-modal>
+            </div>
         </div>
     </section>
 </template>
@@ -58,22 +60,31 @@ export default {
                 name: this.$store.state.lead.name,
                 email: this.$store.state.lead.email,
                 phone: this.$store.state.lead.phone,
-                comment: this.$store.state.lead.comment
+                comment: 'Quero ser cliente!'
             },
         }
     },
     methods: {
-        createLeadObject(){
+        async createLeadObject() {
             const dataLeadObject = {
                 date: new Date(),
                 fullName: this.lead.name,
                 email: this.lead.email,
                 phone: this.lead.phone,
                 comment: this.lead.comment
+            };
+            const response = await this.$store.dispatch('sendLeadResponse', dataLeadObject);
+            // if response is 'true', show modal
+            if (response) {
+                this.$refs['modalSuccess'].show();
+                this.lead = {
+                    name: '',
+                    email: '',
+                    phone: '',
+                    comment: ''
+                }
             }
-            this.$store.dispatch('sendLeadResponse', dataLeadObject)
-            this.$store.dispatch('hideMessageWarning')
-        },
+        }
     }
 }
 </script>

@@ -2,7 +2,7 @@
     <div class="p-3">
         <form class="login-form col-10 p-3 col-xl-3 col-md-6 border m-auto">
             <!-- all the components when the user is not logged -->
-            <div v-if="!$store.state.authenticated">
+            <div>
                 <h4 class="text-center p-2">Iniciar Sessão</h4>
                 <MessageWarning 
                 :messageWarning="this.$store.state.messageWarning"
@@ -27,14 +27,6 @@
                 </div>
                 <div class="p mt-3">Não possui uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
             </div>
-            <!-- if the user is logged -->
-            <div v-else>
-                <h4 class="text-center p-2">Você já está logado!</h4>
-                <div class="p-3 d-flex justify-content-center">
-                    <button type="button" class="btn btn-danger m-1">Sair</button>
-                    <button type="button" class="btn btn-primary m-1">Página home</button>
-                </div>
-            </div>
         </form>
     </div>
 </template>
@@ -53,7 +45,7 @@ export default {
     data() {
        return {
             messageWarning: null,
-           auth: {
+            auth: {
                email: '',
                password: ''
             }

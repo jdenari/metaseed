@@ -1,6 +1,10 @@
 export default {
     state() {
         return {
+            // dev env: http://localhost:5000
+            // pro env: https://metaseed.online
+            url: 'http://localhost:5000',
+
             // user info
             userLogin: false,
             authenticated: false,
@@ -16,6 +20,7 @@ export default {
 
             // messages alert
             messageWarning: null,
+            modalShow: false,
 
             // components
             homeClientContent: 'automatizationContent',
@@ -89,32 +94,34 @@ export default {
                 comment: '',
             }
         },
+        ACTIVATE_MODAL(state){
+            state.modalShow = true
+        },
     },
     actions: {
-        async sendLeadResponse({commit}, dataLeadObject){
-            const jsonDataObject = JSON.stringify(dataLeadObject)
-            await fetch("https://metaseed.online/api/lead/leadResponse", {
-            // await fetch("http://localhost:5000/api/lead/leadResponse", {
-                method: "POST",
-                headers: {"Content-type": "application/json"},
-                body: jsonDataObject
-            })
-            .then((resp) => resp.json())
-            .then((data) => {
-                if (data.error) { 
-                    commit('MESSAGE_RESPONSE', data.error)
-                }
-                else {
-                    commit('RESET_LEAD_RESPONSE')
-                    this.$refs['modalSuccess'].show()
-                }
-            })
+        async sendLeadResponse({commit, state}, dataLeadObject){
+            return new Promise((resolve) => {
+                const jsonDataObject = JSON.stringify(dataLeadObject)
+                fetch(`${state.url}/api/lead/leadResponse`, {
+                    method: "POST",
+                    headers: {"Content-type": "application/json"},
+                    body: jsonDataObject
+                })
+                .then((resp) => resp.json())
+                .then((data) => {
+                    if (data.error) { 
+                        commit('MESSAGE_RESPONSE', data.error)
+                    }
+                    else {
+                        return resolve('true');
+                    }
+                });
+            });
         },
-        async loginVerification({commit}, data){
+        async loginVerification({commit, state}, data){
             console.log(data)
             const jsonDataObject = JSON.stringify(data)
-            await fetch("https://metaseed.online/api/auth/login", {
-            // await fetch("http://localhost:5000/api/auth/login", {
+            await fetch(`${state.url}/api/auth/login`, {
                 method: "POST",
                 headers: {"Content-type": "application/json"},
                 body: jsonDataObject
@@ -124,12 +131,14 @@ export default {
             // it access the api to update the profile data using token and the object
             .then((data) => {
                 if (data.error) { 
+                    console.log(data)
                     commit('MESSAGE_RESPONSE', data.error)
                 }
                 else {
                     // it takes to the dashboard page and commit all the page with the user info
+                    console.log(data)
                     $nuxt.$router.push('/client/home')
-                    this.$store.commit("AUTHENTICATE", {
+                    commit("AUTHENTICATE", {
                         token: data.token, 
                         userId: data.userId, 
                         firstName: data.firstName, 
@@ -138,7 +147,50 @@ export default {
                         email: data.email,
                         phone: data.phone
                     })
+                    console.log(data)
                 }
+            })
+        },
+        async updateProfileData({commit, state}, data){
+            const jsonDataObject = JSON.stringify(data)
+
+            // it access the api to update the profile data using token and the object
+            await fetch(`${state.url}/api/user/profile`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": state.token
+                },
+                body: jsonDataObject
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend and it commits all changes made
+                this.messageWarning = data.error;
+                commit("UPDATE_PROFILE_DATA", { 
+                    firstName: data.data.firstName, 
+                    lastName: data.data.lastName,
+                    company: data.data.company, 
+                    email: data.data.email,
+                    phone: data.data.phone
+                })
+            })
+        },
+        async updatePassword({commit, state}, data){
+            const jsonDataObject = JSON.stringify(data)
+            // it access the api to update the password using token and the object
+            await fetch(`${state.url}/api/user/password`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": state.token
+                },
+                body: jsonDataObject
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend
+                this.messageWarning = data.error;
             })
         },
         async hideMessageWarning({commit}){
