@@ -1,9 +1,11 @@
 <template>
     <div>
         <MainHeader />
-        <div class="d-flex">
-            <BeClientForm class="client-form w-100 p-3" />
-            <img src="../static/images/business-desk.png" alt="" class="main-img d-none d-xl-block">
+        <div class="d-flex sec-landing-page sec-lading-page">
+            <div class="w-50"></div>
+            <div class="w-50">
+                <BeClientForm class="client-form p-3 w-75"/>
+            </div>
         </div>
         <MetaseedValues />
         <SucessPillars />
@@ -59,8 +61,11 @@ body{
 </style>
 
 <style scoped>
-.client-form{
-    width: 45%;
+.sec-lading-page{
+    background-image:url(../static/images/laptop-image.jpg);
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .main-img{
     width: 55%;

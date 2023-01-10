@@ -33,3 +33,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.navbar{
+    width: 90%;
+    margin: auto;
+}
+</style>

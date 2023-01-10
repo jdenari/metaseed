@@ -1,8 +1,8 @@
 <template>
     <section class="m-auto">
         <div class="form-bg col-10 col-xxl-9 m-auto p-5 bg-white">
-            <div class="h1 my-2">O SEU PONTO DE PARTIDA!</div>
-            <div class="h3 my-5">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
+            <div class="h1 my-2 text-center">O SEU PONTO DE PARTIDA!</div>
+            <div class="h4 my-4 text-center">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
             <FormField
                 formFieldItem="Nome"
                 v-model="lead.name"
@@ -24,8 +24,9 @@
             <div class="w-100 d-md-flex justify-content-md-end">
                 <SmallButton 
                     smallButtonText="Quero ser cliente →"
-                    @event="createLeadObject()"
+                    @event="createLeadObject();$store.dispatch('hideMessageWarning')"
                     id="show-btn"
+                    class="my-2"
                 />
             </div>
             <MessageWarning 

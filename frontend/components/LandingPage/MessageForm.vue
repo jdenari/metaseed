@@ -1,5 +1,5 @@
 <template>
-    <div class="message-form-div container p-5">
+    <div class="message-form-div container p-5 mb-5">
         <div class="h1 p-1">DEIXE-ME SABER COMO POSSO TE AJUDAR?</div>
         <div class="container text-center">
             <div class="row text-left">

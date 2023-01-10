@@ -10,12 +10,6 @@ router.post("/leadResponse", async (req, res) => {
     const comment = req.body.comment
     const date = req.body.date
 
-    console.log(fullName)
-    console.log(email)
-    console.log(phone)
-    console.log(comment)
-    console.log(date)
-
     // check for required fields
     if(fullName == '' || email == '' || phone == '' || comment == '' ){
         return res.status(400).json({ error: "Por favor, preencha todos os campos!"});
