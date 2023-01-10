@@ -2,7 +2,7 @@
     <div class="p-3 metaseed-values-div my-5">
         <div class="h1 w-75 mx-auto text-center">NÃO SE TORNE MAIS UM NAS ESTATÍSTICAS DO SEBRAE</div>
         <div class="h4 w-50 mx-auto text-center m-3">1 em cada 3 micro e pequenos empreendedores fecham seus negócios antes dos primeiros anos.</div>
-        <div class="col-5 bg-text mx-auto mt-5 p-3 rounded">
+        <div class="col-md-5 col-9 bg-text mx-auto mt-5 p-3 rounded">
             <div class="d-flex align-items-center my-2 w-100">
                 <img src="../../static/logo/logo-metaseed-small.png" alt="" class="">
                 <div class="h3 my-0 mx-2">Metaseed</div>

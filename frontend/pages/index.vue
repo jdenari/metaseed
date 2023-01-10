@@ -1,9 +1,9 @@
 <template>
     <div>
         <MainHeader />
-        <div class="d-flex sec-landing-page sec-lading-page">
-            <div class="w-50"></div>
-            <div class="w-50">
+        <div class="d-xl-flex sec-lading-page">
+            <div class="col-6 d-none d-xl-block"></div>
+            <div class="col-lg-6 col-12 m-auto">
                 <BeClientForm class="client-form p-3 w-75"/>
             </div>
         </div>
@@ -70,6 +70,9 @@ body{
 .main-img{
     width: 55%;
 }
+.client-form{
+    min-width: 550px
+}
 </style>
 
 <style>
@@ -86,23 +89,22 @@ body{
 }
 /*-----------------------------------1200px-xl-------------------------------------------*/ 
 @media screen and (max-width: 1200px) {
-    .client-form{
-        background-image:url(../static/images/business-desk.png);
-        background-color: white;
-        background-repeat: no-repeat;
-        background-size: cover;
-        display: block;
-    }
+
 }
 /*------------------------------------992px-lg-------------------------------------------*/ 
 @media screen and (max-width: 992px) {
     html{
         font-size: 85.0%;
     }
+    .client-form{
+        min-width: 0px !important;
+    }
 }
 /*------------------------------------768px-md-------------------------------------------*/
 @media screen and (max-width: 768px) {
-
+    .client-form{
+        width: 100% !important;
+    }
 }
 /*------------------------------------576px-sm-------------------------------------------*/
 @media screen and (max-width: 576px) {
