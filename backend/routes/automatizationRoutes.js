@@ -19,6 +19,7 @@ router.put("/uploads/script-01", async (req, res) => {
         })
     }
     const scriptResult = await goToScript()
+    console.log(scriptResult)
     res.json(scriptResult);
 });
 
@@ -39,7 +40,8 @@ router.put("/uploads/script-02", async (req, res) => {
         })
     }
     const scriptResult = await goToScript()
-    res.json(scriptResult);
+    const data = JSON.stringify(scriptResult)
+    res.json(data);
 });
 
 // Route to the 3st script
@@ -59,6 +61,7 @@ router.put("/uploads/script-03", async (req, res) => {
         })
     }
     const scriptResult = await goToScript()
+    console.log(scriptResult)
     res.json(scriptResult);
 });
 

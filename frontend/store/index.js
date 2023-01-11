@@ -31,6 +31,10 @@ export default {
                 phone: '',
                 comment: '',
             },
+
+            // automatizations
+            scriptFunction: 'script-02',
+            emailContact: ''
         }
     },
     mutations: {
@@ -97,6 +101,14 @@ export default {
         ACTIVATE_MODAL(state){
             state.modalShow = true
         },
+        // automatization
+        CHANGE_SCRIPT_FUNCTION(state, data){
+            state.scriptFunction = data
+            console.log(state.scriptFunction)
+        },
+        CHANGE_EMAIL_CONTACT(state, data){
+            state.emailContact = data
+        },
     },
     actions: {
         async sendLeadResponse({commit, state}, dataLeadObject){
@@ -119,7 +131,6 @@ export default {
             });
         },
         async loginVerification({commit, state}, data){
-            console.log(data)
             const jsonDataObject = JSON.stringify(data)
             await fetch(`${state.url}/api/auth/login`, {
                 method: "POST",
@@ -131,12 +142,10 @@ export default {
             // it access the api to update the profile data using token and the object
             .then((data) => {
                 if (data.error) { 
-                    console.log(data)
                     commit('MESSAGE_RESPONSE', data.error)
                 }
                 else {
                     // it takes to the dashboard page and commit all the page with the user info
-                    console.log(data)
                     $nuxt.$router.push('/client/home')
                     commit("AUTHENTICATE", {
                         token: data.token, 
@@ -147,7 +156,6 @@ export default {
                         email: data.email,
                         phone: data.phone
                     })
-                    console.log(data)
                 }
             })
         },
@@ -166,7 +174,7 @@ export default {
             .then((resp) => resp.json())
             .then((data) => {
                 // it prints the message from the backend and it commits all changes made
-                this.messageWarning = data.error;
+                commit('MESSAGE_RESPONSE', data.error)
                 commit("UPDATE_PROFILE_DATA", { 
                     firstName: data.data.firstName, 
                     lastName: data.data.lastName,
@@ -190,9 +198,37 @@ export default {
             .then((resp) => resp.json())
             .then((data) => {
                 // it prints the message from the backend
-                this.messageWarning = data.error;
+                commit('MESSAGE_RESPONSE', data.error)
             })
         },
+        async sendFile({commit, state}, data){
+            const file = JSON.stringify(data)
+            await fetch(`${state.url}/api/automatization/uploads/${state.scriptFunction}`, {
+            method: "PUT",
+            headers: {"Content-type": "application/json",},
+            body: file
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend
+                commit('MESSAGE_RESPONSE', data)
+            })
+        },
+        async sendEmail({commit, state}, email){
+            const emailObject = {email: email}
+            const data = JSON.stringify(emailObject)
+            await fetch(`${state.url}/api/automatization/uploads/${state.scriptFunction}`, {
+            method: "PUT",
+            headers: {"Content-type": "application/json",},
+            body: data
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend
+                commit('MESSAGE_RESPONSE', data)
+            })
+        },
+
         async hideMessageWarning({commit}){
             setTimeout(() => { 
                 commit('RESET_MESSAGE_WARNING')
@@ -200,9 +236,3 @@ export default {
         }
     }
 }
-  
-  
-  
-  
-  
-  
