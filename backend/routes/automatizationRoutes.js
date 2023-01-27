@@ -18,9 +18,12 @@ router.put("/uploads/script-01", async (req, res) => {
             })
         })
     }
-    const scriptResult = await goToScript()
-    console.log(scriptResult)
-    res.json(scriptResult);
+    try {
+        const scriptResult = await goToScript()
+        res.json(scriptResult);
+    } catch (e) {
+        res.json(e);
+    }
 });
 
 // Route to the 2st script
@@ -39,16 +42,19 @@ router.put("/uploads/script-02", async (req, res) => {
             })
         })
     }
-    const scriptResult = await goToScript()
-    const data = JSON.stringify(scriptResult)
-    res.json(data);
+    try {
+        const scriptResult = await goToScript()
+        res.json(scriptResult);
+    } catch (e) {
+        res.json(e);
+    }
 });
 
 // Route to the 3st script
 router.put("/uploads/script-03", async (req, res) => {
     let options = {
         scriptPath: "scripts",
-        args: JSON.stringify(req.body)
+        args: JSON.stringify(req.body),
     };
   
     const goToScript = () => {
@@ -60,9 +66,13 @@ router.put("/uploads/script-03", async (req, res) => {
             })
         })
     }
-    const scriptResult = await goToScript()
-    console.log(scriptResult)
-    res.json(scriptResult);
+    
+    try {
+        const scriptResult = await goToScript()
+        res.json(scriptResult);
+    } catch (e) {
+        res.json(e);
+    }
 });
 
 module.exports = router;

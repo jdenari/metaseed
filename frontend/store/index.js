@@ -33,7 +33,7 @@ export default {
             },
 
             // automatizations
-            scriptFunction: 'script-02',
+            scriptFunction: 'script-01',
             emailContact: ''
         }
     },
@@ -203,7 +203,7 @@ export default {
         },
         async sendFile({commit, state}, data){
             const file = JSON.stringify(data)
-            await fetch(`${state.url}/api/automatization/uploads/${state.scriptFunction}`, {
+            await fetch(`${state.url}/api/automatization/uploads/script-01`, {
             method: "PUT",
             headers: {"Content-type": "application/json",},
             body: file
@@ -217,7 +217,7 @@ export default {
         async sendEmail({commit, state}, email){
             const emailObject = {email: email}
             const data = JSON.stringify(emailObject)
-            await fetch(`${state.url}/api/automatization/uploads/${state.scriptFunction}`, {
+            await fetch(`${state.url}/api/automatization/uploads/script-02`, {
             method: "PUT",
             headers: {"Content-type": "application/json",},
             body: data
@@ -228,6 +228,17 @@ export default {
                 commit('MESSAGE_RESPONSE', data)
             })
         },
+        async openPage({commit, state}){
+            await fetch(`${state.url}/api/automatization/uploads/script-03`, {
+            method: "PUT",
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend
+                commit('MESSAGE_RESPONSE', data)
+            })
+        },
+
 
         async hideMessageWarning({commit}){
             setTimeout(() => { 

@@ -23,6 +23,7 @@
     "nodemon": "^2.0.20",
     "pip": "^0.0.1",
     "python": "^0.0.4",
-    "python-shell": "^3.0.1"
+    "python-shell": "^3.0.1",
+    "selenium": "^2.20.0"
   }
 }

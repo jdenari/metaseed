@@ -46,18 +46,13 @@
                 <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
                     <option value="script-01" selected >Script 02</option>
                 </select>
-                <input 
-                    id="file" 
-                    type="file"
-                    ref="file"
-                    @change="sendEmail();"
-                >
             </div>
             <div class="d-flex">
                 <SmallButton 
                     smallButtonText="Limpar"
                     class="bg-secondary ml-4 mx-1"
                     @event="cleanFile"
+                    disabled
                 />   
                 <SmallButton 
                     smallButtonText="Acionar"
@@ -66,8 +61,8 @@
                 />
             </div>
         </form>
-        <div class="h5 px-2 mt-3">Automatização via controle de teclado e mouse:</div> -->
-        <!-- <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
+        <div class="h5 px-2 mt-3">Automatização via controle de teclado e mouse:</div>
+        <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
             <div class="w-75 d-flex flex-row">
                 <input 
                     type="email" 
@@ -80,26 +75,21 @@
                 <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
                     <option value="script-01" selected >Script 03</option>
                 </select>
-                <input 
-                    id="file" 
-                    type="file"
-                    ref="file"
-                    @change="selectFile()"
-                >
             </div>
             <div class="d-flex">
                 <SmallButton 
                     smallButtonText="Limpar"
                     class="bg-secondary ml-4 mx-1"
                     @event="cleanFile"
+                    disabled
                 />   
                 <SmallButton 
                     smallButtonText="Acionar"
                     class="mx-1"
-                    @event="sendFile"
+                    @event="openPage"
                 />
             </div>
-        </form> -->
+        </form>
         <MessageWarning 
             :messageWarning="this.$store.state.messageWarning"
             class="text-start m-0 w-75"
@@ -129,12 +119,15 @@ export default {
             this.file = this.$refs.file.files[0];
             this.fileName = this.file.name
         },
-        changeScriptFunction(){ 
-            this.$store.commit('CHANGE_SCRIPT_FUNCTION', document.getElementById("script-function").value)
-        },
         cleanFile(){
             this.file = ""
             this.fileName = "Selecione Arquivo"
+        },
+        changeScriptFunction(){ 
+            this.$store.commit('CHANGE_SCRIPT_FUNCTION', document.getElementById("script-function").value)
+        },
+        changeEmailContact(){
+            this.$store.commit('CHANGE_EMAIL_CONTACT', this.emailContact)
         },
         async sendFile(){   
             const data = await this.file.arrayBuffer();
@@ -142,12 +135,13 @@ export default {
             const fileObject = utils.sheet_to_json(workbook.Sheets.Planilha)
             this.$store.dispatch('sendFile', fileObject)
         },
-        changeEmailContact(){
-            this.$store.commit('CHANGE_EMAIL_CONTACT', this.emailContact)
-        },
         async sendEmail(){
             this.$store.dispatch('sendEmail', this.emailContact)
+        },
+        async openPage(){
+            this.$store.dispatch('openPage')
         }
+
     }
 }
 </script>
