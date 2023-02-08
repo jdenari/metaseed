@@ -3,7 +3,7 @@ export default {
         return {
             // dev env: http://localhost:5000
             // pro env: https://metaseed.online
-            url: 'https://metaseed.online',
+            url: 'http://localhost:5000',
 
             // user info
             userLogin: false,

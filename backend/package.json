@@ -24,6 +24,7 @@
     "pip": "^0.0.1",
     "python": "^0.0.4",
     "python-shell": "^3.0.1",
-    "selenium": "^2.20.0"
+    "selenium": "^2.20.0",
+    "selenium-webdriver": "^4.8.0"
   }
 }
