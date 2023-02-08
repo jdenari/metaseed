@@ -3,7 +3,7 @@ export default {
         return {
             // dev env: http://localhost:5000
             // pro env: https://metaseed.online
-            url: 'http://localhost:5000',
+            url: 'https://metaseed.online',
 
             // user info
             userLogin: false,
@@ -228,7 +228,7 @@ export default {
                 commit('MESSAGE_RESPONSE', data)
             })
         },
-        async openPage({commit, state}){
+        async createNumbersNumpy({commit, state}){
             await fetch(`${state.url}/api/automatization/uploads/script-03`, {
             method: "PUT",
             })
@@ -238,8 +238,26 @@ export default {
                 commit('MESSAGE_RESPONSE', data)
             })
         },
-
-
+        async openPagePyautogui({commit, state}){
+            await fetch(`${state.url}/api/automatization/uploads/script-04`, {
+            method: "PUT",
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend
+                commit('MESSAGE_RESPONSE', data)
+            })
+        },
+        async openPageSelenium({commit, state}){
+            await fetch(`${state.url}/api/automatization/uploads/script-05`, {
+            method: "PUT",
+            })
+            .then((resp) => resp.json())
+            .then((data) => {
+                // it prints the message from the backend
+                commit('MESSAGE_RESPONSE', data)
+            })
+        },
         async hideMessageWarning({commit}){
             setTimeout(() => { 
                 commit('RESET_MESSAGE_WARNING')

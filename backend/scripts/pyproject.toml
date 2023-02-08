@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "scripts"
+version = "0.1.0"
+description = ""
+authors = ["João Vitor Denari dos Santos <98748740+jdenari@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+selenium = "^4.8.0"
+PyAutoGUI = "^0.9.53"
+numpy = "^1.24.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

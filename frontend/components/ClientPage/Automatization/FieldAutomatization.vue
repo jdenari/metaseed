@@ -1,6 +1,6 @@
 <template>
     <div class="in p-3 w-100">    
-        <div class="h5 px-2 mt-3">Soma de coluna em tabela Excel:</div>
+        <div class="h5 px-2 mt-3">sendFile()</div>
         <form enctype="multipart/form-data" class="d-flex align-items-center p-2">
             <div class="w-75 d-flex flex-row">
                 <label 
@@ -32,7 +32,7 @@
                 />
             </div>
         </form>
-        <div class="h5 px-2 mt-3">Envio de e-mail automático:</div>
+        <div class="h5 px-2 mt-3">sendEmail()</div>
         <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
             <div class="w-75 d-flex flex-row">
                 <input 
@@ -61,7 +61,7 @@
                 />
             </div>
         </form>
-        <div class="h5 px-2 mt-3">Automatização via controle de teclado e mouse:</div>
+        <div class="h5 px-2 mt-3">createNumbersNumpy()</div>
         <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
             <div class="w-75 d-flex flex-row">
                 <input 
@@ -86,7 +86,65 @@
                 <SmallButton 
                     smallButtonText="Acionar"
                     class="mx-1"
-                    @event="openPage"
+                    @event="createNumbersNumpy"
+                />
+            </div>
+        </form>
+        <div class="h5 px-2 mt-3">openPagePyautogui()</div>
+        <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
+            <div class="w-75 d-flex flex-row">
+                <input 
+                    type="email" 
+                    class="form-control input-field" 
+                    id="exampleInputEmail1" 
+                    aria-describedby="emailHelp"
+                    placeholder="Desabilitado"
+                    disabled
+                >
+                <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
+                    <option value="script-01" selected >Script 04</option>
+                </select>
+            </div>
+            <div class="d-flex">
+                <SmallButton 
+                    smallButtonText="Limpar"
+                    class="bg-secondary ml-4 mx-1"
+                    @event="cleanFile"
+                    disabled
+                />   
+                <SmallButton 
+                    smallButtonText="Acionar"
+                    class="mx-1"
+                    @event="openPagePyautogui"
+                />
+            </div>
+        </form>
+        <div class="h5 px-2 mt-3">openPageSelenium()</div>
+        <form enctype="multipart/form-data" class="d-flex align-items-center p-2 text-center">
+            <div class="w-75 d-flex flex-row">
+                <input 
+                    type="email" 
+                    class="form-control input-field" 
+                    id="exampleInputEmail1" 
+                    aria-describedby="emailHelp"
+                    placeholder="Desabilitado"
+                    disabled
+                >
+                <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
+                    <option value="script-01" selected >Script 05</option>
+                </select>
+            </div>
+            <div class="d-flex">
+                <SmallButton 
+                    smallButtonText="Limpar"
+                    class="bg-secondary ml-4 mx-1"
+                    @event="cleanFile"
+                    disabled
+                />   
+                <SmallButton 
+                    smallButtonText="Acionar"
+                    class="mx-1"
+                    @event="openPageSelenium"
                 />
             </div>
         </form>
@@ -138,10 +196,15 @@ export default {
         async sendEmail(){
             this.$store.dispatch('sendEmail', this.emailContact)
         },
-        async openPage(){
-            this.$store.dispatch('openPage')
-        }
-
+        async createNumbersNumpy(){
+            this.$store.dispatch('createNumbersNumpy')
+        },
+        async openPagePyautogui(){
+            this.$store.dispatch('openPagePyautogui')
+        },
+        async openPageSelenium(){
+            this.$store.dispatch('openPageSelenium')
+        },
     }
 }
 </script>
