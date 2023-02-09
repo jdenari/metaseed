@@ -16,6 +16,12 @@ const automatizationRouter = require("./routes/automatizationRoutes.js");
 const dbName = "databaseMetaseed"
 const port = 5000;
 
+var corsOptions = {
+    origin: 'https://www.metaseed.com.br',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+  
+
 const DB_USER = process.env.DB_USER
 const DB_PASS = process.env.DB_PASS
 
@@ -30,7 +36,7 @@ app.use("/api/user", userRouter)
 app.use("/api/lead", leadRouter)
 app.use("/api/automatization", automatizationRouter)
 
-app.get("/", (req, res) => {
+app.get("/", cors(corsOptions), (req, res) => {
     res.json({ message: "Rota teste"})
 })
 
