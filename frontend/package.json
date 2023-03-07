@@ -24,6 +24,7 @@
     "vue-popperjs": "^2.3.0",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
+    "vuejs-datepicker": "^1.6.2",
     "xlsx": "https://cdn.sheetjs.com/xlsx-latest/xlsx-latest.tgz"
   },
   "devDependencies": {

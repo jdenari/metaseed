@@ -7,6 +7,7 @@
                 <MainAutomatization v-if="this.$store.state.homeClientContent === 'automatizationContent'"/>
                 <ProfileDataForm v-if="this.$store.state.homeClientContent === 'profileContent'"/>
                 <MainDashboard v-if="this.$store.state.homeClientContent === 'dashboardContent'"/>
+                <FacebookAddsContent v-if="this.$store.state.homeClientContent === 'facebookAddsContent'"/>
             </div>
         </div>
     </div>
@@ -18,6 +19,7 @@ import MainAutomatization from '../../components/ClientPage/Automatization/MainA
 import ProfileDataForm from '../../components/ClientPage/ProfilePage/ProfileDataForm.vue'
 import MainDashboard from '../../components/ClientPage/Dashboards/MainDashboard.vue'
 import MainFooter from '../../components/MainFooter.vue'
+import FacebookAddsContent from '../../components/ClientPage/FacebookAdds/FacebookAddsContent.vue';
     export default {
         components: {
             SideBar
@@ -26,8 +28,9 @@ import MainFooter from '../../components/MainFooter.vue'
             , ProfileDataForm
             , MainDashboard
             , MainFooter
+            , FacebookAddsContent
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 

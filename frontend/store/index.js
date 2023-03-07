@@ -83,6 +83,9 @@ export default {
         CHANGE_CONTENT_TO_AUTOMATIZATION(state){
             state.homeClientContent = 'automatizationContent'
         },
+        CHANGE_CONTENT_TO_FACEBOOKADDS(state){
+            state.homeClientContent = 'facebookAddsContent'
+        },
         // message mutations
         MESSAGE_RESPONSE(state, data){
             state.messageWarning = data
@@ -238,8 +241,8 @@ export default {
                 commit('MESSAGE_RESPONSE', data)
             })
         },
-        async openPagePyautogui({commit, state}){
-            await fetch(`${state.url}/api/automatization/uploads/script-06`, {
+        async openPageSelenium({commit, state}){
+            await fetch(`${state.url}/api/automatization/uploads/script-05`, {
             method: "PUT",
             })
             .then((resp) => resp.json())
@@ -248,9 +251,13 @@ export default {
                 commit('MESSAGE_RESPONSE', data)
             })
         },
-        async openPageSelenium({commit, state}){
-            await fetch(`${state.url}/api/automatization/uploads/script-05`, {
-            method: "PUT",
+        async getDataFromFacebookAdd({commit, state}, payload){
+            const emailObject = payload
+            const data = JSON.stringify(emailObject)
+            await fetch(`${state.url}/api/automatization/uploads/script-06`, {
+                method: "PUT",
+                headers: {"Content-type": "application/json",},
+                body: data
             })
             .then((resp) => resp.json())
             .then((data) => {

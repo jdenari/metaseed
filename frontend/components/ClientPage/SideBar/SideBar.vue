@@ -1,23 +1,21 @@
 <template>
     <div>
 		<aside class="sideBar bg-light p-3" :class="{'sideBar-small': fullSideBar }">
-			<!-- <div class="w-100 d-flex flex-row-reverse p-1 mb-3">
-				<img 
-					src="../../../static/icons/arrow-bar-left.svg" 
-					alt="Ícone de seta a esquerda" 
-					class="pe-auto icon-SideBar" 
-					@click="fullSideBar = !fullSideBar"
-					v-if="!this.fullSideBar"
-				>
-				<img 
-					src="../../../static/icons/arrow-bar-right.svg" 
-					alt="Ícone de seta a esquerda" 
-					class="pe-auto icon-SideBar" 
-					@click="fullSideBar = !fullSideBar"
-					v-else
-				>
-			</div> -->
 			<div v-if="!this.fullSideBar" class="p-1">
+				<div class="accordion" role="tablist">
+					<b-card no-body class="mb-1">
+						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
+							<img src="../../../static/icons/facebook.svg" alt="" class="mx-2">
+							<b-button 
+								block v-b-toggle.accordion-1 
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								@click="$store.commit('CHANGE_CONTENT_TO_FACEBOOKADDS')"
+								> Facebook
+							</b-button>
+						</b-card-header>
+					</b-card>
+				</div>
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">

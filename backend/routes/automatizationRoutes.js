@@ -103,9 +103,7 @@ router.put("/uploads/script-04", async (req, res) => {
 router.put("/uploads/script-05", async (req, res) => {
 
     try {
-        console.log('01')
         const scriptResult = await scriptJavaScript.teste()
-        console.log('03')
         res.json(scriptResult);
 
     } catch (e) {
@@ -114,6 +112,9 @@ router.put("/uploads/script-05", async (req, res) => {
 });
 
 router.put("/uploads/script-06", async (req, res) => {
+
+    console.log(req.body)
+
     let options = {
         scriptPath: "scripts",
         args: JSON.stringify(req.body)
