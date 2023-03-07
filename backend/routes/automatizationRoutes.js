@@ -113,4 +113,27 @@ router.put("/uploads/script-05", async (req, res) => {
     }
 });
 
+router.put("/uploads/script-06", async (req, res) => {
+    let options = {
+        scriptPath: "scripts",
+        args: JSON.stringify(req.body)
+    };
+  
+    const goToScript = () => {
+        return new Promise((resolve, reject) => {
+            PythonShell.run("script-06.py", options, (err, res) => {
+                if (err) {reject(err)}
+                responseScript = JSON.parse(res)
+                resolve(responseScript)
+            })
+        })
+    }
+    try {
+        const scriptResult = await goToScript()
+        res.json(scriptResult);
+    } catch (e) {
+        res.json(e);
+    }
+});
+
 module.exports = router;

@@ -239,7 +239,7 @@ export default {
             })
         },
         async openPagePyautogui({commit, state}){
-            await fetch(`${state.url}/api/automatization/uploads/script-04`, {
+            await fetch(`${state.url}/api/automatization/uploads/script-06`, {
             method: "PUT",
             })
             .then((resp) => resp.json())

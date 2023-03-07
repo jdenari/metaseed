@@ -16,7 +16,7 @@ export default {
         , LoginField
         , MainFooter
     },
-    methods: {}
+    methods: {},
 }
 </script>
 
