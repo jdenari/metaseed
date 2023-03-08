@@ -1,20 +1,17 @@
 // modules
 require('dotenv').config()
 const express = require("express");
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const cors = require("cors");
-const multer = require("multer");
 
 // routes
 const authRouter = require("./routes/authRoutes.js");
 const userRouter = require("./routes/userRoutes.js");
 const leadRouter = require("./routes/leadRoutes.js");
 const automatizationRouter = require("./routes/automatizationRoutes.js");
+const faceadsRouter = require("./routes/faceadsRoutes");
 
 // config
-const dbName = "databaseMetaseed"
 const port = 5000;
 
 var corsOptions = {
@@ -22,7 +19,6 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
   
-
 const DB_USER = process.env.DB_USER
 const DB_PASS = process.env.DB_PASS
 
@@ -36,6 +32,7 @@ app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
 app.use("/api/lead", leadRouter)
 app.use("/api/automatization", automatizationRouter)
+app.use("/api/faceads", faceadsRouter)
 
 app.get("/", cors(corsOptions), (req, res) => {
     res.json({ message: "Rota teste"})

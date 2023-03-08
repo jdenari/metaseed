@@ -32,30 +32,9 @@ token = '&access_token=' + fb_api
 #cria o caminho a ser coletado
 url = base_url + 'act_' + str(ad_acc) + '/insights?level=' + 'campaign' + '&fields=' + ','.join(api_fields) + time_range +'&time_increment=1' + token
 
-data = requests.get(url + token)
+response = requests.get(url + token)
 
-data = json.loads(data._content.decode('utf-8'))
+response = json.loads(response._content.decode('utf-8'))
 
-#coleta todas as chaves dos dicionários
-for e in data['data']:
-    for i in e:
-        if i in list_keys:
-            list_keys = list_keys
-        else: 
-            list_keys += [i]
-
-#coleta os valores dos dicionários e plota no dicionário final
-for e in list_keys: 
-    list_itens = []
-    if e != 'video_p25_watched_actions' and (e != 'video_p50_watched_actions') and (e != 'video_p75_watched_actions') and (e != 'video_p95_watched_actions'):
-        for i in data['data']:
-            list_itens += [i.get(e)]
-    else:
-        for i in data['data']:
-            c = str(i.get(e))
-            list_itens += [c.replace('[{\'action_type\': \'video_view\', \'value\': \'', '').replace('\'}]', '')]
-    dic.update({e: list_itens})
-
-#imprime as informações no formato JSON
-json_data = json.dumps(dic)
-print(json_data)
+#exporta as informações
+print(json.dumps(response))

@@ -34,7 +34,11 @@ export default {
 
             // automatizations
             scriptFunction: 'script-01',
-            emailContact: ''
+            emailContact: '',
+
+            // faceads
+            dataFaceAds: {
+            }
         }
     },
     mutations: {
@@ -107,11 +111,13 @@ export default {
         // automatization
         CHANGE_SCRIPT_FUNCTION(state, data){
             state.scriptFunction = data
-            console.log(state.scriptFunction)
         },
         CHANGE_EMAIL_CONTACT(state, data){
             state.emailContact = data
         },
+        UPDATE_DATA_FACEADS(state, data){
+            state.dataFaceAds = data
+        }
     },
     actions: {
         async sendLeadResponse({commit, state}, dataLeadObject){
@@ -207,9 +213,9 @@ export default {
         async sendFile({commit, state}, data){
             const file = JSON.stringify(data)
             await fetch(`${state.url}/api/automatization/uploads/script-01`, {
-            method: "PUT",
-            headers: {"Content-type": "application/json",},
-            body: file
+                method: "PUT",
+                headers: {"Content-type": "application/json",},
+                body: file
             })
             .then((resp) => resp.json())
             .then((data) => {
@@ -221,9 +227,9 @@ export default {
             const emailObject = {email: email}
             const data = JSON.stringify(emailObject)
             await fetch(`${state.url}/api/automatization/uploads/script-02`, {
-            method: "PUT",
-            headers: {"Content-type": "application/json",},
-            body: data
+                method: "PUT",
+                headers: {"Content-type": "application/json",},
+                body: data
             })
             .then((resp) => resp.json())
             .then((data) => {
@@ -260,9 +266,30 @@ export default {
                 body: data
             })
             .then((resp) => resp.json())
-            .then((data) => {
-                // it prints the message from the backend
-                commit('MESSAGE_RESPONSE', data)
+            .then((data) => { 
+                
+                for (const item of data.data) {
+                    const currentDate = new Date(item.date_start);
+                    const year = new Date(currentDate.getFullYear(), 0, 1);
+                    const days = Math.floor((currentDate - year) / (24 * 60 * 60 * 1000));
+                    const week = Math.ceil((currentDate.getDay() + 1 + days) / 7);
+                    item.week_number = week;
+                }
+                commit('UPDATE_DATA_FACEADS', data)
+            })
+        },
+        async updateDatabase({commit, state}, payload){
+            console.log(data)
+            const data = JSON.stringify(payload)
+            await fetch(`${state.url}/api/faceads/getFaceads`, {
+                method: "PUT",
+                headers: {"Content-type": "application/json",},
+                body: data
+            })
+            .then((resp) => resp.json())
+            .then((data) => { 
+                
+                commit('UPDATE_DATA_FACEADS', data)
             })
         },
         async hideMessageWarning({commit}){
