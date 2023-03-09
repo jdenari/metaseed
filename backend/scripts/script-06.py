@@ -21,7 +21,7 @@ c = 0
 base_url = 'https://graph.facebook.com/v14.0/'
 
 #determina quais vão ser as colunas a serem coletados na api
-api_fields = ['date_start','date_stop', 'ad_name', 'campaign_name', 'reach','impressions', 'clicks', 'spend',  'conversions', 'full_view_impressions', 'full_view_reach', 'video_p25_watched_actions', 'video_p50_watched_actions', 'video_p75_watched_actions', 'video_p95_watched_actions']
+api_fields = ['date_start','date_stop', 'campaign_name', 'reach','impressions', 'clicks', 'spend', 'video_p25_watched_actions', 'video_p50_watched_actions', 'video_p75_watched_actions', 'video_p95_watched_actions']
 
 #determina o periodo a ser analisado
 time_range = "&time_range={\'since\':\'" + f"{date_obj['startDate']}" + "\',\'until\':\'" + f"{date_obj['endDate']}" + "\'}"

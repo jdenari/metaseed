@@ -1,26 +1,36 @@
 const router = require("express").Router();
-const Faceads = require("../models/user");
+const Faceads = require("../models/faceads");
 
 // get an user
-router.post("/getFaceads", async (req, res) => {
+router.post("/updateDataDatabase", async (req, res) => {
     
-    value = req.body
+    const values = req.body.data;
+  
+    try {
+        // remove all documents from the collection
+        await Faceads.deleteMany({});
     
-    console.log(value)
+        values.forEach(element => {
+            Faceads.insertMany(element);
+        })
 
-    try{
-        const newUser = await Faceads.save();
-
-    // return token
-    res.json({  error: null, 
-                msg: "Você realizou o cadastro com sucesso!", 
-                userId: newUser._id})
+        res.json({
+            error: null,
+            msg: "Dados cadastrados com sucesso!",
+        });
         
-    } catch(error){
-        res.status(400).json({ error })
+    } catch (error) {
+      res.status(400).json({ error });
     }
-    
-    
+});
+
+router.get("/getDataDatabase", async (req, res) => {
+    try {
+        const faceads = await Faceads.find();
+        res.json({ data: faceads });
+    } catch (error) {
+        res.status(400).json({ error });
+    }
 });
 
 module.exports = router;

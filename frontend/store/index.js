@@ -116,11 +116,28 @@ export default {
             state.emailContact = data
         },
         UPDATE_DATA_FACEADS(state, data){
-            state.dataFaceAds = data
+            // spliting the campaign name into three new columns into (cycle, class, type)
+            data.data.forEach((item) => {
+                const [cycle, campaignClass, campaignType] = item.campaign_name.split('|').map((value) => value.trim());
+                item.cycle = cycle;
+                item.class = campaignClass;
+                item.type = campaignType;
+                delete item.campaign_name;
+            });
+            // creating numbers to represents the week number
+            for (const item of data.data) {
+                const currentDate = new Date(item.date_start);
+                const year = new Date(currentDate.getFullYear(), 0, 1);
+                const days = Math.floor((currentDate - year) / (24 * 60 * 60 * 1000));
+                const week = Math.ceil((currentDate.getDay() + 1 + days) / 7);
+                item.week_number = week;
+            }
+            // commiting final data
+            state.dataFaceAds = data;
         }
     },
     actions: {
-        async sendLeadResponse({commit, state}, dataLeadObject){
+        async sendLeadResponse({commit, state, dispatch}, dataLeadObject){
             return new Promise((resolve) => {
                 const jsonDataObject = JSON.stringify(dataLeadObject)
                 fetch(`${state.url}/api/lead/leadResponse`, {
@@ -132,6 +149,7 @@ export default {
                 .then((data) => {
                     if (data.error) { 
                         commit('MESSAGE_RESPONSE', data.error)
+                        dispatch('hideMessageWarning')
                     }
                     else {
                         return resolve('true');
@@ -139,7 +157,7 @@ export default {
                 });
             });
         },
-        async loginVerification({commit, state}, data){
+        async loginVerification({commit, state, dispatch}, data){
             const jsonDataObject = JSON.stringify(data)
             await fetch(`${state.url}/api/auth/login`, {
                 method: "POST",
@@ -152,6 +170,7 @@ export default {
             .then((data) => {
                 if (data.error) { 
                     commit('MESSAGE_RESPONSE', data.error)
+                    dispatch('hideMessageWarning')
                 }
                 else {
                     // it takes to the dashboard page and commit all the page with the user info
@@ -168,7 +187,7 @@ export default {
                 }
             })
         },
-        async updateProfileData({commit, state}, data){
+        async updateProfileData({commit, state, dispatch}, data){
             const jsonDataObject = JSON.stringify(data)
 
             // it access the api to update the profile data using token and the object
@@ -184,6 +203,7 @@ export default {
             .then((data) => {
                 // it prints the message from the backend and it commits all changes made
                 commit('MESSAGE_RESPONSE', data.error)
+                dispatch('hideMessageWarning')
                 commit("UPDATE_PROFILE_DATA", { 
                     firstName: data.data.firstName, 
                     lastName: data.data.lastName,
@@ -193,7 +213,7 @@ export default {
                 })
             })
         },
-        async updatePassword({commit, state}, data){
+        async updatePassword({commit, state, dispatch}, data){
             const jsonDataObject = JSON.stringify(data)
             // it access the api to update the password using token and the object
             await fetch(`${state.url}/api/user/password`, {
@@ -208,9 +228,10 @@ export default {
             .then((data) => {
                 // it prints the message from the backend
                 commit('MESSAGE_RESPONSE', data.error)
+                dispatch('hideMessageWarning')
             })
         },
-        async sendFile({commit, state}, data){
+        async sendFile({commit, state, dispatch}, data){
             const file = JSON.stringify(data)
             await fetch(`${state.url}/api/automatization/uploads/script-01`, {
                 method: "PUT",
@@ -221,9 +242,10 @@ export default {
             .then((data) => {
                 // it prints the message from the backend
                 commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
             })
         },
-        async sendEmail({commit, state}, email){
+        async sendEmail({commit, state, dispatch}, email){
             const emailObject = {email: email}
             const data = JSON.stringify(emailObject)
             await fetch(`${state.url}/api/automatization/uploads/script-02`, {
@@ -235,9 +257,10 @@ export default {
             .then((data) => {
                 // it prints the message from the backend
                 commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
             })
         },
-        async createNumbersNumpy({commit, state}){
+        async createNumbersNumpy({commit, state, dispatch}){
             await fetch(`${state.url}/api/automatization/uploads/script-03`, {
             method: "PUT",
             })
@@ -245,9 +268,10 @@ export default {
             .then((data) => {
                 // it prints the message from the backend
                 commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
             })
         },
-        async openPageSelenium({commit, state}){
+        async openPageSelenium({commit, state, dispatch}){
             await fetch(`${state.url}/api/automatization/uploads/script-05`, {
             method: "PUT",
             })
@@ -255,43 +279,47 @@ export default {
             .then((data) => {
                 // it prints the message from the backend
                 commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
             })
         },
-        async getDataFromFacebookAdd({commit, state}, payload){
-            const emailObject = payload
-            const data = JSON.stringify(emailObject)
+        async getDataFromFacebookAdd({state, dispatch}, payload){
             await fetch(`${state.url}/api/automatization/uploads/script-06`, {
                 method: "PUT",
                 headers: {"Content-type": "application/json",},
-                body: data
+                body: JSON.stringify(payload)
             })
             .then((resp) => resp.json())
             .then((data) => { 
-                
-                for (const item of data.data) {
-                    const currentDate = new Date(item.date_start);
-                    const year = new Date(currentDate.getFullYear(), 0, 1);
-                    const days = Math.floor((currentDate - year) / (24 * 60 * 60 * 1000));
-                    const week = Math.ceil((currentDate.getDay() + 1 + days) / 7);
-                    item.week_number = week;
-                }
-                commit('UPDATE_DATA_FACEADS', data)
+                dispatch('updateDataDatabase', data)
             })
         },
-        async updateDatabase({commit, state}, payload){
-            console.log(data)
-            const data = JSON.stringify(payload)
-            await fetch(`${state.url}/api/faceads/getFaceads`, {
-                method: "PUT",
+        async updateDataDatabase({commit, state, dispatch}, payload){
+            await fetch(`${state.url}/api/faceads/updateDataDatabase`, {
+                method: "POST",
                 headers: {"Content-type": "application/json",},
-                body: data
+                body: JSON.stringify(payload)
             })
             .then((resp) => resp.json())
             .then((data) => { 
-                
+                commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
+            })
+            commit('UPDATE_DATA_FACEADS', payload)
+        },
+
+        async getDataDatabase({commit, state, dispatch}){
+            await fetch(`${state.url}/api/faceads/getDataDatabase`, {
+                method: "GET",
+                headers: {"Content-type": "application/json",},
+            })
+            .then((resp) => resp.json())
+            .then((data) => { 
+                commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
                 commit('UPDATE_DATA_FACEADS', data)
             })
         },
+
         async hideMessageWarning({commit}){
             setTimeout(() => { 
                 commit('RESET_MESSAGE_WARNING')

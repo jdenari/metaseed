@@ -1,22 +1,21 @@
 const mongoose = require("mongoose");
 
 const faceadsSchema = new mongoose.Schema({
-    dateStart: [Date],
-    dateStop: [Date],
-    adName: [String],
-    campaignName: [String],
-    reach: [Number],
-    impressions: [Number],
-    clicks: [Number],
-    spend: [Number],
-    conversions: [String],
-    fullViewImpressions: [Number],
-    fullViewReach: [Number],
-    videoP25WatchedActions: [Number],
-    videoP50WatchedActions: [Number],
-    videoP75WatchedActions: [Number],
-    videoP95WatchedActions: [Number],
-    weekYear: [String],
+    date_start: {type: Date},
+    date_stop: {type: Date},
+    ad_name: {type: String},
+    campaign_name: {type: String},
+    reach: {type: Number},
+    impressions: {type: Number},
+    clicks: {type: Number},
+    spend: {type: Number},
+    conversions: {type: Number},
+    full_view_impressions: {type: Number},
+    full_view_reach: {type: Number},
+    video_p25_watched_actions: {type: Object||Array},
+    video_p50_watched_actions: {type: Object||Array},
+    video_p75_watched_actions: {type: Object||Array},
+    video_p95_watched_actions: {type: Object||Array},
 })
 
 const Faceads = mongoose.model('faceads', faceadsSchema);

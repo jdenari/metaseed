@@ -113,8 +113,6 @@ router.put("/uploads/script-05", async (req, res) => {
 
 router.put("/uploads/script-06", async (req, res) => {
 
-    console.log(req.body)
-
     let options = {
         scriptPath: "scripts",
         args: JSON.stringify(req.body)
