@@ -1,37 +1,27 @@
 <template>
     <div>
-        <CalendarData 
-            :start-date="startDate" 
-            :end-date="endDate" 
-            @update:start-date="startDate = $event" 
-            @update:end-date="endDate = $event" 
+        <CalendarData
+            :start-date="startDate"
+            :end-date="endDate"
+            @update:start-date="startDate = $event"
+            @update:end-date="endDate = $event"
         />
-        <div v-for="(type, index) in distinctType" :key="index">
-        <FilterButtonOutline 
-            v-bind:FilterButtonOutlineText="type" 
-            v-on:event="handleFilter(type)" 
-            v-bind:isActive="filtersType[type]"
-        />
+        <div v-for="(value, index) in distinctType" :key="'type-' + index">
+            <FilterButtonOutline
+                v-bind:FilterButtonOutlineText="value"
+                v-on:event="handleFilter(value)"
+                v-bind:isActive="filtersType[value]"
+            />
         </div>
+        <div v-for="(value, index) in distinctClass" :key="'class-' + index">
+            <FilterButtonOutline
+                v-bind:FilterButtonOutlineText="value"
+                v-on:event="handleFilter(value)"
+                v-bind:isActive="filtersClass[value]"
+            />
+            </div>
         <div>
-            <table class="table table-striped table-dist-content text-center m-3">
-                <thead>
-                    <tr>
-                    <th>Week Year</th>
-                    <th>Reach</th>
-                    <th>Impressions</th>
-                    <th>Spend</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(item, index) in distinctWeekYear" :key="index">
-                        <td class="p-0">{{ distinctWeekYear[index] }}</td>
-                        <td class="p-0">{{ dataTable[index].reach.toFixed(0) }}</td>
-                        <td class="p-0">{{ dataTable[index].impressions.toFixed(0) }}</td>
-                        <td class="p-0">{{ dataTable[index].spend.toFixed(2) }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <MainTable :data="dataTable" :distinctWeekYear="distinctWeekYear"></MainTable>
         </div>
     </div>
 </template>
@@ -39,13 +29,13 @@
 <script>
 import CalendarData from './CalendarData.vue';
 import FilterButtonOutline from './FilterButtonOutline.vue';
-import TableDistContent from './TableDistContent.vue';
+import MainTable from './MainTable.vue';
 
 export default {
     components: {
-        TableDistContent
-        , FilterButtonOutline
+        FilterButtonOutline
         , CalendarData
+        , MainTable
     },
     data() {
         // FUNCTION TO CALCULATE 30 DIAS ANTERIORES
@@ -53,24 +43,22 @@ export default {
         // const startDate = new Date(today.getTime() - (31 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10);
         // const endDate = new Date(today.getTime() - (1 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10);
         return {
-            // date variables
             startDate: '2022-05-01',
             endDate: '2022-05-30',
             distinctWeekYear: [],
-
-            // data to print inside the table! it could be filtered
             dataTable: {},
-            
-            // variables to create the filters
             distinctType: [],
-            filtersType: {}
+            filtersType: {},
+            distinctClass: [],
+            filtersClass: {},
         }
     },
     // functions to be activated when the page is loaded
     async mounted() {
         await this.handleGetDataDatabase();
         this.distinctValuesForFilters();
-        this.distinctType.forEach((type) => {this.filtersType[type] = true;});
+        this.distinctType.forEach((value) => {this.filtersType[value] = true;});
+        this.distinctClass.forEach((value) => {this.filtersClass[value] = true;});
         this.createDataForTable();
     },
     
@@ -86,8 +74,13 @@ export default {
             const data = this.$store.state.dataFaceAds.data;
             // create list for the type values
             for (const key in data) {
-                const type = data[key].type;
-                if (!this.distinctType.includes(type)) {this.distinctType.push(type);}
+                const value = data[key].type;
+                if (!this.distinctType.includes(value)) {this.distinctType.push(value);}
+            }
+
+            for (const key in data) {
+                const value = data[key].class;
+                if (!this.distinctClass.includes(value)) {this.distinctClass.push(value);}
             }
         },
 
@@ -109,12 +102,19 @@ export default {
                 }
 
                 // check if any of the filter values is false
-                const shouldAddData = Object.values(this.filtersType).every(value => value);
+                const shouldAddDataType = Object.values(this.filtersType).every(value => value);
+                const shouldAddDataClass = Object.values(this.filtersClass).every(value => value);
+
+                console.log(shouldAddDataType)
+                console.log(shouldAddDataClass)
                 
                 data.filter(element => element.week_number === this.distinctWeekYear[e])
                 .forEach(element => {
                     // add data only if the filter allows it
-                    if (shouldAddData || this.filtersType[element.type]) {
+                    if (
+                    (shouldAddDataType || this.filtersType[element.type]) &&
+                    (shouldAddDataClass || this.filtersClass[element.class])
+                    ) {
                         this.dataTable[e].reach += element.reach;
                         this.dataTable[e].impressions += element.impressions;
                         this.dataTable[e].spend += element.spend;
@@ -123,8 +123,9 @@ export default {
             }
         },
         // change the filters to false or true and reload the main function
-        handleFilter(type) {
-            this.filtersType[type] = !this.filtersType[type];
+        handleFilter(value) {
+            this.filtersType[value] = !this.filtersType[value];
+            this.filtersClass[value] = !this.filtersClass[value];
             this.createDataForTable();
         },
         // get the from facebook database and after update the database metaseed

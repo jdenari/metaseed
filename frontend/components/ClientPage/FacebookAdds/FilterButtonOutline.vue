@@ -15,7 +15,6 @@
         props: {
             FilterButtonOutlineText: {
                 type: String,
-                required: true,
             },
         },
         data() {
