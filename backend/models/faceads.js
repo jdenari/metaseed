@@ -12,10 +12,10 @@ const faceadsSchema = new mongoose.Schema({
     conversions: {type: Number},
     full_view_impressions: {type: Number},
     full_view_reach: {type: Number},
-    video_p25_watched_actions: {type: Object||Array},
-    video_p50_watched_actions: {type: Object||Array},
-    video_p75_watched_actions: {type: Object||Array},
-    video_p95_watched_actions: {type: Object||Array},
+    video_p25_watched_actions: {type: Number},
+    video_p50_watched_actions: {type: Number},
+    video_p75_watched_actions: {type: Number},
+    video_p95_watched_actions: {type: Number},
 })
 
 const Faceads = mongoose.model('faceads', faceadsSchema);

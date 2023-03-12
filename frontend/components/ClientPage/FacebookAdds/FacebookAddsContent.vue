@@ -42,6 +42,7 @@
                 :row-data="dataTable" 
             />
         </div>
+        <button v-on:click="updateDataFaceAds">Update Data</button>
     </div>
 </template>
 
@@ -75,8 +76,8 @@ export default {
             filtersClass: {},
 
             // data for table01
-            headerTable01: ['Week Year', 'Reach', 'Impressions', 'Spend'],
-            othersColumnsTable01: ['reach', 'impressions', 'spend'],
+            headerTable01: ['Semana do Ano', 'Alcance', 'Impressões', 'Reprodução 75%', 'Custo', 'CPV 75%'],
+            othersColumnsTable01: ['reach', 'impressions', 'video_p75_watched_actions', 'spend', 'CPV 75%'],
             distinctWeekYear: [],
         }
     },
@@ -87,16 +88,6 @@ export default {
         this.distinctType.forEach((value) => {this.filtersType[value] = true;});
         this.distinctClass.forEach((value) => {this.filtersClass[value] = true;});
         this.createDataForTable();
-    },
-
-    computed: {
-        roundedData() {
-            return this.dataTable.map(item => ({
-                reach: Math.round(item.reach),
-                impressions: Math.round(item.impressions),
-                spend: item.spend.toFixed(2)
-            }));
-        }
     },
     
     methods: {
@@ -135,7 +126,8 @@ export default {
                 this.dataTable[e] = {
                     reach: 0,
                     impressions: 0,
-                    spend: 0
+                    video_p75_watched_actions: 0,
+                    spend: 0,
                 }
 
                 // check if any of the filter values is false
@@ -151,12 +143,14 @@ export default {
                     ) {
                         this.dataTable[e].reach += Number(element.reach);
                         this.dataTable[e].impressions += Number(element.impressions);
+                        this.dataTable[e].video_p75_watched_actions += Number(element.video_p75_watched_actions);
                         this.dataTable[e].spend += Number(element.spend);
                     }
                 });
                 // round and format the values
                 this.dataTable[e].reach = Math.round(this.dataTable[e].reach).toLocaleString();
                 this.dataTable[e].impressions = Math.round(this.dataTable[e].impressions).toLocaleString();
+                this.dataTable[e].video_p75_watched_actions = Math.round(this.dataTable[e].video_p75_watched_actions).toLocaleString();
                 this.dataTable[e].spend = this.dataTable[e].spend.toFixed(2);
             }
             this.isDataReady = true
@@ -169,6 +163,7 @@ export default {
         },
         // get the from facebook database and after update the database metaseed
         async updateDataFaceAds() {
+            console.log('oi')
             await this.$store.dispatch('getDataFromFacebookAdd', {
                 startDate: this.startDate,
                 endDate: this.endDate

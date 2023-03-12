@@ -36,5 +36,16 @@ response = requests.get(url + token)
 
 response = json.loads(response._content.decode('utf-8'))
 
+data = response['data']
+
+for item in data:
+    for field in api_fields[7:]:
+        if field in item:
+            value = item[field][0]['value']
+            item[field] = int(value)
+        else:
+            item[field] = 0  # Replace missing values with 0.
+
+
 #exporta as informações
 print(json.dumps(response))

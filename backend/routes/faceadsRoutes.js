@@ -18,7 +18,7 @@ router.post("/updateDataDatabase", async (req, res) => {
             error: null,
             msg: "Dados cadastrados com sucesso!",
         });
-        
+
     } catch (error) {
       res.status(400).json({ error });
     }
