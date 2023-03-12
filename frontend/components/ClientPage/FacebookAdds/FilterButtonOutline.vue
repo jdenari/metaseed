@@ -34,7 +34,7 @@
 <style scoped>
 .btn {
     border: 1px solid rgb(255, 94, 94);
-    border-radius: 4px;
+    border-radius: 0px;
     background-color:rgb(252, 221, 221);
     color: red;
     transition: all 0.3s ease;

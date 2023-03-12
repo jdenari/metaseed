@@ -90,6 +90,9 @@ export default {
         CHANGE_CONTENT_TO_FACEBOOKADDS(state){
             state.homeClientContent = 'facebookAddsContent'
         },
+        CHANGE_CONTENT_TO_DATABASE_MARKETING(state){
+            state.homeClientContent = 'databaseMarketing'
+        },
         // message mutations
         MESSAGE_RESPONSE(state, data){
             state.messageWarning = data

@@ -2,29 +2,37 @@
     <table class="table table-striped table-dist-content text-center m-3">
         <thead>
             <tr>
-                <th>Week Year</th>
-                <th>Reach</th>
-                <th>Impressions</th>
-                <th>Spend</th>
+                <th v-for="(column, index) in headerColumns" :key="'header-' + index">{{ column }}</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in data" :key="'column-' + index">
-                <td class="p-0">{{ distinctWeekYear[index] }}</td>
-                <td class="p-0">{{ item.reach.toFixed(0) }}</td>
-                <td class="p-0">{{ item.impressions.toFixed(0) }}</td>
-                <td class="p-0">{{ item.spend.toFixed(2) }}</td>
+            <tr v-for="(row, rowIndex) in rowData" :key="'row-' + rowIndex">
+                <td class="p-0">{{ firstColumn[rowIndex] }}</td>
+                <td v-for="(column, columnIndex) in otherColumns" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
             </tr>
         </tbody>
     </table>
 </template>
-  
 <script>
 export default {
     props: {
-        data: {type: Object ,},
-        distinctWeekYear: {type: Array,},
+        headerColumns: {
+            type: Array,
+            required: true,
+        },
+        firstColumn: {
+            type: Array,
+            required: true,
+        },
+        otherColumns: {
+            type: Array,
+            required: true,
+        },
+        rowData: {
+            type: Object,
+            required: true,
+        },
     },
 };
-</script>
+  </script>
   

@@ -7,13 +7,25 @@
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 							<img src="../../../static/icons/facebook.svg" alt="" class="mx-2">
 							<b-button 
-								block v-b-toggle.accordion-1 
+								block v-b-toggle.accordion-1
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
-								@click="$store.commit('CHANGE_CONTENT_TO_FACEBOOKADDS')"
-								> Facebook
+								> Marketing
 							</b-button>
 						</b-card-header>
+						<b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
+							<b-card-body>
+								<ul class="list-group list-group-flush">
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
+									@click="$store.commit('CHANGE_CONTENT_TO_FACEBOOKADDS')"
+									>Distribuição de Conteúdo</li>
+									<li class="no-underline list-group-item p-0 my-1"
+									@click="$store.commit('CHANGE_CONTENT_TO_DATABASE_MARKETING')"
+										> Leads
+									</li>
+								</ul>
+							</b-card-body>
+						</b-collapse>
 					</b-card>
 				</div>
 				<div class="accordion" role="tablist">
@@ -21,7 +33,7 @@
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 							<img src="../../../static/icons/gear.svg" alt="" class="mx-2">
 							<b-button 
-								block v-b-toggle.accordion-1 
+								block v-b-toggle.accordion-2 
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
 								@click="$store.commit('CHANGE_CONTENT_TO_AUTOMATIZATION')"
@@ -35,7 +47,7 @@
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 							<img src="../../../static/icons/laptop.svg" alt="" class="mx-2">
 							<b-button 
-								block v-b-toggle.accordion-2 
+								block v-b-toggle.accordion-3
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
 								@click="$store.commit('CHANGE_CONTENT_TO_DASHBOARD')"
@@ -49,13 +61,13 @@
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 							<img src="../../../static/icons/person.svg" alt="" class="mx-2">
 							<b-button 
-								block v-b-toggle.accordion-3
+								block v-b-toggle.accordion-4
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
 								> Perfil
 							</b-button>
 						</b-card-header>
-						<b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+						<b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
 							<b-card-body>
 								<ul class="list-group list-group-flush">
 									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"

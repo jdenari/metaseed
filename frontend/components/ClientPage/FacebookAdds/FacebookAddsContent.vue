@@ -1,27 +1,46 @@
 <template>
     <div>
-        <CalendarData
-            :start-date="startDate"
-            :end-date="endDate"
-            @update:start-date="startDate = $event"
-            @update:end-date="endDate = $event"
-        />
-        <div v-for="(value, index) in distinctType" :key="'type-' + index">
-            <FilterButtonOutline
-                v-bind:FilterButtonOutlineText="value"
-                v-on:event="handleFilter(value)"
-                v-bind:isActive="filtersType[value]"
+        <div class="p-3">
+            <CalendarData
+                :start-date="startDate"
+                :end-date="endDate"
+                @update:start-date="startDate = $event"
+                @update:end-date="endDate = $event"
             />
-        </div>
-        <div v-for="(value, index) in distinctClass" :key="'class-' + index">
-            <FilterButtonOutline
-                v-bind:FilterButtonOutlineText="value"
-                v-on:event="handleFilter(value)"
-                v-bind:isActive="filtersClass[value]"
-            />
+            <div class="d-flex">
+                <div class="m-1">
+                    <h6 class="px-1">TIPO</h6>
+                    <div class="d-flex">
+                        <div v-for="(value, index) in distinctType" :key="'type-' + index">
+                            <FilterButtonOutline
+                                v-bind:FilterButtonOutlineText="value"
+                                v-on:event="handleFilter(value)"
+                                v-bind:isActive="filtersType[value]"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="m-1">
+                    <h6 class="px-1">CLASSE</h6>
+                    <div class="d-flex">
+                        <div v-for="(value, index) in distinctClass" :key="'class-' + index">
+                            <FilterButtonOutline
+                                v-bind:FilterButtonOutlineText="value"
+                                v-on:event="handleFilter(value)"
+                                v-bind:isActive="filtersClass[value]"
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
-        <div>
-            <MainTable :data="dataTable" :distinctWeekYear="distinctWeekYear"></MainTable>
+        </div>
+        <div v-if="isDataReady">
+            <main-table 
+                :header-columns="headerTable01" 
+                :first-column="distinctWeekYear" 
+                :other-columns="othersColumnsTable01" 
+                :row-data="dataTable" 
+            />
         </div>
     </div>
 </template>
@@ -43,14 +62,22 @@ export default {
         // const startDate = new Date(today.getTime() - (31 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10);
         // const endDate = new Date(today.getTime() - (1 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10);
         return {
+            // main values
             startDate: '2022-05-01',
             endDate: '2022-05-30',
-            distinctWeekYear: [],
             dataTable: {},
+            isDataReady: false,
+
+            // values for create the filters
             distinctType: [],
             filtersType: {},
             distinctClass: [],
             filtersClass: {},
+
+            // data for table01
+            headerTable01: ['Week Year', 'Reach', 'Impressions', 'Spend'],
+            othersColumnsTable01: ['reach', 'impressions', 'spend'],
+            distinctWeekYear: [],
         }
     },
     // functions to be activated when the page is loaded
@@ -60,6 +87,16 @@ export default {
         this.distinctType.forEach((value) => {this.filtersType[value] = true;});
         this.distinctClass.forEach((value) => {this.filtersClass[value] = true;});
         this.createDataForTable();
+    },
+
+    computed: {
+        roundedData() {
+            return this.dataTable.map(item => ({
+                reach: Math.round(item.reach),
+                impressions: Math.round(item.impressions),
+                spend: item.spend.toFixed(2)
+            }));
+        }
     },
     
     methods: {
@@ -104,9 +141,6 @@ export default {
                 // check if any of the filter values is false
                 const shouldAddDataType = Object.values(this.filtersType).every(value => value);
                 const shouldAddDataClass = Object.values(this.filtersClass).every(value => value);
-
-                console.log(shouldAddDataType)
-                console.log(shouldAddDataClass)
                 
                 data.filter(element => element.week_number === this.distinctWeekYear[e])
                 .forEach(element => {
@@ -115,12 +149,17 @@ export default {
                     (shouldAddDataType || this.filtersType[element.type]) &&
                     (shouldAddDataClass || this.filtersClass[element.class])
                     ) {
-                        this.dataTable[e].reach += element.reach;
-                        this.dataTable[e].impressions += element.impressions;
-                        this.dataTable[e].spend += element.spend;
+                        this.dataTable[e].reach += Number(element.reach);
+                        this.dataTable[e].impressions += Number(element.impressions);
+                        this.dataTable[e].spend += Number(element.spend);
                     }
                 });
+                // round and format the values
+                this.dataTable[e].reach = Math.round(this.dataTable[e].reach).toLocaleString();
+                this.dataTable[e].impressions = Math.round(this.dataTable[e].impressions).toLocaleString();
+                this.dataTable[e].spend = this.dataTable[e].spend.toFixed(2);
             }
+            this.isDataReady = true
         },
         // change the filters to false or true and reload the main function
         handleFilter(value) {

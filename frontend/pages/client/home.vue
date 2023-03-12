@@ -8,6 +8,7 @@
                 <ProfileDataForm v-if="this.$store.state.homeClientContent === 'profileContent'"/>
                 <MainDashboard v-if="this.$store.state.homeClientContent === 'dashboardContent'"/>
                 <FacebookAddsContent v-if="this.$store.state.homeClientContent === 'facebookAddsContent'"/>
+                <DatabaseMarketing v-if="this.$store.state.homeClientContent === 'databaseMarketing'"/>
             </div>
         </div>
     </div>
@@ -20,6 +21,8 @@ import ProfileDataForm from '../../components/ClientPage/ProfilePage/ProfileData
 import MainDashboard from '../../components/ClientPage/Dashboards/MainDashboard.vue'
 import MainFooter from '../../components/MainFooter.vue'
 import FacebookAddsContent from '../../components/ClientPage/FacebookAdds/FacebookAddsContent.vue';
+import DatabaseMarketing from '../../components/ClientPage/FacebookAdds/DatabaseMarketing/DatabaseMarketing.vue';
+
     export default {
         components: {
             SideBar
@@ -29,6 +32,7 @@ import FacebookAddsContent from '../../components/ClientPage/FacebookAdds/Facebo
             , MainDashboard
             , MainFooter
             , FacebookAddsContent
+            , DatabaseMarketing
         },
         // middleware: ['auth']
     }
