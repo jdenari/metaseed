@@ -87,7 +87,7 @@
     },
     // functions to be activated when the page is loaded
     async mounted() {
-        await this.handleGetDataDatabase();
+        await this.$store.dispatch('getDataDatabase')
         this.distinctValuesForFilters();
         this.distinctType.forEach((value) => {this.filtersType[value] = true;});
         this.distinctClass.forEach((value) => {this.filtersClass[value] = true;});
@@ -95,11 +95,6 @@
     },
     
     methods: {
-
-        // get data from database metaseed and update inside the variable this.$store.state.dataFaceAds.data
-        async handleGetDataDatabase() {
-            await this.$store.dispatch('getDataDatabase')
-        },
 
         // create lists with the distict values for the filters
         distinctValuesForFilters() {
