@@ -13,9 +13,9 @@
                     <div class="d-flex">
                         <div v-for="(value, index) in distinctType" :key="'type-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
-                                v-on:event="handleFilter(value)"
-                                v-bind:isActive="filtersType[value]"
+                            v-bind:FilterButtonOutlineText="value"
+                            v-on:event="handleFilter(value)"
+                            v-bind:isActive="filtersType[value]"
                             />
                         </div>
                     </div>
@@ -25,9 +25,9 @@
                     <div class="d-flex">
                         <div v-for="(value, index) in distinctClass" :key="'class-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
-                                v-on:event="handleFilter(value)"
-                                v-bind:isActive="filtersClass[value]"
+                            v-bind:FilterButtonOutlineText="value"
+                            v-on:event="handleFilter(value)"
+                            v-bind:isActive="filtersClass[value]"
                             />
                         </div>
                     </div>
@@ -35,27 +35,31 @@
             </div>
         </div>
         <div v-if="isDataReady">
-            <main-table 
-                :header-columns="headerTable01" 
-                :first-column="distinctWeekYear" 
-                :other-columns="othersColumnsTable01" 
-                :row-data="dataTable" 
-            />
+            <table class="table table-striped table-dist-content text-center m-3">
+                <thead>
+                    <tr>
+                    <th v-for="(column, index) in headerTable01" :key="'header-' + index">{{ column }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(row, rowIndex) in dataTable" :key="'row-' + rowIndex">
+                    <td v-for="(column, columnIndex) in columnsTable01" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <button v-on:click="updateDataFaceAds">Update Data</button>
     </div>
-</template>
-
-<script>
-import CalendarData from './CalendarData.vue';
-import FilterButtonOutline from './FilterButtonOutline.vue';
-import MainTable from './MainTable.vue';
-
-export default {
+  </template>
+  
+  <script>
+  import CalendarData from "./CalendarData.vue";
+  import FilterButtonOutline from "./FilterButtonOutline.vue";
+  
+  export default {
     components: {
-        FilterButtonOutline
-        , CalendarData
-        , MainTable
+      FilterButtonOutline,
+      CalendarData,
     },
     data() {
         // FUNCTION TO CALCULATE 30 DIAS ANTERIORES
@@ -68,7 +72,7 @@ export default {
             endDate: '2022-05-30',
             dataTable: {},
             isDataReady: false,
-
+            
             // values for create the filters
             distinctType: [],
             filtersType: {},
@@ -77,7 +81,7 @@ export default {
 
             // data for table01
             headerTable01: ['Semana do Ano', 'Alcance', 'Impressões', 'Reprodução 75%', 'Custo', 'CPV 75%'],
-            othersColumnsTable01: ['reach', 'impressions', 'video_p75_watched_actions', 'spend', 'CPV 75%'],
+            columnsTable01: [ 'distinctWeekYear','reach', 'impressions', 'video_p75_watched_actions', 'spend', 'CPV75'],
             distinctWeekYear: [],
         }
     },
@@ -105,7 +109,6 @@ export default {
                 const value = data[key].type;
                 if (!this.distinctType.includes(value)) {this.distinctType.push(value);}
             }
-
             for (const key in data) {
                 const value = data[key].class;
                 if (!this.distinctClass.includes(value)) {this.distinctClass.push(value);}
@@ -114,6 +117,8 @@ export default {
 
         // update the data that should be printed in table
         createDataForTable() {
+
+            this.isDataReady = false
 
             // collect the raw data and create the numbers of rows according to week_number
             const data = this.$store.state.dataFaceAds.data;
@@ -124,10 +129,12 @@ export default {
             for (let e = 0; e < this.distinctWeekYear.length; e++){
 
                 this.dataTable[e] = {
+                    distinctWeekYear: 0,
                     reach: 0,
                     impressions: 0,
                     video_p75_watched_actions: 0,
                     spend: 0,
+                    CPV75: 0,
                 }
 
                 // check if any of the filter values is false
@@ -137,9 +144,7 @@ export default {
                 data.filter(element => element.week_number === this.distinctWeekYear[e])
                 .forEach(element => {
                     // add data only if the filter allows it
-                    if (
-                    (shouldAddDataType || this.filtersType[element.type]) &&
-                    (shouldAddDataClass || this.filtersClass[element.class])
+                    if ((shouldAddDataType || this.filtersType[element.type]) && (shouldAddDataClass || this.filtersClass[element.class])
                     ) {
                         this.dataTable[e].reach += Number(element.reach);
                         this.dataTable[e].impressions += Number(element.impressions);
@@ -148,11 +153,14 @@ export default {
                     }
                 });
                 // round and format the values
+                this.dataTable[e].distinctWeekYear = this.distinctWeekYear[e]
                 this.dataTable[e].reach = Math.round(this.dataTable[e].reach).toLocaleString();
                 this.dataTable[e].impressions = Math.round(this.dataTable[e].impressions).toLocaleString();
                 this.dataTable[e].video_p75_watched_actions = Math.round(this.dataTable[e].video_p75_watched_actions).toLocaleString();
                 this.dataTable[e].spend = this.dataTable[e].spend.toFixed(2);
+                this.dataTable[e]['CPV75'] = (this.dataTable[e].spend * this.dataTable[e].video_p75_watched_actions).toFixed(2);
             }
+
             this.isDataReady = true
         },
         // change the filters to false or true and reload the main function
@@ -163,7 +171,6 @@ export default {
         },
         // get the from facebook database and after update the database metaseed
         async updateDataFaceAds() {
-            console.log('oi')
             await this.$store.dispatch('getDataFromFacebookAdd', {
                 startDate: this.startDate,
                 endDate: this.endDate
