@@ -27,16 +27,12 @@
             </div>
         </div>
         <div class="m-3">
-      <h6 class="px-1">CABEÇALHOS</h6>
-        <div class="d-flex m-1">
-            <div class="checkbox-filter m-auto text-center">
-            <input type="checkbox" v-model="selectAllHeaders" @change="selectAllHeadersCheckbox" class="m-4">
-            Selecionar tudo
+            <h6 class="px-1">CABEÇALHOS</h6>
+            <div class="d-flex m-1">
+                <div v-for="(header, index) in distinctHeaders" :key="'header-' + index" class="checkbox-filter m-auto text-center">
+                    <input type="checkbox" v-model="distinctHeaders[header]" @change="fillCheckboxList(header)" class="m-4" checked> {{ header }}
+                </div>
             </div>
-            <div v-for="(header, index) in distinctHeaders" :key="'header-' + index" class="checkbox-filter m-auto text-center">
-                <input type="checkbox" v-model="headersFilter[header]" @change="fillCheckboxList(header)" class="m-4" checked> {{ header }}
-            </div>
-        </div>
         </div>
         <div class="table-responsive m-auto">
             <table class="table table-striped">
@@ -53,16 +49,16 @@
             </table>
         </div>
     </div>
-  </template>
+</template>
   
-  <script>
-  import FilterButtonOutline from '../FilterButtonOutline.vue';
-  export default {
-      components: {
-        FilterButtonOutline,
-      },
-      data() {
-          return {
+<script>
+    import FilterButtonOutline from '../FilterButtonOutline.vue';
+    export default {
+        components: {
+            FilterButtonOutline,
+        },
+        data() {
+            return {
                 data: {},
                 result: {},
                 distinctHeaders: [],
@@ -72,9 +68,7 @@
                 filtersType: {},
                 distinctClass: [],
                 filtersClass: {},
-                headersFilter: [],
-                selectAllHeaders: false,
-                listTotal: [],
+                filterHeaders: [],
             };
         },
         async mounted() {
@@ -88,24 +82,18 @@
             distinctValuesForFilters() {
                 // create headers list
                 this.distinctHeaders = Object.keys(this.data[0]);
-                this.listTotal = Object.keys(this.data[0])
+                this.filterHeaders = Object.keys(this.data[0])
     
                 // create list for the type values
                 for (const key in this.data) {
                     const value = this.data[key].type;
-                    if (!this.distinctType.includes(value)) {
-                        this.distinctType.push(value);
-                        this.filtersType[value] = true;
-                    }
+                    if (!this.distinctType.includes(value)) {this.distinctType.push(value);this.filtersType[value] = true;}
                 }
     
                 // create list for the class values
                 for (const key in this.data) {
                     const value = this.data[key].class;
-                    if (!this.distinctClass.includes(value)) {
-                        this.distinctClass.push(value);
-                        this.filtersClass[value] = true;
-                    }
+                    if (!this.distinctClass.includes(value)) {this.distinctClass.push(value);this.filtersClass[value] = true;}
                 }
             },
             // change the filters to false or true and reload the main function
@@ -116,17 +104,11 @@
     
                 // filter data based on active filters
                 let filteredData = this.$store.state.dataFaceAds.data.filter(item => {
-                    // filter by type
+       
                     let typeFilter = true;
-                    if (this.filtersType[item.type] !== undefined) {
-                        typeFilter = this.filtersType[item.type];
-                    }
-    
-                    // filter by class
+                    if (this.filtersType[item.type] !== undefined) {typeFilter = this.filtersType[item.type];}
                     let classFilter = true;
-                    if (this.filtersClass[item.class] !== undefined) {
-                        classFilter = this.filtersClass[item.class];
-                    }
+                    if (this.filtersClass[item.class] !== undefined) {classFilter = this.filtersClass[item.class];}
     
                     return typeFilter && classFilter;
                 });
@@ -135,36 +117,26 @@
                 this.data = filteredData;
                 
             },
+
+            // remove or add the columns according to the checkboxs
             fillCheckboxList(header) {
-                if (this.listTotal.includes(header)) {
-                    const index = this.listTotal.indexOf(header);
-                    this.listTotal.splice(index, 1);
-                    console.log('cortou')
-                } else {
-                    console.log('adicionou')
-                    this.listTotal.push(header);
-                }
+                if (this.filterHeaders.includes(header)) {const index = this.filterHeaders.indexOf(header);this.filterHeaders.splice(index, 1);
+                } else {this.filterHeaders.push(header);}
                 this.createDataforTable()
             },
+            // treat the raw data to print on table
             createDataforTable() {
 
                 this.result = {}
-
                 for (const e in this.data) {
-                    for (const i in this.listTotal) {
+                    for (const i in this.filterHeaders) {
                         if (!this.result[e]) {this.result[e] = {};}
-                        this.result[e][this.listTotal[i]] = this.data[e][this.listTotal[i]];
+                        this.result[e][this.filterHeaders[i]] = this.data[e][this.filterHeaders[i]];
                     }
                 }
             },
-            selectAllHeadersCheckbox() {
-
-                for (const header of this.distinctHeaders) {
-                    this.headersFilter[header] = this.selectAllHeaders;
-                }
-            },
-      }
-  };
+        }
+    };
   </script>
 
 <style scoped>
