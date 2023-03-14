@@ -93,6 +93,9 @@ export default {
         CHANGE_CONTENT_TO_DATABASE_MARKETING(state){
             state.homeClientContent = 'databaseMarketing'
         },
+        CHANGE_CONTENT_TO_LEADS_MARKETING(state){
+            state.homeClientContent = 'leadsMarketing'
+        },
         // message mutations
         MESSAGE_RESPONSE(state, data){
             state.messageWarning = data

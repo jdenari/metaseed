@@ -19,9 +19,13 @@
 									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
 									@click="$store.commit('CHANGE_CONTENT_TO_FACEBOOKADDS')"
 									>Distribuição de Conteúdo</li>
-									<li class="no-underline list-group-item p-0 my-1"
-									@click="$store.commit('CHANGE_CONTENT_TO_DATABASE_MARKETING')"
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
+										@click="$store.commit('CHANGE_CONTENT_TO_LEADS_MARKETING')"
 										> Leads
+									</li>
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
+									@click="$store.commit('CHANGE_CONTENT_TO_DATABASE_MARKETING')"
+										> Banco de Dados
 									</li>
 								</ul>
 							</b-card-body>

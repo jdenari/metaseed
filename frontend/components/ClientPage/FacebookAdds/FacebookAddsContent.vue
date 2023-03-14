@@ -11,11 +11,11 @@
                 <div class="m-1">
                     <h6 class="px-1">TIPO</h6>
                     <div class="d-flex">
-                        <div v-for="(value, index) in distinctType" :key="'type-' + index">
+                        <div v-for="(value, index) in uniqueValues.type" :key="'type-' + index">
                             <FilterButtonOutline
-                            v-bind:FilterButtonOutlineText="value"
-                            v-on:event="handleFilter(value)"
-                            v-bind:isActive="filtersType[value]"
+                                v-bind:FilterButtonOutlineText="value"
+                                v-on:event="handleFilter('type', value)"
+                                v-bind:isActive="filtersType[value]"
                             />
                         </div>
                     </div>
@@ -23,11 +23,11 @@
                 <div class="m-1">
                     <h6 class="px-1">CLASSE</h6>
                     <div class="d-flex">
-                        <div v-for="(value, index) in distinctClass" :key="'class-' + index">
+                        <div v-for="(value, index) in uniqueValues.class" :key="'class-' + index">
                             <FilterButtonOutline
-                            v-bind:FilterButtonOutlineText="value"
-                            v-on:event="handleFilter(value)"
-                            v-bind:isActive="filtersClass[value]"
+                                v-bind:FilterButtonOutlineText="value"
+                                v-on:event="handleFilter('class', value)"
+                                v-bind:isActive="filtersClass[value]"
                             />
                         </div>
                     </div>
@@ -35,15 +35,21 @@
                 <div class="m-1">
                     <h6 class="px-1">CICLO</h6>
                     <div class="d-flex">
-                        <div v-for="(value, index) in distinctCycle" :key="'type-' + index">
+                        <div v-for="(value, index) in uniqueValues.cycle" :key="'type-' + index">
                             <FilterButtonOutline
-                            v-bind:FilterButtonOutlineText="value"
-                            v-on:event="handleFilter(value)"
-                            v-bind:isActive="filtersCycle[value]"
+                                v-bind:FilterButtonOutlineText="value"
+                                v-on:event="handleFilter('cycle', value)"
+                                v-bind:isActive="filtersCycle[value]"
                             />
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="border rounded m-3 p-3" v-if="isDataReady">
+            <div class="h4 title-dist-table text-center rounded">RESUMO DISTRIBUIÇÃO DE CONTEÚDO</div>
+            <div class="w-50 m-auto px-3">
+                
             </div>
         </div>
         <div class="border rounded m-3 p-3" v-if="isDataReady">
@@ -152,6 +158,7 @@
                     class="mx-3 m-3"
                     @event="exportToExcel"
                 />  
+                <div class="p"> {{ this.activatedFilters.class }} </div>
             </div>
         </div>
     </div>
@@ -165,9 +172,9 @@
   
   export default {
     components: {
-        FilterButtonOutline,
-        CalendarData,
-        SmallButton
+        FilterButtonOutline
+        , CalendarData
+        , SmallButton
     },
     data() {
         // FUNCTION TO CALCULATE 30 DIAS ANTERIORES
@@ -179,7 +186,9 @@
             startDate: '2022-05-01',
             endDate: '2022-05-30',
             dataTable: {},
+            mainData: {},
             isDataReady: false,
+            activatedFilters: [],
             
             // values for create the filters
             distinctType: [],
@@ -205,11 +214,97 @@
     // functions to be activated when the page is loaded
     async mounted() {
         await this.$store.dispatch('getDataDatabase')
+        this.mainData = this.$store.state.dataFaceAds.data;
         this.distinctValuesForFilters();
         this.distinctType.forEach((value) => {this.filtersType[value] = true;});
         this.distinctClass.forEach((value) => {this.filtersClass[value] = true;});
         this.distinctCycle.forEach((value) => {this.filtersCycle[value] = true;});
         this.createDataForTable();
+    
+    },
+
+    computed:{
+        distinctHeaders() {
+            if (Object.keys(this.mainData).length === 0) {return [];}
+            const headers = Object.keys(this.mainData[0]);
+            const uniqueHeaders = new Set(headers);
+            return Array.from(uniqueHeaders);
+        },
+        uniqueValues() {
+            if (Object.keys(this.mainData).length === 0) {return {};}
+
+            const uniqueValuesObj = {};
+            const keys = ['date_start', 'week_number', 'cycle', 'class', 'type'];
+
+            keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
+            return uniqueValuesObj;
+        },
+        activatedFilters() {
+            if (Object.keys(this.uniqueValues).length === 0) {return {};}
+
+            const filters = {class: {},type: {},cycle: {}};
+            this.uniqueValues.class.forEach(value => {filters.class[value] = true;});
+            this.uniqueValues.type.forEach(value => {filters.type[value] = true;});
+            this.uniqueValues.cycle.forEach(value => {filters.cycle[value] = true;});
+            
+            return filters;
+        },
+        mainDataFiltered() {
+            if (Object.keys(this.mainData).length === 0) {return {};}
+
+            let filteredData = [];
+            this.mainData.forEach(element => {
+
+                for (const e in Object.values(this.activatedFilters.cycle)) {
+                    if (Object.values(this.activatedFilters.cycle)[e] === false) {
+                        console.log(Object.values(this.activatedFilters.cycle)[e])
+                        console.log('brek')
+                        break;
+                    }
+                }
+
+                for (const e in Object.values(this.activatedFilters.class)) {
+                    if (Object.values(this.activatedFilters.class)[e] === false) {
+                        console.log(Object.values(this.activatedFilters.class)[e])
+                        console.log('break')
+                        break;
+                    }
+                }
+
+                for (const e in Object.values(this.activatedFilters.type)) {
+                    if (Object.values(this.activatedFilters.type)[e] === false) {
+                        console.log(Object.values(this.activatedFilters.type)[e])
+                        console.log('brea')
+                        break;
+                    }
+                }
+                console.log('foi')
+                filteredData.push(element);
+            });
+
+            return filteredData;
+        }
+
+    // return filteredData;
+    //     },
+        // tableData() {
+        //     if (Object.keys(this.mainData).length === 0) {return {};}
+
+        //     const data = {};
+        //     this.uniqueValues.week_number.forEach(weekNumber => {
+        //         data[weekNumber] = {
+        //             reach: 0,
+        //             impressions: 0,
+        //             video_p75_watched_actions: 0,
+        //             video_p50_watched_actions: 0,
+        //             video_p25_watched_actions: 0,
+        //             spend: 0
+        //         };
+
+                
+        //     });
+        //     return data;
+        // }
     },
     
     methods: {
@@ -290,15 +385,10 @@
             this.isDataReady = true
         },
         // change the filters to false or true and reload the main function
-        handleFilter(value) {
-            this.filtersType[value] = !this.filtersType[value];
-            this.filtersClass[value] = !this.filtersClass[value];
-            this.filtersCycle[value] = !this.filtersCycle[value];
-            this.createDataForTable();
-        },
+        handleFilter(header, value) {this.activatedFilters[header][value] = !this.activatedFilters[header][value];console.log('filtrossss')},
+
         // get the from facebook database and after update the database metaseed
-        async updateDataFaceAds() {await this.$store.dispatch('getDataFromFacebookAdd', {startDate: this.startDate,endDate: this.endDate})
-        },
+        async updateDataFaceAds() {await this.$store.dispatch('getDataFromFacebookAdd', {startDate: this.startDate,endDate: this.endDate})},
         exportToExcel() {
             const worksheet = XLSX.utils.json_to_sheet(Object.values(this.dataTable));
             const workbook = XLSX.utils.book_new();
