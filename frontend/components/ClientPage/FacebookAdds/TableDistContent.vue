@@ -69,8 +69,5 @@ export default {
 </script>
 
 <style>
-.table-dist-content {
-    width: 400px;
-    font-size: 12px;
-}
+
 </style>

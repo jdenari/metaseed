@@ -33,17 +33,17 @@
   
 <style scoped>
 .btn {
-    border: 1px solid rgb(255, 94, 94);
+    border: 1px solid white;
     border-radius: 0px;
-    background-color:rgb(252, 221, 221);
-    color: red;
+    background-color:white;
+    color: #212536;
     transition: all 0.3s ease;
 }
   
 .clicked {
-    background-color: rgb(255, 94, 94);
-    color: white;
-    border-color: lightcoral;
+    background-color: rgb(248, 138, 138);
+    border-color: rgb(248, 138, 138);
+    color: white
 }
 </style>
   
