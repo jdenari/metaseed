@@ -46,10 +46,10 @@
                 </div>
             </div>
         </div>
-        <div class="border rounded m-3 p-3">
+        <div class="border rounded m-3 p-3" v-if="isDataReady">
             <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 75%</div>
             <div class="d-flex">
-                <div class="w-50 m-auto px-3" v-if="isDataReady">
+                <div class="w-50 m-auto px-3">
                     <div class="h5 text-center">FB | IG</div>
                     <table class="table table-dist-content text-center mx-auto">
                         <thead>
@@ -64,7 +64,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-50 m-auto px-3" v-if="isDataReady">
+                <div class="w-50 m-auto px-3">
                     <div class="h5 text-center">GOOGLE</div>
                     <table class="table table-dist-content text-center mx-auto">
                         <thead>
@@ -82,7 +82,7 @@
             </div>
             <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 50%</div>
             <div class="d-flex px-3">
-                <div class="w-50 m-auto px-3" v-if="isDataReady">
+                <div class="w-50 m-auto px-3">
                     <div class="h5 text-center">FB | IG</div>
                     <table class="table table-dist-content text-center mx-auto">
                         <thead>
@@ -97,7 +97,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-50 m-auto px-3" v-if="isDataReady">
+                <div class="w-50 m-auto px-3">
                     <div class="h5 text-center">GOOGLE</div>
                     <table class="table table-dist-content text-center mx-auto">
                         <thead>
@@ -115,7 +115,7 @@
             </div>
             <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 25%</div>
             <div class="d-flex px-3">
-                <div class="w-50 m-auto px-3" v-if="isDataReady">
+                <div class="w-50 m-auto px-3">
                     <div class="h5 text-center">FB | IG</div>
                     <table class="table table-dist-content text-center mx-auto">
                         <thead>
@@ -130,7 +130,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-50 m-auto px-3" v-if="isDataReady">
+                <div class="w-50 m-auto px-3">
                     <div class="h5 text-center">GOOGLE</div>
                     <table class="table table-dist-content text-center mx-auto">
                         <thead>
@@ -146,6 +146,13 @@
                     </table>
                 </div>
             </div>
+            <div class="d-flex flex-row-reverse">
+                <SmallButton 
+                    smallButtonText="Exportar"
+                    class="mx-3 m-3"
+                    @event="exportToExcel"
+                />  
+            </div>
         </div>
     </div>
   </template>
@@ -153,11 +160,14 @@
   <script>
   import CalendarData from "./CalendarData.vue";
   import FilterButtonOutline from "./FilterButtonOutline.vue";
+  import SmallButton from "../../SmallButton.vue";
+  import * as XLSX from 'xlsx';
   
   export default {
     components: {
         FilterButtonOutline,
         CalendarData,
+        SmallButton
     },
     data() {
         // FUNCTION TO CALCULATE 30 DIAS ANTERIORES
@@ -289,6 +299,12 @@
         // get the from facebook database and after update the database metaseed
         async updateDataFaceAds() {await this.$store.dispatch('getDataFromFacebookAdd', {startDate: this.startDate,endDate: this.endDate})
         },
+        exportToExcel() {
+            const worksheet = XLSX.utils.json_to_sheet(Object.values(this.dataTable));
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+            XLSX.writeFile(workbook, 'table.xlsx');
+        }
     },
 }
 </script>
