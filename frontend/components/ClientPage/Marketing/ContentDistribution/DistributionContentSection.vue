@@ -164,9 +164,9 @@
   </template>
   
   <script>
-  import CalendarData from "./CalendarData.vue";
-  import FilterButtonOutline from "./FilterButtonOutline.vue";
-  import SmallButton from "../../SmallButton.vue";
+  import CalendarData from "../CalendarData.vue";
+  import FilterButtonOutline from "../FilterButtonOutline.vue";
+  import SmallButton from "../../../SmallButton.vue";
   
   export default {
     components: {
@@ -252,7 +252,6 @@
                 };
                 this.mainDataFiltered.filter(element => element.week_number === weekNumber)
                 .forEach(element => {
-
                         data[weekNumber].reach += Number(element.reach);
                         data[weekNumber].impressions += Number(element.impressions);
                         data[weekNumber].video_p75_watched_actions += Number(element.video_p75_watched_actions);

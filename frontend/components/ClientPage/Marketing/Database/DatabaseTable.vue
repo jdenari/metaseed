@@ -29,9 +29,9 @@
 </template>
   
 <script>
-    import FilterButtonOutline from '../FilterButtonOutline.vue';
-    import SmallButton from '../../../SmallButton.vue';
-    import * as XLSX from 'xlsx';
+import FilterButtonOutline from '../FilterButtonOutline.vue';
+import SmallButton from '../../../SmallButton.vue';
+import * as XLSX from 'xlsx';
   
 export default {
     components: {

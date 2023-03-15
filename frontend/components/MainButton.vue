@@ -11,13 +11,13 @@
 <style scoped>
     .main-btn{
         color: white;
-        background-color: red;
+        background-color: var(--dark-red);
         font-size: 20px;
         border-radius: 30px;
     }
     .main-btn:hover{
         transition: 0.3s;
-        background-color: var(--light-red)
+        background-color: var(--light-red);
     }
 </style>
 

@@ -1,16 +1,28 @@
 <template>
-    <div>
-        <MainHeader />
-        <div class="d-xl-flex sec-lading-page">
-            <div class="col-6 d-none d-xl-block"></div>
-            <div class="col-lg-6 col-12 m-auto">
-                <BeClientForm class="client-form p-3 w-75"/>
+    <div class="main-background">
+        <div class="navbar navbar-expand bg-white border-bottom shadow-sm bg-body-tertiary rounded">
+            <MainHeader />
+        </div>
+        <div class="container-metaseed">
+            <div class="d-xl-flex sec-lading-page">
+                <div class="col-7">
+                    <img src="../static/images/laptop-image-small.png" alt="" class="w-100 m-auto shadow-sm bg-body-tertiary">
+                </div>
+                <div class="col-5 d-flex align-items-center">
+                    <BeClientForm class="client-form p-3 w-75"/>
+                </div>
             </div>
         </div>
-        <MetaseedValues />
-        <SucessPillars />
-        <MessageForm />
-        <MainFooter />
+        <div class="w-100 bg-white">
+            <MetaseedValues />
+        </div>
+        <div class="bg-dark-black">
+            <SucessPillars />
+        </div>
+        <div class="container-metaseed">
+            <MessageForm />
+            <MainFooter />
+        </div>
     </div>
 </template>
 
@@ -35,12 +47,12 @@ export default {
 </script>
 
 <style>
-
 :root{
-    --dark-black: #212529;
-    --light-white: #F8F9FA;
-    --light-red: rgba(255, 0, 0, 0.6);
-    --light-gray: #e5e5e5;
+    --dark-black: #2B2D42;
+    --light-black: #8D99AE;
+    --light-white: #EDF2F4;
+    --light-red: #FF9A9A;
+    --dark-red: #d90429;
 }
 @font-face {
     font-family: 'monteserrat';
@@ -52,27 +64,26 @@ body{
     zoom: 1;
     font-family: 'monteserrat';
 }
-.no-underline{
-    text-decoration: none !important;
-    color: inherit !important;
-    cursor: pointer;
-}
+.no-underline{text-decoration: none !important;color: inherit !important;cursor: pointer;}
 
-</style>
+.bg-dark-black{background-color: var(--dark-black);}
+.bg-light-black{background-color: var(--light-black);}
+.bg-light-white{background-color: var(--light-white);}
+.bg-light-red{background-color: var(--light-red);}
+.bg-dark-red{background-color: var(--dark-red);}
 
-<style scoped>
-.sec-lading-page{
-    background-image:url(../static/images/laptop-image.jpg);
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.main-img{
-    width: 55%;
-}
-.client-form{
-    min-width: 550px
-}
+.text-color-dark-black{color: var(--dark-black);}
+.text-color-dark-black{color: var(--light-black);}
+.text-color-dark-black{color: var(--light-white);}
+.text-color-dark-black{color: var(--light-red);}
+.text-color-dark-black{color: var(--dark-red);}
+
+.main-background{background-color: var(--light-white);}
+.container-metaseed{width: 70%;margin: 0px auto;}
+.view-h-100{height: 100vh;}
+
+.client-form{min-width: 550px}
+
 </style>
 
 <style>

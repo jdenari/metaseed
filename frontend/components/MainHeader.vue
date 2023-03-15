@@ -1,23 +1,25 @@
 <template>
-    <nav class="navbar navbar-expand p-2 py-3">
-        <div class="d-flex">
-            <NuxtLink to="/">
-                <img src="../static/logo/logo-metaseed-small.png" alt="" class="px-3">
-            </NuxtLink>
-            <NuxtLink to="/" class="d-flex align-items-center no-underline">
-                <div class="logo-name h4 m-0 mx-2 ">Metaseed.Co</div>
-            </NuxtLink>
-        </div>
+    <div class="container-metaseed">
+        <nav class="navbar navbar-expand p-3">
+            <div class="d-flex">
+                <NuxtLink to="/">
+                    <img src="../static/logo/logo-metaseed-small.png" alt="">
+                </NuxtLink>
+                <NuxtLink to="/" class="d-flex align-items-center no-underline">
+                    <div class="logo-name h4 m-0 mx-2 ">Metaseed.Co</div>
+                </NuxtLink>
+            </div>
 
-        <!-- if the user it is not logged -->
-        <ul class="navbar-nav lg-auto d-flex justify-content-end w-100" v-if="!this.$store.state.authenticated">
-            <MainButton />
-        </ul>
-        <!-- if the user it is logged -->
-        <ul class="navbar-nav lg-auto d-flex justify-content-end w-100" v-else>
-            <PerfilPhotoHeader />
-        </ul>
-    </nav>
+            <!-- if the user it is not logged -->
+            <ul class="navbar-nav lg-auto d-flex justify-content-end w-100" v-if="!this.$store.state.authenticated">
+                <MainButton />
+            </ul>
+            <!-- if the user it is logged -->
+            <ul class="navbar-nav lg-auto d-flex justify-content-end w-100" v-else>
+                <PerfilPhotoHeader />
+            </ul>
+        </nav>
+    </div>
 </template>
 
 <script>
@@ -36,7 +38,7 @@ export default {
 
 <style scoped>
 .navbar{
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 </style>

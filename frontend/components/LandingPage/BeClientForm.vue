@@ -1,6 +1,7 @@
 <template>
     <section class="m-auto">
-        <div class="form-bg col-10 col-xxl-9 m-auto p-5 bg-white">
+        <div class="d-flex">
+            <div class="col-10 col-xxl-9 m-auto px-5 py-3 bg-white shadow-sm p-3 mb-5 bg-body-tertiary rounded">
             <div class="h1 my-2 text-center">O SEU PONTO DE PARTIDA!</div>
             <div class="h4 my-4 text-center">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
             <FormField
@@ -40,6 +41,7 @@
                 > Obrigado pelo interesse! Em breve entraremos em contato. 
                 </b-modal>
             </div>
+        </div>
         </div>
     </section>
 </template>
@@ -91,10 +93,6 @@ export default {
 </script>
 
 <style scoped>
-.form-bg{
-    border-radius: 30px;
-    margin: 50px auto !important;
-}
 
 </style> 
 

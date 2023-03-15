@@ -1,9 +1,9 @@
 <template>
     <div class="p-3">
-        <form class="login-form col-10 p-3 col-xl-3 col-md-6 border m-auto">
+        <form class="login-form col-10 p-5 col-xl-3 col-md-6 border m-auto shadow-sm mb-5 bg-body-tertiary rounded bg-white">
             <!-- all the components when the user is not logged -->
             <div>
-                <h4 class="text-center p-2">Iniciar Sessão</h4>
+                <h4 class="text-center p-1">Iniciar Sessão</h4>
                 <MessageWarning 
                 :messageWarning="this.$store.state.messageWarning"
                     class="p-3"
@@ -20,12 +20,12 @@
                     textAttributeValue="password"
                     placeholderAttributeValue="********"
                 />
-                <div class="w-100 d-md-flex justify-content-md-end">
+                <div class="px-1 my-3">Não possui conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
+                <div class="w-100 d-md-flex justify-content-md-end mt-4">
                     <MainButton 
                         @click.native="loginVerification"
                     />
                 </div>
-                <div class="p mt-3">Não possui uma conta?<NuxtLink to="/"> Preencha o formulário.</NuxtLink></div>
             </div>
         </form>
     </div>

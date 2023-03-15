@@ -7,8 +7,8 @@
                 <MainAutomatization v-if="this.$store.state.homeClientContent === 'automatizationContent'"/>
                 <ProfileDataForm v-if="this.$store.state.homeClientContent === 'profileContent'"/>
                 <MainDashboard v-if="this.$store.state.homeClientContent === 'dashboardContent'"/>
-                <FacebookAddsContent v-if="this.$store.state.homeClientContent === 'facebookAddsContent'"/>
-                <DatabaseMarketing v-if="this.$store.state.homeClientContent === 'databaseMarketing'"/>
+                <DistributionContentSection v-if="this.$store.state.homeClientContent === 'distributionContentSection'"/>
+                <DatabaseTable v-if="this.$store.state.homeClientContent === 'databaseMarketing'"/>
             </div>
         </div>
     </div>
@@ -20,8 +20,8 @@ import MainAutomatization from '../../components/ClientPage/Automatization/MainA
 import ProfileDataForm from '../../components/ClientPage/ProfilePage/ProfileDataForm.vue'
 import MainDashboard from '../../components/ClientPage/Dashboards/MainDashboard.vue'
 import MainFooter from '../../components/MainFooter.vue'
-import FacebookAddsContent from '../../components/ClientPage/FacebookAdds/FacebookAddsContent.vue';
-import DatabaseMarketing from '../../components/ClientPage/FacebookAdds/DatabaseMarketing/DatabaseMarketing.vue';
+import DistributionContentSection from '../../components/ClientPage/Marketing/ContentDistribution/DistributionContentSection.vue';
+import DatabaseTable from '../../components/ClientPage/Marketing/Database/DatabaseTable';
 
     export default {
         components: {
@@ -31,8 +31,8 @@ import DatabaseMarketing from '../../components/ClientPage/FacebookAdds/Database
             , ProfileDataForm
             , MainDashboard
             , MainFooter
-            , FacebookAddsContent
-            , DatabaseMarketing
+            , DistributionContentSection
+            , DatabaseTable
         },
         // middleware: ['auth']
     }

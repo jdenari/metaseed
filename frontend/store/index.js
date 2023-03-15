@@ -90,7 +90,7 @@ export default {
             state.homeClientContent = 'automatizationContent'
         },
         CHANGE_CONTENT_TO_FACEBOOKADDS(state){
-            state.homeClientContent = 'facebookAddsContent'
+            state.homeClientContent = 'distributionContentSection'
         },
         CHANGE_CONTENT_TO_DATABASE_MARKETING(state){
             state.homeClientContent = 'databaseMarketing'

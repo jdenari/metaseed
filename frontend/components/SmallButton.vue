@@ -25,13 +25,13 @@
 <style scoped>
     .main-sml-btn{
         color: white;
-        background-color: red;
+        background-color: var(--dark-red);
         font-size: 16px;
         border-radius: 20px;
     }
     .main-sml-btn:hover{
         transition: 0.3s;
-        background-color: var(--light-red)
+        background-color: var(--light-red);
     }
 </style>
 
