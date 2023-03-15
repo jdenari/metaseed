@@ -1,7 +1,7 @@
 <template>
     <div class="main-background">
         <div class="navbar navbar-expand bg-white border-bottom shadow-sm bg-body-tertiary rounded">
-            <MainHeader />
+            <MainHeader class="container-metaseed"/>
         </div>
         <div class="container-metaseed">
             <div class="d-xl-flex sec-lading-page">

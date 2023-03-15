@@ -1,6 +1,6 @@
 <template>
     <div class="p-3 m-xl-0 mt-5">
-        <form class="col-10 col-xl-6 p-3 border m-auto">
+        <form class="col-10 col-xl-6 p-3 m-auto bg-white border-bottom shadow-sm bg-body-tertiary rounded">
             <div class="h1">Perfil</div>
             <div class="m-1 my-2 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>

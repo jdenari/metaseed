@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="border rounded m-3 p-3">
+        <div class="border rounded bg-light-white m-3 p-3">
+            <div class="h2 text-center font-weight-bold px-3 pb-3">FILTROS</div>
             <CalendarData
                 :start-date="startDate"
                 :end-date="endDate"
@@ -46,115 +47,122 @@
                 </div>
             </div>
         </div>
-        <div class="border rounded m-3 p-3">
-            <div class="h4 title-dist-table text-center rounded">RESUMO DISTRIBUIÇÃO DE CONTEÚDO</div>
+        <div class="border rounded bg-light-white m-3 p-3">
+            <div class="h2 text-center font-weight-bold px-3 pb-3">RESUMO DISTRIBUIÇÃO DE CONTEÚDO</div>
             <div class="w-50 m-auto px-3">
                 
             </div>
         </div>
-        <div class="border rounded m-3 p-3">
-            <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 75%</div>
-            <div class="d-flex">
-                <div class="w-50 m-auto px-3">
-                    <div class="h5 text-center">FB | IG</div>
-                    <table class="table table-dist-content text-center mx-auto">
-                        <thead>
-                            <tr>
-                                <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
-                                <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="w-50 m-auto px-3">
-                    <div class="h5 text-center">GOOGLE</div>
-                    <table class="table table-dist-content text-center mx-auto">
-                        <thead>
-                            <tr>
-                                <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
-                                <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 50%</div>
-            <div class="d-flex px-3">
-                <div class="w-50 m-auto px-3">
-                    <div class="h5 text-center">FB | IG</div>
-                    <table class="table table-dist-content text-center mx-auto">
-                        <thead>
-                            <tr>
-                                <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
-                                <td v-for="(column, columnIndex) in columnsTableFB50" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="w-50 m-auto px-3">
-                    <div class="h5 text-center">GOOGLE</div>
-                    <table class="table table-dist-content text-center mx-auto">
-                        <thead>
-                            <tr>
-                                <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
-                                <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="border rounded bg-light-white m-3 p-3">
+            <h2 class="text-center font-weight-bold px-3 pb-3">ACOMPANHAMENTO POR REDE SOCIAL</h2>
+            <div class="border bg-white p-3 my-1">
+                <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 75%</div>
+                <div class="d-flex">
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">FB | IG</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                    <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">GOOGLE</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                    <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 25%</div>
-            <div class="d-flex px-3">
-                <div class="w-50 m-auto px-3">
-                    <div class="h5 text-center">FB | IG</div>
-                    <table class="table table-dist-content text-center mx-auto">
-                        <thead>
-                            <tr>
-                                <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
-                                <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="border bg-white p-3 my-1">
+                <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 50%</div>
+                <div class="d-flex">
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">FB | IG</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                    <td v-for="(column, columnIndex) in columnsTableFB50" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">GOOGLE</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                    <td v-for="(column, columnIndex) in columnsTableFB50" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="w-50 m-auto px-3">
-                    <div class="h5 text-center">GOOGLE</div>
-                    <table class="table table-dist-content text-center mx-auto">
-                        <thead>
-                            <tr>
-                                <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
-                                <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+            <div class="border bg-white p-3 my-1">
+                <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 25%</div>
+                <div class="d-flex">
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">FB | IG</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                    <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">GOOGLE</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                    <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="d-flex flex-row-reverse">
                 <SmallButton 
-                    smallButtonText="Exportarr"
+                    smallButtonText="Exportar"
                     class="mx-3 m-3"
                     @event="$store.dispatch('exportToExcel', {tableData: tableData, documentName: 'nome_do_documento'})"
                 />  
@@ -292,13 +300,3 @@
     },
 }
 </script>
-
-<style>
-.table-dist-content {
-    font-size: 14px;
-}
-.title-dist-table{
-    background-color: rgb(255, 94, 94);
-    color: white;
-}
-</style>

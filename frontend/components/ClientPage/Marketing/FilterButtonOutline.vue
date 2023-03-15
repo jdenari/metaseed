@@ -41,9 +41,9 @@
 }
   
 .clicked {
-    background-color: rgb(248, 138, 138);
-    border-color: rgb(248, 138, 138);
-    color: white
+    background-color: var(--light-red);
+    border-color: var(--light-red);
+    color: var(--dark-black)
 }
 </style>
   

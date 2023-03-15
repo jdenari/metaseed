@@ -1,7 +1,7 @@
 <template>
     <div>
-		<aside class="sideBar bg-light p-3" :class="{'sideBar-small': fullSideBar }">
-			<div v-if="!this.fullSideBar" class="p-1">
+		<aside class="sideBar bg-dark-black py-3 pl-3" :class="{'sideBar-small': fullSideBar }">
+			<div v-if="!this.fullSideBar">
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
@@ -136,7 +136,7 @@ export default {
 <style scoped>
 .sideBar{
 	width: 350px;
-	height: 92vh;
+	height: 100%;
 }
 .sideBar-small{
 	width: 65px;

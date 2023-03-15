@@ -1,7 +1,7 @@
 <template>
-    <div class="m-3 border rounded">
+    <div class="m-3 border rounded bg-white border-bottom shadow-sm bg-body-tertiary">
         <div class="p-3">
-            <h3 class="h4 title-dist-table text-center rounded">BANCO DE DADOS</h3>
+            <div class="h2 text-center font-weight-bold px-3 pb-3">BANCO DE DADOS</div>
             <div class="table-responsive m-auto text-center">
                 <table class="table">
                     <thead class="table-sticky">
@@ -24,7 +24,6 @@
             @event="exportToExcel"
         />  
         </div>
-        <div class="p"> {{ this.uniqueValues }}</div>
     </div>
 </template>
   
@@ -94,7 +93,8 @@ export default {
     .table-sticky th {
         position: sticky;
         top: 0;
-        background-color: #fff;
+        background-color: var(--light-red);
+        color: var(--dark-black);
     }
 </style>
   

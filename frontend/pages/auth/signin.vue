@@ -1,7 +1,7 @@
 <template>
      <div class="main-background view-h-100"> 
         <div class="navbar navbar-expand bg-white border-bottom shadow-sm bg-body-tertiary rounded">
-            <MainHeader />
+            <MainHeader class="container-metaseed"/>
         </div>
         <LoginField class="main-form m-5"/>
         <MainFooter class="main-footer" />

@@ -1,5 +1,5 @@
     <template>
-        <div class="form-inline mb-3 mx-2">
+        <div class="d-flex">
             <div class="form-group mr-2">
                 <label for="startDate" class="mr-2">DATA DE INÍCIO:</label>
                 <input type="date" class="form-control" id="startDate" :value="startDate" @input="$emit('update:start-date', $event.target.value)">

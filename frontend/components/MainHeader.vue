@@ -1,6 +1,6 @@
 <template>
-    <div class="container-metaseed">
-        <nav class="navbar navbar-expand p-3">
+    <div>
+        <nav class="navbar navbar-expand">
             <div class="d-flex">
                 <NuxtLink to="/">
                     <img src="../static/logo/logo-metaseed-small.png" alt="">
