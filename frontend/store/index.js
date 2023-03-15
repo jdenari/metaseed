@@ -1,3 +1,5 @@
+import * as XLSX from 'xlsx';
+
 export default {
     state() {
         return {
@@ -122,6 +124,7 @@ export default {
             state.emailContact = data
         },
         UPDATE_DATA_FACEADS(state, data){
+            console.log(data)
             // spliting the campaign name into three new columns into (cycle, class, type)
             data.data.forEach((item) => {
                 const [cycle, campaignClass, campaignType] = item.campaign_name.split('|').map((value) => value.trim());
@@ -330,6 +333,12 @@ export default {
             setTimeout(() => { 
                 commit('RESET_MESSAGE_WARNING')
             }, 5000)
+        },
+        exportToExcel({commit}, payload) {
+            const worksheet = XLSX.utils.json_to_sheet(Object.values(payload.tableData));
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+            XLSX.writeFile(workbook, `${payload.documentName}.xlsx`);
         }
     }
 }
