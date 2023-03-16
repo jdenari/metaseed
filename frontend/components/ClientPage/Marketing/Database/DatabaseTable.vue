@@ -6,7 +6,7 @@
                 <table class="table">
                     <thead class="table-sticky">
                     <tr>
-                        <th v-for="(value, key) in mainData[0]" :key="key">{{ key }}</th>
+                        <th v-for="(value, key) in headersName" :key="key">{{ value }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -21,7 +21,7 @@
             <SmallButton 
             smallButtonText="Exportar"
             class="mx-3 mb-3"
-            @event="exportToExcel"
+            @event="$store.dispatch('exportToExcel', {data: mainData, documentName: 'nome_do_documento'})"
         />  
         </div>
     </div>
@@ -30,7 +30,6 @@
 <script>
 import FilterButtonOutline from '../FilterButtonOutline.vue';
 import SmallButton from '../../../SmallButton.vue';
-import * as XLSX from 'xlsx';
   
 export default {
     components: {
@@ -40,7 +39,8 @@ export default {
     data() {
         return {
             mainData: {},
-            show: false
+            show: false,
+            headersName: ['ID', 'DATA DE INÍCIO', 'DATA FINAL', 'ALCANCE', 'IMPRESSÕES', 'CLIQUES', 'CUSTO', 'REP.25%', 'REP.50%', 'REP.75%', 'REP.95%', '_V', 'CICLO', 'CLASS', 'TIPO', 'SEMANA DO ANO']
         };
     },
     async mounted() {
@@ -48,7 +48,6 @@ export default {
         this.mainData = this.$store.state.dataFaceAds.data;
     },
     computed:{
-
         distinctHeaders() {
             if (Object.keys(this.mainData).length === 0) {
                 return [];
@@ -58,24 +57,15 @@ export default {
             return Array.from(uniqueHeaders);
         },
         uniqueValues() {
-        if (Object.keys(this.mainData).length === 0) {
-            return {};
+            if (Object.keys(this.mainData).length === 0) {return {};
         }
-
-        const uniqueValuesObj = {};
-        const keys = ['date_start', 'week_number', 'cycle', 'class', 'type'];
-        keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
-        return uniqueValuesObj;
+            const uniqueValuesObj = {};
+            const keys = ['date_start', 'week_number', 'cycle', 'class', 'type'];
+            keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
+            return uniqueValuesObj;
         },
     },
-    methods: {
-        exportToExcel() {
-            const worksheet = XLSX.utils.json_to_sheet(this.mainData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
-            XLSX.writeFile(workbook, 'data.xlsx');
-        },
-    }
+    methods: {}
 };
 </script>
   

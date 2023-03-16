@@ -42,7 +42,8 @@ export default {
         , MetaseedValues
         , MessageForm
         , MainFooter
-    }
+    },
+    middleware: ['auth']
 }
 </script>
 

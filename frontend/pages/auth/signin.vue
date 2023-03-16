@@ -19,6 +19,7 @@ export default {
         , MainFooter
     },
     methods: {},
+    middleware: ['auth']
 }
 </script>
 

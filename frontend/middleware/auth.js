@@ -1,4 +1,6 @@
 export default function ({store, route, redirect}){
+    store.commit('RESET_MESSAGE_WARNING')
+    if (route.path === '/') return
     if (route.path !== '/auth/signin') {
         //we are on a protected route
         if(!store.state.authenticated) {
