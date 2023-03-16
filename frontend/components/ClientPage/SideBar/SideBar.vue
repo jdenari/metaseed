@@ -32,7 +32,7 @@
 						</b-collapse>
 					</b-card>
 				</div>
-				<div class="accordion" role="tablist">
+				<!-- <div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 							<img src="../../../static/icons/gear.svg" alt="" class="mx-2">
@@ -45,7 +45,7 @@
 							</b-button>
 						</b-card-header>
 					</b-card>
-				</div>
+				</div> -->
 				<div class="accordion" role="tablist">
 					<b-card no-body class="mb-1">
 						<b-card-header header-tag="header" class="p-2 d-flex" role="tab">

@@ -1,8 +1,8 @@
 <template>
-    <div class="p-3 m-xl-0 mt-5">
-        <form class="col-10 col-xl-6 p-3 m-auto bg-white border-bottom shadow-sm bg-body-tertiary rounded">
+    <div class="p-3 my-5">
+        <form class="col-10 col-xl-6 p-5 mx-auto my-2 bg-white border-bottom shadow-sm bg-body-tertiary rounded">
             <div class="h1">Perfil</div>
-            <div class="m-1 my-2 p-3 border">
+            <div class="m-1 my-3 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>
                 <!-- looping for data profile field-->
                 <ProfileDataField
@@ -175,5 +175,7 @@ export default {
 </script>
 
 <style scoped>
-
+.flex-1 {
+  flex: 1 1 auto;
+}
 </style>

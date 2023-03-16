@@ -335,7 +335,7 @@ export default {
             }, 5000)
         },
         exportToExcel({commit}, payload) {
-            const worksheet = XLSX.utils.json_to_sheet(Object.values(payload.tableData));
+            const worksheet = XLSX.utils.json_to_sheet(Object.values(payload.data));
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
             XLSX.writeFile(workbook, `${payload.documentName}.xlsx`);

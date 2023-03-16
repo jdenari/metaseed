@@ -11,6 +11,7 @@
                 <MainDashboard v-if="this.$store.state.homeClientContent === 'dashboardContent'"/>
                 <DistributionContentSection v-if="this.$store.state.homeClientContent === 'distributionContentSection'"/>
                 <DatabaseTable v-if="this.$store.state.homeClientContent === 'databaseMarketing'"/>
+                <LeadsContentSection v-if="this.$store.state.homeClientContent === 'leadsMarketing'"/>
             </div>
         </div>
     </div>
@@ -24,6 +25,7 @@ import MainDashboard from '../../components/ClientPage/Dashboards/MainDashboard.
 import MainFooter from '../../components/MainFooter.vue'
 import DistributionContentSection from '../../components/ClientPage/Marketing/ContentDistribution/DistributionContentSection.vue';
 import DatabaseTable from '../../components/ClientPage/Marketing/Database/DatabaseTable';
+import LeadsContentSection from '../../components/ClientPage/Marketing/Leads/LeadsContentSection.vue';
 
     export default {
         components: {
@@ -35,6 +37,7 @@ import DatabaseTable from '../../components/ClientPage/Marketing/Database/Databa
             , MainFooter
             , DistributionContentSection
             , DatabaseTable
+            , LeadsContentSection
         },
         // middleware: ['auth']
     }

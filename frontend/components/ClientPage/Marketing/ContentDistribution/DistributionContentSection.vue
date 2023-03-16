@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="border rounded bg-light-white m-3 p-3">
-            <div class="h2 text-center font-weight-bold px-3 pb-3">FILTROS</div>
+            <div class="h2 text-center font-weight-bold px-3">FILTROS</div>
+            <div class="h6 text-center px-3"> {{ this.textFiltersActivated[0] }}</div>
             <CalendarData
                 :start-date="startDate"
                 :end-date="endDate"
@@ -49,8 +50,33 @@
         </div>
         <div class="border rounded bg-light-white m-3 p-3">
             <div class="h2 text-center font-weight-bold px-3 pb-3">RESUMO DISTRIBUIÇÃO DE CONTEÚDO</div>
-            <div class="w-50 m-auto px-3">
-                
+            <div class="border bg-white p-3 my-1">
+                <div class="d-flex">
+                    <div class="w-50 m-auto px-3">
+                        <div class="h5 text-center">FB | IG | GOOGLE</div>
+                        <table class="table table-dist-content text-center mx-auto">
+                            <thead>
+                                <tr>
+                                    <th>Plataforma</th>
+                                    <th v-for="(column, index) in uniqueValues.week_number" :key="'header-' + index">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr v-for="(row, rowIndex) in dataContentDistribution" :key="'row-' + rowIndex">
+                                    <td class="p-0"> {{ rowIndex }} </td>
+                                    <td v-for="(column, columnIndex) in uniqueValues.week_number" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse">
+                <SmallButton 
+                    smallButtonText="Exportar"
+                    class="mx-3 m-3"
+                    @event="$store.dispatch('exportToExcel', {data: dataContentDistribution, documentName: 'nome_do_documento'})"
+                />  
             </div>
         </div>
         <div class="border rounded bg-light-white m-3 p-3">
@@ -67,7 +93,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
@@ -82,7 +108,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
@@ -102,7 +128,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB50" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
@@ -117,7 +143,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB50" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
@@ -137,7 +163,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
@@ -152,7 +178,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in tableData" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
@@ -164,7 +190,7 @@
                 <SmallButton 
                     smallButtonText="Exportar"
                     class="mx-3 m-3"
-                    @event="$store.dispatch('exportToExcel', {tableData: tableData, documentName: 'nome_do_documento'})"
+                    @event="$store.dispatch('exportToExcel', {data: dataReprodution, documentName: 'nome_do_documento'})"
                 />  
             </div>
         </div>
@@ -203,6 +229,8 @@
 
             headerTableFB25: ['Semana do Ano', 'Alcance', 'Impressões', 'Reprodução 25%', 'Custo', 'CPV 25%'],
             columnsTableFB25: [ 'distinctWeekYear','reach', 'impressions', 'video_p25_watched_actions', 'spend', 'CPV25'],
+
+            aux: ['w', 'y']
         }
     },
     // functions to be activated when the page is loaded
@@ -229,9 +257,19 @@
             keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
             return uniqueValuesObj;
         },
+        textFiltersActivated(){
+            if (Object.keys(this.activatedFilters).length === 0) {return {};}
+
+            const listFalse = []
+
+            for (const e in Object.values(this.activatedFilters.cycle)) {if (Object.values(this.activatedFilters.cycle)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.cycle)[e])}}
+            for (const e in Object.values(this.activatedFilters.class)) {if (Object.values(this.activatedFilters.class)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.class)[e])}}
+            for (const e in Object.values(this.activatedFilters.type)) {if (Object.values(this.activatedFilters.type)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.type)[e])}}
+
+            if (listFalse.length === 0) {return ['SEM FILTRO ATIVADO'];} else { return [`FILTROS [${listFalse}] ATIVADOS!`]}
+        },
         // filters the main data
         mainDataFiltered() {
-            
             if (Object.keys(this.mainData).length === 0) {return {};}
             let filteredData = [];
             this.mainData.forEach(element => {
@@ -245,7 +283,7 @@
             return filteredData;
         },
         // treat the mainDataFiltered to be able to input inside tables
-        tableData() {
+        dataReprodution() {
             if (Object.keys(this.mainData).length === 0) {return {};}
             const data = {};
 
@@ -277,6 +315,25 @@
                 data[weekNumber]['CPV50'] = (data[weekNumber].spend / data[weekNumber].video_p50_watched_actions).toFixed(2);
                 data[weekNumber]['CPV25'] = (data[weekNumber].spend / data[weekNumber].video_p25_watched_actions).toFixed(2);
             });
+            return data;
+        },
+        dataContentDistribution(){
+            if (Object.keys(this.mainData).length === 0) {return {};}
+            const data = {};
+
+            for (let e in this.uniqueValues.week_number){
+                if(!data.hasOwnProperty('FB & IG')){data['FB & IG'] = {};}
+                if(!data.hasOwnProperty('GOOGLE')){data['GOOGLE'] = {};}
+                data['FB & IG'][this.uniqueValues.week_number[e]] = 0;
+                data['GOOGLE'][this.uniqueValues.week_number[e]] = 0;
+
+                this.mainDataFiltered.filter(element => element.week_number === Number(this.uniqueValues.week_number[e])).forEach(element => {
+                    data['FB & IG'][this.uniqueValues.week_number[e]] += element.spend
+                    data['GOOGLE'][this.uniqueValues.week_number[e]] += element.spend
+                })
+                data['FB & IG'][this.uniqueValues.week_number[e]] = (data['FB & IG'][this.uniqueValues.week_number[e]]).toFixed(2)
+                data['GOOGLE'][this.uniqueValues.week_number[e]] = (data['GOOGLE'][this.uniqueValues.week_number[e]]).toFixed(2)
+            }              
             return data;
         }
     },
