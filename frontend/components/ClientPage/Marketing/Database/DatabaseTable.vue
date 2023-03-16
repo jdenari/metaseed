@@ -40,7 +40,7 @@ export default {
         return {
             mainData: {},
             show: false,
-            headersName: ['ID', 'DATA DE INÍCIO', 'DATA FINAL', 'ALCANCE', 'IMPRESSÕES', 'CLIQUES', 'CUSTO', 'REP.25%', 'REP.50%', 'REP.75%', 'REP.95%', '_V', 'CICLO', 'CLASS', 'TIPO', 'SEMANA DO ANO']
+            headersName: ['ID', 'DATA DE INÍCIO', 'DATA FINAL', 'ALCANCE', 'IMPRESSÕES', 'CLIQUES', 'CUSTO', 'REP.25%', 'REP.50%', 'REP.75%', 'REP.95%', 'V', 'CICLO', 'CLASS', 'TIPO', 'SEM. ANO']
         };
     },
     async mounted() {
@@ -83,8 +83,8 @@ export default {
     .table-sticky th {
         position: sticky;
         top: 0;
-        background-color: var(--light-red);
-        color: var(--dark-black);
+        background-color: var(--dark-black);
+        color: var(--light-white);
     }
 </style>
   

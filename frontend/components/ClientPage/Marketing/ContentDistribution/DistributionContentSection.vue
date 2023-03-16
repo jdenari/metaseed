@@ -56,7 +56,7 @@
                         <div class="h5 text-center">FB | IG | GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th>Plataforma</th>
                                     <th v-for="(column, index) in uniqueValues.week_number" :key="'header-' + index">{{ column }}</th>
                                 </tr>
@@ -88,7 +88,7 @@
                         <div class="h5 text-center">FB | IG</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
                                 </tr>
                             </thead>
@@ -103,7 +103,7 @@
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
                                 </tr>
                             </thead>
@@ -123,7 +123,7 @@
                         <div class="h5 text-center">FB | IG</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
                                 </tr>
                             </thead>
@@ -138,7 +138,7 @@
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
                                 </tr>
                             </thead>
@@ -158,7 +158,7 @@
                         <div class="h5 text-center">FB | IG</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
                                 </tr>
                             </thead>
@@ -173,7 +173,7 @@
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-dark-black text-light-white">
                                     <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
                                 </tr>
                             </thead>
@@ -229,8 +229,6 @@
 
             headerTableFB25: ['Semana do Ano', 'Alcance', 'Impressões', 'Reprodução 25%', 'Custo', 'CPV 25%'],
             columnsTableFB25: [ 'distinctWeekYear','reach', 'impressions', 'video_p25_watched_actions', 'spend', 'CPV25'],
-
-            aux: ['w', 'y']
         }
     },
     // functions to be activated when the page is loaded
@@ -311,9 +309,10 @@
                 data[weekNumber].impressions = Math.round(data[weekNumber].impressions).toLocaleString();
                 data[weekNumber].video_p75_watched_actions = Math.round(data[weekNumber].video_p75_watched_actions).toLocaleString();
                 data[weekNumber].spend = data[weekNumber].spend.toFixed(2);
-                data[weekNumber]['CPV75'] = (data[weekNumber].spend / data[weekNumber].video_p75_watched_actions).toFixed(2);
-                data[weekNumber]['CPV50'] = (data[weekNumber].spend / data[weekNumber].video_p50_watched_actions).toFixed(2);
-                data[weekNumber]['CPV25'] = (data[weekNumber].spend / data[weekNumber].video_p25_watched_actions).toFixed(2);
+                if (data[weekNumber].video_p75_watched_actions > 0) {data[weekNumber]['CPV75'] = (data[weekNumber].spend / data[weekNumber].video_p75_watched_actions).toFixed(2);} else {data[weekNumber]['CPV75'] = 0;}
+                if (data[weekNumber].video_p50_watched_actions > 0) {data[weekNumber]['CPV50'] = (data[weekNumber].spend / data[weekNumber].video_p50_watched_actions).toFixed(2);} else {data[weekNumber]['CPV50'] = 0;}
+                if (data[weekNumber].video_p25_watched_actions > 0) {data[weekNumber]['CPV25'] = (data[weekNumber].spend / data[weekNumber].video_p25_watched_actions).toFixed(2);} else {data[weekNumber]['CPV25'] = 0;}
+
             });
             return data;
         },

@@ -39,7 +39,7 @@ import LeadsContentSection from '../../components/ClientPage/Marketing/Leads/Lea
             , DatabaseTable
             , LeadsContentSection
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 

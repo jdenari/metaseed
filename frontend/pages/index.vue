@@ -73,11 +73,11 @@ body{
 .bg-light-red{background-color: var(--light-red);}
 .bg-dark-red{background-color: var(--dark-red);}
 
-.text-color-dark-black{color: var(--dark-black);}
-.text-color-dark-black{color: var(--light-black);}
-.text-color-dark-black{color: var(--light-white);}
-.text-color-dark-black{color: var(--light-red);}
-.text-color-dark-black{color: var(--dark-red);}
+.text-dark-black{color: var(--dark-black);}
+.text-light-black{color: var(--light-black);}
+.text-light-white{color: var(--light-white);}
+.text-light-red{color: var(--light-red);}
+.text-dark-red{color: var(--dark-red);}
 
 .main-background{background-color: var(--light-white);}
 .container-metaseed{width: 70%;margin: 0px auto;}
