@@ -1,5 +1,5 @@
 <template>
-    <div class="message-form-div my-5 p-3 w-75 mx-auto bg-white rounded shadow-sm p-3 mb-5 bg-body-tertiary">
+    <div class="message-form-div w-75 m-5 p-3 mx-auto bg-white rounded shadow-sm bg-body-tertiary">
         <div class="h1 p-1">DEIXE-ME SABER COMO POSSO TE AJUDAR?</div>
         <div class="container text-center">
             <div class="row text-left">
@@ -107,3 +107,32 @@ textarea.form-control-coment{
     height: 200px !important;
 }
 </style> 
+
+<style scoped>
+/*------------------------------------1600px----------------------------------------------*/ 
+@media screen and (max-width: 1600px) {
+
+}
+/*-----------------------------------1400px-xxl------------------------------------------*/ 
+@media screen and (max-width: 1400px) {
+
+}
+/*-----------------------------------1200px-xl-------------------------------------------*/ 
+@media screen and (max-width: 1200px) {
+
+}
+/*------------------------------------992px-lg-------------------------------------------*/ 
+@media screen and (max-width: 992px) {
+    
+}
+/*------------------------------------768px-md-------------------------------------------*/
+@media screen and (max-width: 768px) {
+
+}
+/*------------------------------------576px-sm-------------------------------------------*/
+@media screen and (max-width: 576px) {
+    .message-form-div{
+        width: 90% !important;
+    }
+}
+</style>

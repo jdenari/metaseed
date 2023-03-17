@@ -3,7 +3,7 @@
         <div class="bg-white border-bottom shadow-sm bg-body-tertiary rounded">
             <MainHeader class="navbar navbar-expand"/>
         </div>
-        <div class="d-block d-lg-flex">
+        <div class="d-block d-xl-flex">
             <SideBar />
             <div class="w-100 bg-dark-black">
                 <MainAutomatization v-if="this.$store.state.homeClientContent === 'automatizationContent'"/>
@@ -44,6 +44,7 @@ import LeadsContentSection from '../../components/ClientPage/Marketing/Leads/Lea
 </script>
 
 <style>
+
 .footer {
     position: fixed;
     bottom: 0px;

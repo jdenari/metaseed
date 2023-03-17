@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="border rounded bg-light-white m-3 p-3">
+        <div class="border rounded bg-light-white mx-3 my-0 p-3">
             <div class="h2 text-center font-weight-bold px-3">FILTROS</div>
             <CalendarData
                 :start-date="startDate"
@@ -8,7 +8,7 @@
                 @update:start-date="startDate = $event"
                 @update:end-date="endDate = $event"
             />
-            <div class="d-flex">
+            <div class="d-md-flex d-block">
                 <div class="m-1">
                     <h6 class="px-1">TIPO</h6>
                     <div class="d-flex">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="m-1">
                     <h6 class="px-1">CLASSE</h6>
-                    <div class="d-flex">
+                    <div class="d-md-flex d-block">
                         <div v-for="(value, index) in uniqueValues.class" :key="'class-' + index">
                             <FilterButtonOutline
                                 v-bind:FilterButtonOutlineText="value"
@@ -35,7 +35,7 @@
                 </div>
                 <div class="m-1">
                     <h6 class="px-1">CICLO</h6>
-                    <div class="d-flex">
+                    <div class="d-md-flex d-block">
                         <div v-for="(value, index) in uniqueValues.cycle" :key="'type-' + index">
                             <FilterButtonOutline
                                 v-bind:FilterButtonOutlineText="value"
@@ -50,8 +50,8 @@
         <div class="border rounded bg-light-white m-3 p-3">
             <div class="h2 text-center font-weight-bold px-3 pb-3">RESUMO DISTRIBUIÇÃO DE CONTEÚDO</div>
             <div class="border bg-white p-3 my-1">
-                <div class="d-flex m-3">
-                    <div class="m-auto px-3">
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="h5 text-center">FB</div>
                         <table class="table table-dist-content text-center mx-auto border">
                             <thead>
@@ -66,7 +66,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="m-auto px-3">
+                    <div class="col-md-6">
                         <div class="h5 text-center">IG</div>
                         <table class="table table-dist-content text-center mx-auto border">
                             <thead>
@@ -81,7 +81,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="m-auto px-3">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto border">
                             <thead>
@@ -96,9 +98,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="d-flex m-3 mt-5">
-                    <div class="m-auto px-3">
+                    <div class="col-md-6">
                         <div class="h5 text-center">YOUTUBE</div>
                         <table class="table table-dist-content text-center mx-auto border">
                             <thead>
@@ -113,7 +113,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="m-auto px-3">
+                    <div class="col-md-6">
                         <div class="h5 text-center">TOTAL</div>
                         <table class="table table-dist-content text-center mx-auto border">
                             <thead>
@@ -266,6 +266,45 @@
 <style>
 .div-para-mudar{
     height: 900px;
+}
+</style>
+
+<style scoped>
+/*------------------------------------1600px----------------------------------------------*/ 
+@media screen and (max-width: 1600px) {
+    .d-flex {
+    flex-wrap: wrap;
+  }
+  .m-auto {
+    flex-basis: 33.33%;
+  }
+}
+/*-----------------------------------1400px-xxl------------------------------------------*/ 
+@media screen and (max-width: 1400px) {
+}
+/*-----------------------------------1200px-xl-------------------------------------------*/ 
+@media screen and (max-width: 1200px) {
+}
+/*------------------------------------992px-lg-------------------------------------------*/ 
+@media screen and (max-width: 992px) {
+}
+/*------------------------------------768px-md-------------------------------------------*/
+@media screen and (max-width: 768px) {
+    .d-flex {
+    flex-wrap: wrap;
+  }
+  .m-auto {
+    flex-basis: 50%;
+  }
+}
+/*------------------------------------576px-sm-------------------------------------------*/
+@media screen and (max-width: 576px) {
+    .d-flex {
+    flex-wrap: wrap;
+  }
+  .m-auto {
+    flex-basis: 100%;
+  }
 }
 </style>
   

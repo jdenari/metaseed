@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="border rounded bg-light-white m-3 p-3">
+        <div class="border rounded bg-light-white mx-3 my-0 p-3">
             <div class="h2 text-center font-weight-bold px-3">FILTROS</div>
             <div class="h6 text-center px-3"> {{ this.textFiltersActivated[0] }}</div>
             <CalendarData
@@ -9,7 +9,7 @@
                 @update:start-date="startDate = $event"
                 @update:end-date="endDate = $event"
             />
-            <div class="d-flex">
+            <div class="d-md-flex d-block">
                 <div class="m-1">
                     <h6 class="px-1">TIPO</h6>
                     <div class="d-flex">
@@ -83,8 +83,8 @@
             <h2 class="text-center font-weight-bold px-3 pb-3">ACOMPANHAMENTO POR REDE SOCIAL</h2>
             <div class="border bg-white p-3 my-1">
                 <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 75%</div>
-                <div class="d-flex">
-                    <div class="w-50 m-auto px-3">
+                <div class="d-lg-flex d-block">
+                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
                         <div class="h5 text-center">FB | IG</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
@@ -99,7 +99,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="w-50 m-auto px-3">
+                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
@@ -118,8 +118,8 @@
             </div>
             <div class="border bg-white p-3 my-1">
                 <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 50%</div>
-                <div class="d-flex">
-                    <div class="w-50 m-auto px-3">
+                <div class="d-lg-flex d-block">
+                    <div class="ww-lg-50 w-md-75 w-100 m-auto px-3">
                         <div class="h5 text-center">FB | IG</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
@@ -134,7 +134,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="w-50 m-auto px-3">
+                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
@@ -153,8 +153,8 @@
             </div>
             <div class="border bg-white p-3 my-1">
                 <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 25%</div>
-                <div class="d-flex">
-                    <div class="w-50 m-auto px-3">
+                <div class="d-lg-flex d-block">
+                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
                         <div class="h5 text-center">FB | IG</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
@@ -169,7 +169,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="w-50 m-auto px-3">
+                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>

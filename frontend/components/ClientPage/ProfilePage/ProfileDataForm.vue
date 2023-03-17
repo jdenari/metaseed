@@ -1,6 +1,6 @@
 <template>
-    <div class="p-3 my-5">
-        <form class="col-10 col-xl-6 p-5 mx-auto my-2 bg-white border-bottom shadow-sm bg-body-tertiary rounded">
+    <div class="p-3">
+        <form class="form-update-profile col-10 col-xl-6 p-5 mx-auto bg-white border-bottom shadow-sm bg-body-tertiary rounded">
             <div class="h1">Perfil</div>
             <div class="m-1 my-3 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>
@@ -178,4 +178,31 @@ export default {
 .flex-1 {
   flex: 1 1 auto;
 }
+
+.form-update-profile{
+    margin: 100px;
+}
 </style>
+
+<style>
+/*------------------------------------1600px----------------------------------------------*/ 
+@media screen and (max-width: 1600px) {
+}
+/*-----------------------------------1400px-xxl------------------------------------------*/ 
+@media screen and (max-width: 1400px) {
+}
+/*-----------------------------------1200px-xl-------------------------------------------*/ 
+@media screen and (max-width: 1200px) {
+}
+/*------------------------------------992px-lg-------------------------------------------*/ 
+@media screen and (max-width: 992px) {
+    .form-update-profile{
+        margin-top: 0px !important;
+    }
+}
+/*------------------------------------768px-md-------------------------------------------*/
+@media screen and (max-width: 768px) {
+}
+/*------------------------------------576px-sm-------------------------------------------*/
+@media screen and (max-width: 576px) {
+}</style>

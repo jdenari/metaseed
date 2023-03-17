@@ -24,15 +24,14 @@ export default {
 </script>
 
 <style scoped>
-
     .main-footer{
         position: absolute;
         top: 100%;
         left: 50%;
-        transform: translate(-50%, -100%);
+        transform: translate(-50%, -90%);
     }
 
     .main-form{
-        margin-top: 130px !important;
+        margin-top: 100px !important;
     }
 </style>

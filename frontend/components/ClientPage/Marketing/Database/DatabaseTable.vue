@@ -1,5 +1,5 @@
 <template>
-    <div class="m-3 border rounded bg-white border-bottom shadow-sm bg-body-tertiary">
+    <div class="mx-3 my-0 p-3 border rounded bg-white border-bottom shadow-sm bg-body-tertiary">
         <div class="p-3">
             <div class="h2 text-center font-weight-bold px-3 pb-3">BANCO DE DADOS</div>
             <div class="table-responsive m-auto text-center">
@@ -109,7 +109,6 @@ export default {
     
     .table-responsive {
         height: 700px;
-        width: 1450px;
         overflow-x: auto;
     }
     

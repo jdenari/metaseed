@@ -1,6 +1,6 @@
 <template>
-    <div class="p-3">
-        <form class="login-form col-10 p-5 col-xl-3 col-md-6 border m-auto shadow-sm mb-5 bg-body-tertiary rounded bg-white">
+    <div >
+        <form class="login-form col-sm-10 p-5 col-xl-3 col-md-6 border m-auto shadow-sm mb-5 bg-body-tertiary rounded bg-white">
             <!-- all the components when the user is not logged -->
             <div>
                 <h4 class="text-center p-1">Iniciar Sessão</h4>
