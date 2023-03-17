@@ -5,11 +5,11 @@
         </div>
         <div class="container-metaseed">
             <div class="d-xl-flex sec-lading-page">
-                <div class="col-7">
-                    <img src="../static/images/laptop-image-small.png" alt="" class="w-100 m-auto shadow-sm bg-body-tertiary">
+                <div class="col-xl-7 d-xl-block d-none">
+                    <img src="../static/images/laptop-image-small.png" alt="" class="client-form-image w-100 m-auto shadow-sm bg-body-tertiary">
                 </div>
-                <div class="col-5 d-flex align-items-center">
-                    <BeClientForm class="client-form p-3 w-75"/>
+                <div class="col-11 col-sm-9 col-md-7 col-xl-5 d-flex m-xl-0 m-auto align-items-center">
+                    <BeClientForm class="px-0 py-5"/>
                 </div>
             </div>
         </div>
@@ -80,24 +80,32 @@ body{
 .text-dark-red{color: var(--dark-red);}
 
 .main-background{background-color: var(--light-white);}
-.container-metaseed{width: 70%;margin: 0px auto;}
+.container-metaseed{width: 75%;margin: 0px auto;}
 .view-h-100{height: 100vh;}
 
-.client-form{min-width: 550px}
+</style>
 
+<style scoped>
 </style>
 
 <style>
 /*------------------------------------1600px----------------------------------------------*/ 
 @media screen and (max-width: 1600px) {
-
+    .client-form-image{
+        display: none;
+    }
+    .sec-lading-page{
+        background-image:url(../static/images/laptop-image.jpg);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 /*-----------------------------------1400px-xxl------------------------------------------*/ 
 @media screen and (max-width: 1400px) {
     html{
         font-size: 90.0%;
     }
-
 }
 /*-----------------------------------1200px-xl-------------------------------------------*/ 
 @media screen and (max-width: 1200px) {
@@ -110,6 +118,9 @@ body{
     }
     .client-form{
         min-width: 0px !important;
+    }
+    .container-metaseed{
+        width: 100%;
     }
 }
 /*------------------------------------768px-md-------------------------------------------*/

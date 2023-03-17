@@ -1,47 +1,47 @@
 <template>
     <section class="m-auto">
         <div class="d-flex">
-            <div class="col-10 col-xxl-9 m-auto px-5 py-3 bg-white shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-            <div class="h1 my-2 text-center">O SEU PONTO DE PARTIDA!</div>
-            <div class="h4 my-4 text-center">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
-            <FormField
-                formFieldItem="Nome"
-                v-model="lead.name"
-                textAttributeValue="text"
-                placeholderAttributeValue="Como você gostaria de ser chamado"
-            />
-            <FormField
-                formFieldItem="E-mail"
-                v-model="lead.email"
-                textAttributeValue="email"
-                placeholderAttributeValue="nome@minhaempresa.com.br"
-            />
-            <FormField
-                formFieldItem="Telefone"
-                v-model="lead.phone"
-                textAttributeValue="text"
-                placeholderAttributeValue="Número com DD para contato"
-            />
-            <div class="w-100 d-md-flex justify-content-md-end">
-                <SmallButton 
-                    smallButtonText="Quero ser cliente →"
-                    @event="createLeadObject();$store.dispatch('hideMessageWarning')"
-                    id="show-btn"
-                    class="my-2"
+            <div class="form-client col-11 col-xxl-9 m-auto px-5 py-3 bg-white shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="h1 my-2 text-center">O SEU PONTO DE PARTIDA!</div>
+                <div class="h4 my-4 text-center">Aprenda a construir empresas milionárias e garanta o sucesso da sua empresa.</div>
+                <FormField
+                    formFieldItem="Nome"
+                    v-model="lead.name"
+                    textAttributeValue="text"
+                    placeholderAttributeValue="Como você gostaria de ser chamado"
                 />
+                <FormField
+                    formFieldItem="E-mail"
+                    v-model="lead.email"
+                    textAttributeValue="email"
+                    placeholderAttributeValue="nome@minhaempresa.com.br"
+                />
+                <FormField
+                    formFieldItem="Telefone"
+                    v-model="lead.phone"
+                    textAttributeValue="text"
+                    placeholderAttributeValue="Número com DD para contato"
+                />
+                <div class="w-100 d-md-flex justify-content-md-end">
+                    <SmallButton 
+                        smallButtonText="Quero ser cliente →"
+                        @event="createLeadObject();$store.dispatch('hideMessageWarning')"
+                        id="show-btn"
+                        class="my-2"
+                    />
+                </div>
+                <MessageWarning 
+                    :messageWarning="this.$store.state.messageWarning"
+                    class="mt-3"
+                />
+                <div>
+                    <b-modal 
+                        ref="modalSuccess" 
+                        ok-only
+                    > Obrigado pelo interesse! Em breve entraremos em contato. 
+                    </b-modal>
+                </div>
             </div>
-            <MessageWarning 
-                :messageWarning="this.$store.state.messageWarning"
-                class="mt-3"
-            />
-            <div>
-                <b-modal 
-                    ref="modalSuccess" 
-                    ok-only
-                > Obrigado pelo interesse! Em breve entraremos em contato. 
-                </b-modal>
-            </div>
-        </div>
         </div>
     </section>
 </template>
@@ -93,7 +93,6 @@ export default {
 </script>
 
 <style scoped>
-
 </style> 
 
 
