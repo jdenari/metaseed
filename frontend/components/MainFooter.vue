@@ -15,15 +15,6 @@
             class="p-2 col-12 col-md" 
             >
         </a>
-        <a  href="https://www.instagram.com/metaseed.co/" 
-            class="" 
-            target="_blank" 
-        >
-            <img src="../static/icons/linkedin.png"
-            alt="" 
-            class="p-2 col-12 col-md" 
-            >
-        </a>
         <a  href="mailto:jeanlopess11@gmail.com" 
             class="" 
             target="_blank" 

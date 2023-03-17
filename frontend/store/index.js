@@ -25,7 +25,7 @@ export default {
             modalShow: false,
 
             // components
-            homeClientContent: 'automatizationContent',
+            homeClientContent: 'distributionContentSection',
 
             lead: {
                 name: '',
@@ -292,6 +292,8 @@ export default {
             })
         },
         async getDataFromFacebookAdd({state, dispatch}, payload){
+            console.log('oi')
+            console.log(payload)
             await fetch(`${state.url}/api/automatization/uploads/script-06`, {
                 method: "PUT",
                 headers: {"Content-type": "application/json",},

@@ -1,6 +1,6 @@
 <template>
-    <section class="d-flex align-items-center div-para-mudar text-white">
-        <div class="d-block m-auto">
+    <section class="d-flex align-items-center div-para-mudar">
+        <div class="d-block m-auto bg-light-white p-5 rounded text-dark-black">
             <div class="h1 text-center">
                 A seu empresa não possui Dashboard Cadastrado!
             </div>
