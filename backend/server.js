@@ -9,15 +9,10 @@ const authRouter = require("./routes/authRoutes.js");
 const userRouter = require("./routes/userRoutes.js");
 const leadRouter = require("./routes/leadRoutes.js");
 const automatizationRouter = require("./routes/automatizationRoutes.js");
-const faceadsRouter = require("./routes/faceadsRoutes");
+const faceadsRouter = require("./routes/faceadsRoutes.js");
 
 // config
 const port = 5000;
-
-var corsOptions = {
-    origin: 'https://www.metaseed.com.br',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
   
 const DB_USER = process.env.DB_USER
 const DB_PASS = process.env.DB_PASS
@@ -34,7 +29,7 @@ app.use("/api/lead", leadRouter)
 app.use("/api/automatization", automatizationRouter)
 app.use("/api/faceads", faceadsRouter)
 
-app.get("/", cors(corsOptions), (req, res) => {
+app.get("/", (req, res) => {
     res.json({ message: "Rota teste"})
 })
 

@@ -292,7 +292,6 @@ export default {
             })
         },
         async getDataFromFacebookAdd({state, dispatch}, payload){
-            console.log('oi')
             console.log(payload)
             await fetch(`${state.url}/api/automatization/uploads/script-06`, {
                 method: "PUT",
@@ -321,7 +320,6 @@ export default {
         async getDataDatabase({commit, state, dispatch}){
             await fetch(`${state.url}/api/faceads/getDataDatabase`, {
                 method: "GET",
-                headers: {"Content-type": "application/json",},
             })
             .then((resp) => resp.json())
             .then((data) => { 

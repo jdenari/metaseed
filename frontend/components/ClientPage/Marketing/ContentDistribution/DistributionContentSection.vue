@@ -52,9 +52,9 @@
             <div class="h2 text-center font-weight-bold px-3 pb-3">RESUMO DISTRIBUIÇÃO DE CONTEÚDO</div>
             <div class="border bg-white p-3 my-1">
                 <div class="d-flex">
-                    <div class="w-50 m-auto px-3">
+                    <div class="w-100 m-auto px-3">
                         <div class="h5 text-center">FB | IG | GOOGLE</div>
-                        <table class="table table-dist-content text-center mx-auto">
+                        <table class="table-sem-bs w-75 text-center mx-auto text-center">
                             <thead>
                                 <tr class="bg-dark-black text-light-white">
                                     <th>Plataforma</th>
@@ -63,8 +63,8 @@
                             </thead>
                             <tbody class="table-group-divider">
                                 <tr v-for="(row, rowIndex) in dataContentDistribution" :key="'row-' + rowIndex">
-                                    <td class="p-0"> {{ rowIndex }} </td>
-                                    <td v-for="(column, columnIndex) in uniqueValues.week_number" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
+                                    <td class="py-0 px-2"> {{ rowIndex }} </td>
+                                    <td v-for="(column, columnIndex) in uniqueValues.week_number" :key="'cell-' + rowIndex + '-' + columnIndex" class="py-0 px-2">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -356,3 +356,34 @@
     },
 }
 </script>
+
+<style scoped>
+    @media (max-width: 576px) {
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+    .table td,
+    .table th {
+        white-space: nowrap;
+    }
+}
+
+.table-sem-bs {
+  border: 1px solid var(--dark-black);
+  border-collapse: collapse;
+  width: 100%;
+}
+.table-sem-bs th, .table-sem-bs td {
+  border: 1px solid var(--dark-black);
+  padding: 8px;
+}
+.table-sem-bs th {
+  background-color: var(--dark-black);
+  color: #fff;
+}
+.table-sem-bs tr:nth-child(even) {
+  background-color: #fff;
+}
+</style>
