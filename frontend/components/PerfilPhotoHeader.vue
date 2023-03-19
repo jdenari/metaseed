@@ -11,12 +11,12 @@
             </li>
         </template>
         <div
-            @click="$store.commit('CHANGE_CONTENT_TO_FACEBOOKADDS'); goToHome()"
+            @click="goToHome()"
             class="d-flex align-items-center no-underline"
         >
             <b-dropdown-item href="#" class="w-100">Home</b-dropdown-item>
         </div>
-        <b-dropdown-item href="#" @click="$store.commit('CHANGE_CONTENT_TO_PROFILE'); goToHome()">
+        <b-dropdown-item href="#" @click="goToProfile()">
             Alterar Perfil
         </b-dropdown-item>
         <b-dropdown-item
@@ -54,9 +54,12 @@
     export default {
         name: "PerfilPhotoHeader",
         methods: {
-        goToHome() {
-            this.$router.push("/client/home");
-        },
+            goToHome() {
+                this.$router.push("/cliente/home");
+            },
+            goToProfile(){
+                this.$router.push("/cliente/meusdados");
+            }
         },
     };
 </script>

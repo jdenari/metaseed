@@ -1,6 +1,6 @@
 <template>
     <div class="p-3">
-        <form class="form-update-profile col-10 col-xl-6 p-5 mx-auto bg-white border-bottom shadow-sm bg-body-tertiary rounded">
+        <form class="form-update-profile col-11 col-xl-7 col-md-7 p-5 mx-auto bg-white border-bottom shadow-sm bg-body-tertiary rounded">
             <div class="h1">Perfil</div>
             <div class="m-1 my-3 p-3 border">
                 <div class="h4">Alterar Dados Pessoais</div>

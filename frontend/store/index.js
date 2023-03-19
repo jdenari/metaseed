@@ -5,7 +5,7 @@ export default {
         return {
             // dev env: http://localhost:5000
             // pro env: https://metaseed.online
-            url: 'http://localhost:5000',
+            url: 'https://metaseed.online',
 
             // user info
             userLogin: false,
@@ -23,9 +23,6 @@ export default {
             // messages alert
             messageWarning: null,
             modalShow: false,
-
-            // components
-            homeClientContent: 'distributionContentSection',
 
             lead: {
                 name: '',
@@ -78,25 +75,6 @@ export default {
         UPDATE_PASSWORD(state, data){
             state.newPassword = data.newPassword
             state.confirmNewPassword = data.confirmNewPassword
-        },
-        // options user mutations
-        CHANGE_CONTENT_TO_DASHBOARD(state){
-            state.homeClientContent = 'dashboardContent'
-        },
-        CHANGE_CONTENT_TO_PROFILE(state){
-            state.homeClientContent = 'profileContent'
-        },
-        CHANGE_CONTENT_TO_AUTOMATIZATION(state){
-            state.homeClientContent = 'automatizationContent'
-        },
-        CHANGE_CONTENT_TO_FACEBOOKADDS(state){
-            state.homeClientContent = 'distributionContentSection'
-        },
-        CHANGE_CONTENT_TO_DATABASE_MARKETING(state){
-            state.homeClientContent = 'databaseMarketing'
-        },
-        CHANGE_CONTENT_TO_LEADS_MARKETING(state){
-            state.homeClientContent = 'leadsMarketing'
         },
         // message mutations
         MESSAGE_RESPONSE(state, data){
@@ -183,7 +161,7 @@ export default {
                 }
                 else {
                     // it takes to the dashboard page and commit all the page with the user info
-                    $nuxt.$router.push('/client/home')
+                    $nuxt.$router.push('/cliente/home')
                     commit("AUTHENTICATE", {
                         token: data.token, 
                         userId: data.userId, 

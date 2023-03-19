@@ -15,17 +15,21 @@
 					<b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
 						<b-card-body>
 							<ul class="list-group list-group-flush">
-								<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
-								@click="$store.commit('CHANGE_CONTENT_TO_FACEBOOKADDS')"
-								>Distribuição de Conteúdo</li>
-								<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
-									@click="$store.commit('CHANGE_CONTENT_TO_LEADS_MARKETING')"
-									> Leads
-								</li>
-								<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
-								@click="$store.commit('CHANGE_CONTENT_TO_DATABASE_MARKETING')"
+								<nuxt-link to="/cliente/home" class="no-underline">
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
+										>Distribuição de Conteúdo
+									</li>
+								</nuxt-link>
+								<nuxt-link to="/cliente/leads" class="no-underline">
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
+										> Leads
+									</li>
+								</nuxt-link>
+								<nuxt-link to="/cliente/bancodedados" class="no-underline">
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
 									> Banco de Dados
 								</li>
+								</nuxt-link>
 							</ul>
 						</b-card-body>
 					</b-collapse>
@@ -35,13 +39,14 @@
 				<b-card no-body class="mb-1">
 					<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 						<img src="../../../static/icons/laptop.svg" alt="" class="mx-2">
-						<b-button 
-							block v-b-toggle.accordion-3
-							variant="light"
-							class="rounded-0 m-0 px-2 p-0 text-left"
-							@click="$store.commit('CHANGE_CONTENT_TO_DASHBOARD')"
-							> Dashboards
-						</b-button>
+						<nuxt-link to="/cliente/dashboards" class="no-underline">
+							<b-button 
+								block v-b-toggle.accordion-3
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								> Dashboards
+							</b-button>
+						</nuxt-link>
 					</b-card-header>
 				</b-card>
 			</div>
@@ -59,9 +64,11 @@
 					<b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
 						<b-card-body>
 							<ul class="list-group list-group-flush">
-								<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
-									@click="$store.commit('CHANGE_CONTENT_TO_PROFILE')"
-								>Alterar Perfil</li>
+								<nuxt-link to="/cliente/meusdados" class="no-underline">
+									<li class="no-underline list-group-item stretched-link border-0 p-0 my-1"
+										>Alterar Perfil
+									</li>
+								</nuxt-link>
 								<li class="no-underline list-group-item p-0 my-1"
 									@click="$bvModal.show('modalExitSideBar')"
 									>Sair

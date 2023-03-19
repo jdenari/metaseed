@@ -80,9 +80,7 @@ router.post("/login", async (req, res) => {
 
     const user = await User.findOne({ email: email });
 
-    if(!user){
-        return res.status(400).json({ error: "Não há um usuário cadastrado com esse email!" })
-    }
+    if(!user){return res.status(400).json({ error: "Não há um usuário cadastrado com esse email!" })}
 
     // check if password match
     const checkPassword = await bcrypt.compare(password, user.password);
