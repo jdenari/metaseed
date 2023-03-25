@@ -5,6 +5,7 @@ const faceadsSchema = new mongoose.Schema({
     date_stop: {type: Date},
     ad_name: {type: String},
     campaign_name: {type: String},
+    social_network: {type: String},
     reach: {type: Number},
     impressions: {type: Number},
     clicks: {type: Number},

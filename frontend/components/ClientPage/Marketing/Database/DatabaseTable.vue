@@ -18,6 +18,37 @@
             </div>
         </div>
         <div class="d-flex flex-row-reverse">
+            <form enctype="multipart/form-data" class="d-flex align-items-center p-2">
+                <div class="w-75 d-flex flex-row">
+                    <label 
+                        for="file" 
+                        class="label border col-7"
+                        > 
+                    {{ fileName }}
+                    </label>
+                    <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
+                        <option value="script-01" selected >Script 01</option>
+                    </select>
+                    <input 
+                        id="file" 
+                        type="file"
+                        ref="file"
+                        @change="selectFile()"
+                    >
+                </div>
+                <div class="d-flex">
+                    <SmallButton 
+                        smallButtonText="Limpar"
+                        class="bg-secondary ml-4 mx-1"
+                        @event="cleanFile"
+                    />   
+                    <SmallButton 
+                        smallButtonText="Acionar"
+                        class="mx-1"
+                        @event="sendFileToDatabase"
+                    />
+                </div>
+            </form>
             <SmallButton 
                 smallButtonText="Exportar"
                 class="mr-5 my-3"
@@ -57,19 +88,24 @@
 <script>
 import FilterButtonOutline from '../FilterButtonOutline.vue';
 import SmallButton from '../../../SmallButton.vue';
+import Papa from 'papaparse';
   
 export default {
     components: {
-        FilterButtonOutline
-        , SmallButton
+        FilterButtonOutline,
+        SmallButton
     },
     data() {
         return {
             mainData: {},
             show: false,
-            headersName: ['ID', 'DATA DE INÍCIO', 'DATA FINAL', 'ALCANCE', 'IMPRESSÕES', 'CLIQUES', 'CUSTO', 'REP.25%', 'REP.50%', 'REP.75%', 'REP.95%', 'V', 'CICLO', 'CLASS', 'TIPO', 'SEM. ANO'],
+            headersName: ['ID', 'DATA INÍCIO', 'DATA FINAL', 'REDE', 'ALCANCE', 'IMPRESSÕES', 'CLIQUES', 'CUSTO', 'REP.25%', 'REP.50%', 'REP.75%', 'REP.95%', 'V', 'CICLO', 'CLASS', 'TIPO', 'SEM'],
             startDate: '2022-05-01',
             endDate: '2022-05-30',
+
+            selected: null,
+            file: "",
+            fileName: "Selecione",
         };
     },
     async mounted() {
@@ -97,26 +133,75 @@ export default {
     methods: {
         getDataFromFacebookAdd(){
             this.$store.dispatch('getDataFromFacebookAdd', {startDate: this.startDate,endDate: this.endDate})
+        },
+        selectFile(){
+            this.file = this.$refs.file.files[0];
+            this.fileName = this.file.name
+        },
+        cleanFile(){
+            this.file = ""
+            this.fileName = "Selecione Arquivo"
+        },
+        changeScriptFunction(){ 
+            this.$store.commit('CHANGE_SCRIPT_FUNCTION', document.getElementById("script-function").value)
+        },
+        async sendFileToDatabase(){
+            const fileSize = this.file.size;
+
+            console.log(`O tamanho do arquivo é ${fileSize} bytes.`);
+
+            const results = await new Promise((resolve) => {
+                Papa.parse(this.file, {
+                    header: true,
+                    delimiter: /[,\t;]/,
+                    skipRows: 2,
+                    encoding: 'UTF-16le',
+                    complete: (results) => {
+                        resolve(results);
+                    },
+                });
+            });
+
+            
+            this.$store.dispatch('treatGoogleData', results.data)
         }
     }
 };
 </script>
   
 <style scoped>
-    table {
-        font-size: 11px;
-    }
-    
-    .table-responsive {
-        height: 700px;
-        overflow-x: auto;
-    }
-    
-    .table-sticky th {
-        position: sticky;
-        top: 0;
-        background-color: var(--dark-black);
-        color: var(--light-white);
-    }
+table {
+    font-size: 11px;
+}
+
+.table-responsive {
+    height: 700px;
+    overflow-x: auto;
+}
+
+.table-sticky th {
+    position: sticky;
+    top: 0;
+    background-color: var(--dark-black);
+    color: var(--light-white);
+}
+
+input[type='file'] {
+    display: none
+}
+label{
+    margin: 0px;
+    padding: 8px;
+    border-radius: 12px 0px 0px 12px
+}
+select{
+    height: 42px;
+    padding: 8px;
+    border: 0px;
+    border-radius: 0px 12px 12px 0px
+}
+.input-field{
+    height: 42px;
+}
 </style>
   

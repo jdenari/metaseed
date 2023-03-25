@@ -23,7 +23,7 @@ import DatabaseTable from '../../components/ClientPage/Marketing/Database/Databa
             , MainHeader
             , DatabaseTable
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 

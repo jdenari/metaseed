@@ -1,4 +1,3 @@
-import pandas as pd
 import requests
 import os
 import json
@@ -38,7 +37,9 @@ response = json.loads(response._content.decode('utf-8'))
 
 data = response['data']
 
-for item in data:
+for item in response['data']:
+    item["social_network"] = "facebook"
+
     for field in api_fields[7:]:
         if field in item:
             value = item[field][0]['value']

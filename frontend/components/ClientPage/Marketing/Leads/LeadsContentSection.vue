@@ -227,8 +227,6 @@
                         spend: 0,
                         spendClicks: 0,
                     };
-                    console.log(this.dataTreated[0].date_start)
-                    console.log(date)
                     this.dataTreated.filter(element => element.date_start === date)
                     .forEach(element => {
                         

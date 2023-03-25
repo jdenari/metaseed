@@ -33,4 +33,30 @@ router.get("/getDataDatabase", async (req, res) => {
     }
 });
 
+router.post("/googleData", async (req, res) => {
+
+    print(req.body)
+
+    // let options = {
+    //     scriptPath: "scripts",
+    //     args: JSON.stringify(req.body)
+    // };
+  
+    // const goToScript = () => {
+    //     return new Promise((resolve, reject) => {
+    //         PythonShell.run("script-07.py", options, (err, res) => {
+    //             if (err) {reject(err)}
+    //             responseScript = JSON.parse(res)
+    //             resolve(responseScript)
+    //         })
+    //     })
+    // }
+    // try {
+    //     const scriptResult = await goToScript()
+    //     res.json(scriptResult);
+    // } catch (e) {
+    //     res.json(e);
+    // }
+});
+
 module.exports = router;

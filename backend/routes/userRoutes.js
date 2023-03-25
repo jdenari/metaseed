@@ -66,9 +66,6 @@ router.put("/password", verifyToken, async (req, res) =>{
     const confirmpassword = req.body.confirmNewPassword;
     const userId = user._id.toString();
 
-    console.log(userReqId)
-    console.log(userId)
-
     if(userId != userReqId){
         res.status(401).json({error: "Acesso Negado!"});
     }

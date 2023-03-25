@@ -5,7 +5,7 @@ export default {
         return {
             // dev env: http://localhost:5000
             // pro env: https://metaseed.online
-            url: 'https://metaseed.online',
+            url: 'http://localhost:5000',
 
             // user info
             userLogin: false,
@@ -102,7 +102,6 @@ export default {
             state.emailContact = data
         },
         UPDATE_DATA_FACEADS(state, data){
-            console.log(data)
             // spliting the campaign name into three new columns into (cycle, class, type)
             data.data.forEach((item) => {
                 const [cycle, campaignClass, campaignType] = item.campaign_name.split('|').map((value) => value.trim());
@@ -270,7 +269,6 @@ export default {
             })
         },
         async getDataFromFacebookAdd({state, dispatch}, payload){
-            console.log(payload)
             await fetch(`${state.url}/api/automatization/uploads/script-06`, {
                 method: "PUT",
                 headers: {"Content-type": "application/json",},
@@ -283,6 +281,21 @@ export default {
         },
         async updateDataDatabase({commit, state, dispatch}, payload){
             await fetch(`${state.url}/api/faceads/updateDataDatabase`, {
+                method: "POST",
+                headers: {"Content-type": "application/json",},
+                body: JSON.stringify(payload)
+            })
+            .then((resp) => resp.json())
+            .then((data) => { 
+                commit('MESSAGE_RESPONSE', data)
+                dispatch('hideMessageWarning')
+            })
+            commit('UPDATE_DATA_FACEADS', payload)
+        },
+
+        async treatGoogleData({commit, state, dispatch}, payload){
+
+            await fetch(`${state.url}/api/faceads/googleData`, {
                 method: "POST",
                 headers: {"Content-type": "application/json",},
                 body: JSON.stringify(payload)
