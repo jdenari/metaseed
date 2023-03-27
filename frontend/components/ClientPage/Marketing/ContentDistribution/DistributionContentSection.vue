@@ -11,11 +11,23 @@
             />
             <div class="d-md-flex d-block">
                 <div class="m-1">
+                    <h6 class="px-1">REDE SOCIAL</h6>
+                    <div class="d-flex">
+                        <div v-for="(value, index) in uniqueValues.social_network" :key="'type-' + index">
+                            <FilterButtonOutline
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
+                                v-on:event="handleFilter('social_network', value)"
+                                v-bind:isActive="uniqueValues.social_network[value]"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="m-1">
                     <h6 class="px-1">TIPO</h6>
                     <div class="d-flex">
                         <div v-for="(value, index) in uniqueValues.type" :key="'type-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
                                 v-on:event="handleFilter('type', value)"
                                 v-bind:isActive="uniqueValues.type[value]"
                             />
@@ -27,7 +39,7 @@
                     <div class="d-flex">
                         <div v-for="(value, index) in uniqueValues.class" :key="'class-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
                                 v-on:event="handleFilter('class', value)"
                                 v-bind:isActive="uniqueValues.class[value]"
                             />
@@ -39,7 +51,7 @@
                     <div class="d-flex">
                         <div v-for="(value, index) in uniqueValues.cycle" :key="'type-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
                                 v-on:event="handleFilter('cycle', value)"
                                 v-bind:isActive="uniqueValues.cycle[value]"
                             />
@@ -251,7 +263,7 @@
             if (Object.keys(this.mainData).length === 0) {return {};}
 
             const uniqueValuesObj = {};
-            const keys = ['date_start', 'week_number', 'cycle', 'class', 'type'];
+            const keys = ['date_start', 'week_number', 'cycle', 'class', 'type', 'social_network'];
             keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
             return uniqueValuesObj;
         },
@@ -263,6 +275,7 @@
             for (const e in Object.values(this.activatedFilters.cycle)) {if (Object.values(this.activatedFilters.cycle)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.cycle)[e])}}
             for (const e in Object.values(this.activatedFilters.class)) {if (Object.values(this.activatedFilters.class)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.class)[e])}}
             for (const e in Object.values(this.activatedFilters.type)) {if (Object.values(this.activatedFilters.type)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.type)[e])}}
+            for (const e in Object.values(this.activatedFilters.social_network)) {if (Object.values(this.activatedFilters.social_network)[e] === false) {listFalse.push(Object.keys(this.activatedFilters.social_network)[e])}}
 
             if (listFalse.length === 0) {return ['SEM FILTRO ATIVADO'];} else { return [`FILTROS [${listFalse}] ATIVADOS!`]}
         },
@@ -275,6 +288,7 @@
                 for (const e in Object.values(this.activatedFilters.cycle)) {if (Object.values(this.activatedFilters.cycle)[e] === false) {if(Object.keys(this.activatedFilters.cycle)[e] == element.cycle){shouldAdd = false;}}}
                 for (const e in Object.values(this.activatedFilters.class)) {if (Object.values(this.activatedFilters.class)[e] === false) {if(Object.keys(this.activatedFilters.class)[e] == element.class){shouldAdd = false;}}}
                 for (const e in Object.values(this.activatedFilters.type)) {if (Object.values(this.activatedFilters.type)[e] === false) {if(Object.keys(this.activatedFilters.type)[e] == element.type){shouldAdd = false;}}}
+                for (const e in Object.values(this.activatedFilters.social_network)) {if (Object.values(this.activatedFilters.social_network)[e] === false) {if(Object.keys(this.activatedFilters.social_network)[e] == element.social_network){shouldAdd = false;}}}
                 if (shouldAdd) {filteredData.push(element);}
             });
 
@@ -316,25 +330,36 @@
             });
             return data;
         },
-        dataContentDistribution(){
-            if (Object.keys(this.mainData).length === 0) {return {};}
-            const data = {};
+        dataContentDistribution() {
+            if (Object.keys(this.mainData).length === 0) {
+                return {};
+            }
 
-            for (let e in this.uniqueValues.week_number){
-                if(!data.hasOwnProperty('FB & IG')){data['FB & IG'] = {};}
-                if(!data.hasOwnProperty('GOOGLE')){data['GOOGLE'] = {};}
+            const data = {
+                'FB & IG': {},
+                'GOOGLE': {}
+            };
+
+            for (let e in this.uniqueValues.week_number) {
                 data['FB & IG'][this.uniqueValues.week_number[e]] = 0;
                 data['GOOGLE'][this.uniqueValues.week_number[e]] = 0;
 
                 this.mainDataFiltered.filter(element => element.week_number === Number(this.uniqueValues.week_number[e])).forEach(element => {
-                    data['FB & IG'][this.uniqueValues.week_number[e]] += element.spend
-                    data['GOOGLE'][this.uniqueValues.week_number[e]] += element.spend
-                })
-                data['FB & IG'][this.uniqueValues.week_number[e]] = (data['FB & IG'][this.uniqueValues.week_number[e]]).toFixed(2)
-                data['GOOGLE'][this.uniqueValues.week_number[e]] = (data['GOOGLE'][this.uniqueValues.week_number[e]]).toFixed(2)
-            }              
+                if (element.social_network === 'facebook' || element.social_network === 'instagram') {
+                    data['FB & IG'][this.uniqueValues.week_number[e]] += element.spend;
+                } else if (element.social_network === 'google') {
+                    data['GOOGLE'][this.uniqueValues.week_number[e]] += element.spend;
+                }
+                });
+
+                data['FB & IG'][this.uniqueValues.week_number[e]] = (data['FB & IG'][this.uniqueValues.week_number[e]]).toFixed(2);
+                data['GOOGLE'][this.uniqueValues.week_number[e]] = (data['GOOGLE'][this.uniqueValues.week_number[e]]).toFixed(2);
+            }
+
+            console.log(data);
+
             return data;
-        }
+            }
     },
     
     methods: {
@@ -347,10 +372,11 @@
         createObjectFilters(){
             if (Object.keys(this.uniqueValues).length === 0) {return {};}
 
-            const filters = {class: {},type: {},cycle: {}};
+            const filters = {class: {},type: {},cycle: {}, social_network: {}};
             this.uniqueValues.class.forEach(value => {filters.class[value] = true;});
             this.uniqueValues.type.forEach(value => {filters.type[value] = true;});
             this.uniqueValues.cycle.forEach(value => {filters.cycle[value] = true;});
+            this.uniqueValues.social_network.forEach(value => {filters.social_network[value] = true;});
             this.activatedFilters = filters
         },
     },

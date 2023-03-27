@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const Faceads = require("../models/faceads");
 
+const { PythonShell } = require("python-shell");
+let responseScript
+
 // get an user
 router.post("/updateDataDatabase", async (req, res) => {
     
@@ -35,28 +38,37 @@ router.get("/getDataDatabase", async (req, res) => {
 
 router.post("/googleData", async (req, res) => {
 
-    print(req.body)
-
-    // let options = {
-    //     scriptPath: "scripts",
-    //     args: JSON.stringify(req.body)
-    // };
+    let options = {
+        scriptPath: "scripts",
+        args: JSON.stringify(req.body)
+    };
   
-    // const goToScript = () => {
-    //     return new Promise((resolve, reject) => {
-    //         PythonShell.run("script-07.py", options, (err, res) => {
-    //             if (err) {reject(err)}
-    //             responseScript = JSON.parse(res)
-    //             resolve(responseScript)
-    //         })
-    //     })
-    // }
-    // try {
-    //     const scriptResult = await goToScript()
-    //     res.json(scriptResult);
-    // } catch (e) {
-    //     res.json(e);
-    // }
+    const goToScript = () => {
+        return new Promise((resolve, reject) => {
+            PythonShell.run("script-07.py", options, (err, res) => {
+                if (err) {reject(err)}
+                responseScript = JSON.parse(res)
+                resolve(responseScript)
+            })
+        })
+    }
+    try {
+        const scriptResult = await goToScript()
+
+        console.log(scriptResult)
+
+        scriptResult.forEach(element => {
+            Faceads.insertMany(element);
+        })
+
+        res.json({
+            error: null,
+            msg: "Dados cadastrados com sucesso!",
+        });
+    } catch (e) {
+        console.log(e)
+        res.json(e);
+    }
 });
 
 module.exports = router;

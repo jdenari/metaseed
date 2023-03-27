@@ -102,7 +102,6 @@ export default {
             headersName: ['ID', 'DATA INÍCIO', 'DATA FINAL', 'REDE', 'ALCANCE', 'IMPRESSÕES', 'CLIQUES', 'CUSTO', 'REP.25%', 'REP.50%', 'REP.75%', 'REP.95%', 'V', 'CICLO', 'CLASS', 'TIPO', 'SEM'],
             startDate: '2022-05-01',
             endDate: '2022-05-30',
-
             selected: null,
             file: "",
             fileName: "Selecione",
@@ -146,15 +145,11 @@ export default {
             this.$store.commit('CHANGE_SCRIPT_FUNCTION', document.getElementById("script-function").value)
         },
         async sendFileToDatabase(){
-            const fileSize = this.file.size;
-
-            console.log(`O tamanho do arquivo é ${fileSize} bytes.`);
 
             const results = await new Promise((resolve) => {
                 Papa.parse(this.file, {
                     header: true,
                     delimiter: /[,\t;]/,
-                    skipRows: 2,
                     encoding: 'UTF-16le',
                     complete: (results) => {
                         resolve(results);
@@ -162,8 +157,31 @@ export default {
                 });
             });
 
+            const filteredResults = results.data.map(obj => ({
+                Campanha: obj.Campanha,
+                Cliques: obj.Cliques,
+                'Impr.': obj['Impr.'],
+                Custo: obj.Custo,
+                Visualizações: obj.Visualizações,
+                'Vídeo assistido até 25%': obj['Vídeo assistido até 25%'],
+                'Vídeo assistido até 50%': obj['Vídeo assistido até 50%'],
+                'Vídeo assistido até 75%': obj['Vídeo assistido até 75%'],
+                'Vídeo assistido até 100%': obj['Vídeo assistido até 100%'],
+            }));
+
+            const filteredAndExcludedResults = filteredResults.filter(obj => obj['Impr.'] !== '0');
+
+            filteredAndExcludedResults.pop()
+
+            filteredAndExcludedResults.forEach(obj => {
+                const dateStr = this.fileName.match(/\d{8}/)[0];
+                const date = new Date(`${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6)}`);
+                const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString()}`;
+                obj.date_start = formattedDate;
+                obj.date_stop = formattedDate;
+            });
             
-            this.$store.dispatch('treatGoogleData', results.data)
+            this.$store.dispatch('treatGoogleData', filteredAndExcludedResults);
         }
     }
 };
@@ -173,19 +191,16 @@ export default {
 table {
     font-size: 11px;
 }
-
 .table-responsive {
     height: 700px;
     overflow-x: auto;
 }
-
 .table-sticky th {
     position: sticky;
     top: 0;
     background-color: var(--dark-black);
     color: var(--light-white);
 }
-
 input[type='file'] {
     display: none
 }

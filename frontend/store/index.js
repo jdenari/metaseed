@@ -295,6 +295,8 @@ export default {
 
         async treatGoogleData({commit, state, dispatch}, payload){
 
+            console.log(payload)
+
             await fetch(`${state.url}/api/faceads/googleData`, {
                 method: "POST",
                 headers: {"Content-type": "application/json",},
@@ -302,10 +304,10 @@ export default {
             })
             .then((resp) => resp.json())
             .then((data) => { 
-                commit('MESSAGE_RESPONSE', data)
-                dispatch('hideMessageWarning')
+                // commit('MESSAGE_RESPONSE', data)
+                // dispatch('hideMessageWarning')
             })
-            commit('UPDATE_DATA_FACEADS', payload)
+            // commit('UPDATE_DATA_FACEADS', payload)
         },
 
         async getDataDatabase({commit, state, dispatch}){

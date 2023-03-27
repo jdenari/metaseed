@@ -22,7 +22,7 @@ import LeadsContentSection from '../../components/ClientPage/Marketing/Leads/Lea
             , MainHeader
             , LeadsContentSection
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 
