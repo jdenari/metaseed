@@ -10,77 +10,73 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(item, index) in mainData" :key="index">
+                    <tr v-for="(item, index) in formattedData" :key="index">
                         <td v-for="(value, key) in item" :key="key">{{ value }}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="d-flex flex-row-reverse">
-            <form enctype="multipart/form-data" class="d-flex align-items-center p-2">
-                <div class="w-75 d-flex flex-row">
-                    <label 
-                        for="file" 
-                        class="label border col-7"
-                        > 
-                    {{ fileName }}
-                    </label>
-                    <select class="bg-light border col-5" id="script-function" @change="changeScriptFunction">
-                        <option value="script-01" selected >Script 01</option>
-                    </select>
-                    <input 
-                        id="file" 
-                        type="file"
-                        ref="file"
-                        @change="selectFile()"
+        <div class="d-md-flex">
+            <div class="d-flex flex-row col-md-6 col-12">
+                <form enctype="multipart/form-data" class="d-flex align-items-center p-2">
+                    <div class="w-100 d-flex flex-row">
+                        <label 
+                            for="file" 
+                            class="label border col-12"
+                            > 
+                        {{ fileName }}
+                        </label>
+                        <input 
+                            id="file" 
+                            type="file"
+                            ref="file"
+                            @change="selectFile()"
+                        >
+                    </div>
+                    <div class="d-flex">
+                        <SmallButton 
+                            smallButtonText="Mandar"
+                            class="mx-1"
+                            @event="sendFileToDatabase"
+                        />
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex flex-md-row-reverse col-md-6 col-12">
+                <SmallButton 
+                    smallButtonText="Exportar"
+                    class="mr-md-5 my-3"
+                    @event="$store.dispatch('exportToExcel', {data: mainData, documentName: 'nome_do_documento'})"
+                />  
+                <SmallButton 
+                    smallButtonText="Atualizar Dados"
+                    class="mx-2 my-3"
+                    @event="$bvModal.show('modalPassword')"
+                />
+                <b-modal 
+                    id="modalPassword" 
+                    ref="modalPassword"
+                    ok-only
+                    hide-footer
                     >
-                </div>
-                <div class="d-flex">
-                    <SmallButton 
-                        smallButtonText="Limpar"
-                        class="bg-secondary ml-4 mx-1"
-                        @event="cleanFile"
-                    />   
-                    <SmallButton 
-                        smallButtonText="Acionar"
-                        class="mx-1"
-                        @event="sendFileToDatabase"
-                    />
-                </div>
-            </form>
-            <SmallButton 
-                smallButtonText="Exportar"
-                class="mr-5 my-3"
-                @event="$store.dispatch('exportToExcel', {data: mainData, documentName: 'nome_do_documento'})"
-            />  
-            <SmallButton 
-                smallButtonText="Atualizar Dados"
-                class="mx-2 my-3"
-                @event="$bvModal.show('modalPassword')"
-            />
-            <b-modal 
-                id="modalPassword" 
-                ref="modalPassword"
-                ok-only
-                hide-footer
-                >
-                <div class="d-block">Tem certeza que quer atualizar o banco de dados? </div>
-                <div class="d-flex flex-row-reverse w-100 mt-4">
-                    <button 
-                        @click="getDataFromFacebookAdd();$bvModal.hide('modalPassword')"
-                        class="btn btn-primary m-1" 
-                        type="button"
-                        >Sim
-                    </button>
-                    <button 
-                        @click="$bvModal.hide('modalPassword')"
-                        class="btn btn-secondary m-1"
-                        type="button"
-                        >Voltar
-                    </button>
-                </div>
-            </b-modal>
+                    <div class="d-block">Tem certeza que quer atualizar o banco de dados? </div>
+                    <div class="d-flex flex-row-reverse w-100 mt-4">
+                        <button 
+                            @click="getDataFromFacebookAdd();$bvModal.hide('modalPassword')"
+                            class="btn btn-primary m-1" 
+                            type="button"
+                            >Sim
+                        </button>
+                        <button 
+                            @click="$bvModal.hide('modalPassword')"
+                            class="btn btn-secondary m-1"
+                            type="button"
+                            >Voltar
+                        </button>
+                    </div>
+                </b-modal>
+            </div>
         </div>
     </div>
 </template>
@@ -89,6 +85,7 @@
 import FilterButtonOutline from '../FilterButtonOutline.vue';
 import SmallButton from '../../../SmallButton.vue';
 import Papa from 'papaparse';
+import moment from 'moment'
   
 export default {
     components: {
@@ -121,13 +118,21 @@ export default {
             return Array.from(uniqueHeaders);
         },
         uniqueValues() {
-            if (Object.keys(this.mainData).length === 0) {return {};
-        }
+            if (Object.keys(this.mainData).length === 0) {return {};}
             const uniqueValuesObj = {};
             const keys = ['date_start', 'week_number', 'cycle', 'class', 'type'];
             keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
             return uniqueValuesObj;
         },
+        formattedData: function() {
+            if (Object.keys(this.mainData).length === 0) {return {};}
+            return this.mainData.map(function(element) {
+                return Object.assign({}, element, {
+                    date_start: moment(element.date_start).format('DD/MM/YYYY'),
+                    date_stop: moment(element.date_stop).format('DD/MM/YYYY')
+                });
+            });
+        }
     },
     methods: {
         getDataFromFacebookAdd(){

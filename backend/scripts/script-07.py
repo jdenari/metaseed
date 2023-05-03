@@ -8,13 +8,13 @@ data = json.loads(sys.argv[1])
 for obj in data:
     
     if obj['Vídeo assistido até 25%'] != '':
-        obj['Vídeo assistido até 25%'] = round(float(obj['Vídeo assistido até 25%'].replace('%', '').replace(',', '.'))/100 * int(obj['Visualizações']), 0)
+        obj['Vídeo assistido até 25%'] = round(float(obj['Vídeo assistido até 25%'].replace('%', '').replace(',', '.'))/100 * float(obj['Visualizações']), 0)
     if obj['Vídeo assistido até 50%'] != '':
-        obj['Vídeo assistido até 50%'] = round(float(obj['Vídeo assistido até 50%'].replace('%', '').replace(',', '.'))/100 * int(obj['Visualizações']), 0)
+        obj['Vídeo assistido até 50%'] = round(float(obj['Vídeo assistido até 50%'].replace('%', '').replace(',', '.'))/100 * float(obj['Visualizações']), 0)
     if obj['Vídeo assistido até 75%'] != '':
-        obj['Vídeo assistido até 75%'] = round(float(obj['Vídeo assistido até 75%'].replace('%', '').replace(',', '.'))/100 * int(obj['Visualizações']), 0)
+        obj['Vídeo assistido até 75%'] = round(float(obj['Vídeo assistido até 75%'].replace('%', '').replace(',', '.'))/100 * float(obj['Visualizações']), 0)
     if obj['Vídeo assistido até 100%'] != '':
-        obj['Vídeo assistido até 100%'] = round(float(obj['Vídeo assistido até 100%'].replace('%', '').replace(',', '.'))/100 * int(obj['Visualizações']), 0)
+        obj['Vídeo assistido até 100%'] = round(float(obj['Vídeo assistido até 100%'].replace('%', '').replace(',', '.'))/100 * float(obj['Visualizações']), 0)
 
     campanha = obj['Campanha']
     campanha_parts = campanha.split(' ')

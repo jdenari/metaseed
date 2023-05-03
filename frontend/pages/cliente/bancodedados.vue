@@ -16,14 +16,13 @@ import SideBar from '../../components/ClientPage/SideBar/SideBar.vue';
 import MainHeader from '../../components/MainHeader.vue'
 import DatabaseTable from '../../components/ClientPage/Marketing/Database/DatabaseTable';
 
-
     export default {
         components: {
             SideBar
             , MainHeader
             , DatabaseTable
         },
-        // middleware: ['auth']
+        middleware: ['auth']
     }
 </script>
 

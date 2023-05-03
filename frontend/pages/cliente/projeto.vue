@@ -6,25 +6,27 @@
         <div class="d-block d-xl-flex">
             <SideBar />
             <div class="w-100 bg-dark-black">
-                <LeadsContentSection />
+                <MainProject />
             </div>
         </div>
     </div>
 </template>
+
 <script>
-import SideBar from '../../components/ClientPage/SideBar/SideBar.vue';
-import MainHeader from '../../components/MainHeader.vue'
-import LeadsContentSection from '../../components/ClientPage/Marketing/Leads/LeadsContentSection.vue';
+    import SideBar from '../../components/ClientPage/SideBar/SideBar.vue';
+    import MainHeader from '../../components/MainHeader.vue'
+    import MainProject from '../../components/ClientPage/Project/MainProject.vue';
 
     export default {
         components: {
             SideBar
             , MainHeader
-            , LeadsContentSection
+            , MainProject
         },
-        middleware: ['auth']
+        // middleware: ['auth']
     }
 </script>
 
 <style>
+
 </style>

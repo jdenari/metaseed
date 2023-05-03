@@ -34,6 +34,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-md-flex d-block">
                 <div class="m-1">
                     <h6 class="px-1">CLASSE</h6>
                     <div class="d-flex">
@@ -96,23 +98,8 @@
             <div class="border bg-white p-3 my-1">
                 <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 75%</div>
                 <div class="d-lg-flex d-block">
-                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
-                        <div class="h5 text-center">FB | IG</div>
-                        <table class="table table-dist-content text-center mx-auto">
-                            <thead>
-                                <tr class="bg-dark-black text-light-white">
-                                    <th v-for="(column, index) in headerTableFB75" :key="'header-' + index">{{ column }}</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
-                                    <td v-for="(column, columnIndex) in columnsTableFB75" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
-                        <div class="h5 text-center">GOOGLE</div>
+                    <div class="col-sm-10 col-12 m-auto px-3">
+                        <div class="h5 text-center">FB | IG | GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
                                 <tr class="bg-dark-black text-light-white">
@@ -131,23 +118,8 @@
             <div class="border bg-white p-3 my-1">
                 <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 50%</div>
                 <div class="d-lg-flex d-block">
-                    <div class="ww-lg-50 w-md-75 w-100 m-auto px-3">
-                        <div class="h5 text-center">FB | IG</div>
-                        <table class="table table-dist-content text-center mx-auto">
-                            <thead>
-                                <tr class="bg-dark-black text-light-white">
-                                    <th v-for="(column, index) in headerTableFB50" :key="'header-' + index">{{ column }}</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
-                                    <td v-for="(column, columnIndex) in columnsTableFB50" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
-                        <div class="h5 text-center">GOOGLE</div>
+                    <div class="col-sm-10 col-12 m-auto px-3">
+                        <div class="h5 text-center">FB | IG | GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
                                 <tr class="bg-dark-black text-light-white">
@@ -166,23 +138,8 @@
             <div class="border bg-white p-3 my-1">
                 <div class="h4 title-dist-table text-center rounded">REPRODUÇÃO 25%</div>
                 <div class="d-lg-flex d-block">
-                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
-                        <div class="h5 text-center">FB | IG</div>
-                        <table class="table table-dist-content text-center mx-auto">
-                            <thead>
-                                <tr class="bg-dark-black text-light-white">
-                                    <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataReprodution" :key="'row-' + rowIndex">
-                                    <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0">{{ row[column] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="w-lg-50 w-md-75 w-100 m-auto px-3">
-                        <div class="h5 text-center">GOOGLE</div>
+                    <div class="col-sm-10 col-12 m-auto px-3">
+                        <div class="h5 text-center">FB | IG | GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto">
                             <thead>
                                 <tr class="bg-dark-black text-light-white">

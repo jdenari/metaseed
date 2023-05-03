@@ -1,7 +1,7 @@
 <template>
 	<aside class="sideBar bg-dark-black py-3 pl-xl-3 px-xl-0 px-3" :class="{'sideBar-small': fullSideBar }">
 		<div v-if="!this.fullSideBar">
-			<div class="accordion m-md-0 m-auto" role="tablist">
+			<!-- <div class="accordion m-md-0 m-auto" role="tablist">
 				<b-card no-body class="mb-1">
 					<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
 						<img src="../../../static/icons/facebook.svg" alt="" class="mx-2">
@@ -34,17 +34,47 @@
 						</b-card-body>
 					</b-collapse>
 				</b-card>
-			</div>
+			</div> -->
 			<div class="accordion m-md-0 m-auto" role="tablist">
 				<b-card no-body class="mb-1">
 					<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
-						<img src="../../../static/icons/laptop.svg" alt="" class="mx-2">
-						<nuxt-link to="/cliente/dashboards" class="no-underline">
+						<img src="../../../static/icons/lightbulb.svg" alt="" class="mx-2">
+						<nuxt-link to="/cliente/projeto" class="no-underline w-100">
 							<b-button 
 								block v-b-toggle.accordion-3
 								variant="light"
 								class="rounded-0 m-0 px-2 p-0 text-left"
-								> Dashboards
+								> Projeto
+							</b-button>
+						</nuxt-link>
+					</b-card-header>
+				</b-card>
+			</div>
+			<div class="accordion m-md-0 m-auto" role="tablist">
+				<b-card no-body class="mb-1">
+					<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
+						<img src="../../../static/icons/kanban.svg" alt="" class="mx-2">
+						<nuxt-link to="/cliente/kanban" class="no-underline w-100">
+							<b-button 
+								block v-b-toggle.accordion-3
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								> Kanban
+							</b-button>
+						</nuxt-link>
+					</b-card-header>
+				</b-card>
+			</div>
+			<div class="accordion m-md-0 m-auto" role="tablist">
+				<b-card no-body class="mb-1">
+					<b-card-header header-tag="header" class="p-2 d-flex" role="tab">
+						<img src="../../../static/icons/diagram.svg" alt="" class="mx-2">
+						<nuxt-link to="/cliente/mapeamentodeprocessos" class="no-underline w-100">
+							<b-button 
+								block v-b-toggle.accordion-3
+								variant="light"
+								class="rounded-0 m-0 px-2 p-0 text-left"
+								> Mapeamento de Processos
 							</b-button>
 						</nuxt-link>
 					</b-card-header>
@@ -83,8 +113,8 @@
 				ref="modalExitSideBar"
 				ok-only
 				hide-footer
-				>
-				<div class="d-block">Tem certeza que quer sair da sua conta? </div>
+			>
+			<div class="d-block">Tem certeza que quer sair da sua conta? </div>
 				<div class="d-flex flex-row-reverse w-100 mt-4">
 					<button 
 						@click="$store.commit('DEAUTHENTICATE');$bvModal.hide('modalExitSideBar')"

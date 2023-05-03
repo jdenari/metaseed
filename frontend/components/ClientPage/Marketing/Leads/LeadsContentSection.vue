@@ -10,23 +10,37 @@
             />
             <div class="d-md-flex d-block">
                 <div class="m-1">
+                    <h6 class="px-1">REDE SOCIAL</h6>
+                    <div class="d-flex">
+                        <div v-for="(value, index) in uniqueValues.social_network" :key="'type-' + index">
+                            <FilterButtonOutline
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
+                                v-on:event="handleFilter('social_network', value)"
+                                v-bind:isActive="uniqueValues.social_network[value]"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="m-1">
                     <h6 class="px-1">TIPO</h6>
                     <div class="d-flex">
                         <div v-for="(value, index) in uniqueValues.type" :key="'type-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
                                 v-on:event="handleFilter('type', value)"
                                 v-bind:isActive="uniqueValues.type[value]"
                             />
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-md-flex d-block">
                 <div class="m-1">
                     <h6 class="px-1">CLASSE</h6>
-                    <div class="d-md-flex d-block">
+                    <div class="d-flex">
                         <div v-for="(value, index) in uniqueValues.class" :key="'class-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
                                 v-on:event="handleFilter('class', value)"
                                 v-bind:isActive="uniqueValues.class[value]"
                             />
@@ -35,10 +49,10 @@
                 </div>
                 <div class="m-1">
                     <h6 class="px-1">CICLO</h6>
-                    <div class="d-md-flex d-block">
+                    <div class="d-flex">
                         <div v-for="(value, index) in uniqueValues.cycle" :key="'type-' + index">
                             <FilterButtonOutline
-                                v-bind:FilterButtonOutlineText="value"
+                                v-bind:FilterButtonOutlineText="value.toUpperCase()"
                                 v-on:event="handleFilter('cycle', value)"
                                 v-bind:isActive="uniqueValues.cycle[value]"
                             />
@@ -60,29 +74,12 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataLeads" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataLeadsFacebook" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0 px-2">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-6">
-                        <div class="h5 text-center">IG</div>
-                        <table class="table table-dist-content text-center mx-auto border">
-                            <thead>
-                                <tr class="bg-dark-black text-light-white">
-                                    <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataLeads" :key="'row-' + rowIndex">
-                                    <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0 px-2">{{ row[column] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="h5 text-center">GOOGLE</div>
                         <table class="table table-dist-content text-center mx-auto border">
@@ -92,27 +89,14 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataLeads" :key="'row-' + rowIndex">
+                                <tr v-for="(row, rowIndex) in dataLeadsGoogle" :key="'row-' + rowIndex">
                                     <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0 px-2">{{ row[column] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-6">
-                        <div class="h5 text-center">YOUTUBE</div>
-                        <table class="table table-dist-content text-center mx-auto border">
-                            <thead>
-                                <tr class="bg-dark-black text-light-white">
-                                    <th v-for="(column, index) in headerTableFB25" :key="'header-' + index">{{ column }}</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr v-for="(row, rowIndex) in dataLeads" :key="'row-' + rowIndex">
-                                    <td v-for="(column, columnIndex) in columnsTableFB25" :key="'cell-' + rowIndex + '-' + columnIndex" class="p-0 px-2">{{ row[column] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="h5 text-center">TOTAL</div>
                         <table class="table table-dist-content text-center mx-auto border">
@@ -171,7 +155,7 @@
                 if (!this.mainData || Object.keys(this.mainData).length === 0) {return [];}
 
                 const uniqueValuesObj = {};
-                const keys = ['date_start', 'week_number', 'cycle', 'class', 'type'];
+                const keys = ['date_start', 'week_number', 'cycle', 'class', 'type', 'social_network'];
                 keys.forEach(key => {uniqueValuesObj[key] = Array.from(new Set(this.mainData.map(item => item[key])));});
                 return uniqueValuesObj;
             },
@@ -185,27 +169,10 @@
                 dataTreated = this.mainData
                     .filter(element => {
                         let shouldAdd = true;
-                        for (const e in Object.values(this.activatedFilters.cycle)) {
-                            if (Object.values(this.activatedFilters.cycle)[e] === false) {
-                                if (Object.keys(this.activatedFilters.cycle)[e] == element.cycle) {
-                                    shouldAdd = false;
-                                }
-                            }
-                        }
-                        for (const e in Object.values(this.activatedFilters.class)) {
-                            if (Object.values(this.activatedFilters.class)[e] === false) {
-                                if (Object.keys(this.activatedFilters.class)[e] == element.class) {
-                                    shouldAdd = false;
-                                }
-                            }
-                        }
-                        for (const e in Object.values(this.activatedFilters.type)) {
-                            if (Object.values(this.activatedFilters.type)[e] === false) {
-                                if (Object.keys(this.activatedFilters.type)[e] == element.type) {
-                                    shouldAdd = false;
-                                }
-                            }
-                        }
+                        for (const e in Object.values(this.activatedFilters.cycle)) {if (Object.values(this.activatedFilters.cycle)[e] === false) {if (Object.keys(this.activatedFilters.cycle)[e] == element.cycle) {shouldAdd = false;}}}
+                        for (const e in Object.values(this.activatedFilters.class)) {if (Object.values(this.activatedFilters.class)[e] === false) {if (Object.keys(this.activatedFilters.class)[e] == element.class) {shouldAdd = false;}}}
+                        for (const e in Object.values(this.activatedFilters.type)) {if (Object.values(this.activatedFilters.type)[e] === false) {if (Object.keys(this.activatedFilters.type)[e] == element.type) {shouldAdd = false;}}}
+                        for (const e in Object.values(this.activatedFilters.social_network)) {if (Object.values(this.activatedFilters.social_network)[e] === false) {if (Object.keys(this.activatedFilters.social_network)[e] == element.social_network) {shouldAdd = false;}}}
                         return shouldAdd;
                     })
                     .map(element => {
@@ -229,7 +196,6 @@
                     };
                     this.dataTreated.filter(element => element.date_start === date)
                     .forEach(element => {
-                        
                         dataLeads[date].clicks += Number(element.clicks);
                         dataLeads[date].spend += Number(element.spend); 
                     });
@@ -239,7 +205,57 @@
                     if (dataLeads[date].clicks > 0) {dataLeads[date].spendClicks = (dataLeads[date].spend / dataLeads[date].clicks).toFixed(2);} else {dataLeads[date].spendClicks = 0;}
                 })
                 return dataLeads
-            }
+            },
+
+            dataLeadsFacebook() {
+                if (!this.mainData || Object.keys(this.mainData).length === 0) {return {};}
+                const dataLeads = {};
+                
+                this.uniqueValues.date_start.forEach(date => {
+                dataLeads[date] = {
+                    date: new Date(date).toLocaleDateString('pt-BR'),
+                    clicks: 0,
+                    spend: 0,
+                    spendClicks: 0,
+                };
+                this.dataTreated
+                    .filter(element => element.date_start === date && element.social_network === 'facebook')
+                    .forEach(element => {
+                    dataLeads[date].clicks += Number(element.clicks);
+                    dataLeads[date].spend += Number(element.spend); 
+                    });
+
+                dataLeads[date].clicks = Math.round(dataLeads[date].clicks).toLocaleString();
+                dataLeads[date].spend = dataLeads[date].spend.toFixed(2);
+                if (dataLeads[date].clicks > 0) {dataLeads[date].spendClicks = (dataLeads[date].spend / dataLeads[date].clicks).toFixed(2);} else {dataLeads[date].spendClicks = 0;}
+                })
+                return dataLeads
+            },
+
+            dataLeadsGoogle() {
+                if (!this.mainData || Object.keys(this.mainData).length === 0) {return {};}
+                const dataLeads = {};
+                
+                this.uniqueValues.date_start.forEach(date => {
+                dataLeads[date] = {
+                    date: new Date(date).toLocaleDateString('pt-BR'),
+                    clicks: 0,
+                    spend: 0,
+                    spendClicks: 0,
+                };
+                this.dataTreated
+                    .filter(element => element.date_start === date && element.social_network === 'google')
+                    .forEach(element => {
+                    dataLeads[date].clicks += Number(element.clicks);
+                    dataLeads[date].spend += Number(element.spend); 
+                    });
+
+                dataLeads[date].clicks = Math.round(dataLeads[date].clicks).toLocaleString();
+                dataLeads[date].spend = dataLeads[date].spend.toFixed(2);
+                if (dataLeads[date].clicks > 0) {dataLeads[date].spendClicks = (dataLeads[date].spend / dataLeads[date].clicks).toFixed(2);} else {dataLeads[date].spendClicks = 0;}
+                })
+                return dataLeads
+            },
         },
         methods: {
             // change the filters to false or true and reload the main function
@@ -251,10 +267,11 @@
             createObjectFilters(){
                 if (Object.keys(this.uniqueValues).length === 0) {return {};}
 
-                const filters = {class: {},type: {},cycle: {}};
+                const filters = {class: {},type: {},cycle: {}, social_network: {}};
                 this.uniqueValues.class.forEach(value => {filters.class[value] = true;});
                 this.uniqueValues.type.forEach(value => {filters.type[value] = true;});
                 this.uniqueValues.cycle.forEach(value => {filters.cycle[value] = true;});
+                this.uniqueValues.social_network.forEach(value => {filters.social_network[value] = true;});
                 this.activatedFilters = filters
             },
         }

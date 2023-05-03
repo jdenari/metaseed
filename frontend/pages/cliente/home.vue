@@ -11,6 +11,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import SideBar from '../../components/ClientPage/SideBar/SideBar.vue';
 import MainHeader from '../../components/MainHeader.vue'
@@ -24,7 +25,7 @@ import DistributionContentSection from '../../components/ClientPage/Marketing/Co
             , MainFooter
             , DistributionContentSection
         },
-        // middleware: ['auth']
+        middleware: ['auth']
     }
 </script>
 
