@@ -1,17 +1,39 @@
 <template>
-    <div class="p-3 px-5">
-        <h6 class="text-center text-white">kanban</h6>
+    <div class="m-3 p-3 px-5 bg-white rounded">
+        <h2 class="text-center mb-3">KANBAN</h2>
+        <MessageWarning 
+            :messageWarning="this.$store.state.messageWarning"
+            class="p-1"
+        />
         <KanbanBoard :columns="columns" :cards="formattedCards" />
         <div class="p-3">
             <SmallButton 
                 smallButtonText="Salvar"
-                @event="handleSaveKanban"
+                @event="$bvModal.show('modalSaveTaskKanban')"
             />
         </div>
-        <MessageWarning 
-            :messageWarning="this.$store.state.messageWarning"
-            class="p-3"
-        />
+        <b-modal 
+				id="modalSaveTaskKanban" 
+				ref="modalSaveTaskKanban"
+				ok-only
+				hide-footer
+			>
+			<div class="d-block">Tem certeza que quer salvar suas atividades?</div>
+				<div class="d-flex flex-row-reverse w-100 mt-4">
+					<button 
+						@click="handleSaveKanban();$bvModal.hide('modalSaveTaskKanban')"
+						class="btn btn-primary m-1"
+						type="button"  
+						>Sim
+					</button>
+					<button 
+						@click="$bvModal.hide('modalSaveTaskKanban')"
+						class="btn btn-secondary m-1"
+						type="button" 
+						>Voltar
+					</button>
+				</div>
+			</b-modal>
     </div>
 </template>
   
