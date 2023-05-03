@@ -10,16 +10,16 @@
 				{{ card.footerText }}
 			</div>
 			<div class="button-container col-4 p-0">
-				<button type="button" class="btn btn-outline-secondary px-1 py-0">
-					<img src="../../../static/icons/arrow-left-short.svg" alt="Ícone 1" class="icon" />
-				</button>
-				<button type="button" class="btn btn-outline-secondary px-1 py-0">
-					<img src="../../../static/icons/arrow-right-short.svg" alt="Ícone 2" class="icon" />
-				</button>
+                <button type="button" class="btn btn-outline-secondary px-1 py-0" @click="emitDecreaseClick">
+                    <img src="../../../static/icons/arrow-left-short.svg" alt="Ícone 1" class="icon" />
+                </button>
+                <button type="button" class="btn btn-outline-secondary px-1 py-0" @click="emitIncreaseClick">
+                    <img src="../../../static/icons/arrow-right-short.svg" alt="Ícone 2" class="icon" />
+                </button>
 			</div>
 		</div>
 	</div>
-  </template>
+</template>
     
 <script>
     export default {
@@ -34,10 +34,26 @@
                 switch (this.card.priority) {
                     case 'Urgente': return 'priority-urgent';
                     case 'Alta': return 'priority-high';
-                    case 'Médio': return 'priority-medium';
+                    case 'Média': return 'priority-medium';
                     case 'Baixa': return 'priority-low';
                     default: return '';
                 }
+            },
+        },
+        methods: {
+            emitDecreaseClick() {
+                const cardData = {
+                    status: this.card.status,
+                    id: this.card.id,
+                };
+                this.$emit("decrease", cardData);
+            },
+            emitIncreaseClick() {
+                const cardData = {
+                    status: this.card.status,
+                    id: this.card.id,
+                };
+                this.$emit("increase", cardData);
             },
         },
     }

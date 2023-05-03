@@ -42,4 +42,25 @@ router.post('/add-task', async (req, res) => {
     }
 });
 
+router.put('/replace-data', async (req, res) => {
+    const newData = req.body;
+
+    if (!Array.isArray(newData)) {
+        return res.status(400).json({ message: 'O corpo da requisição deve ser um array de tarefas' });
+    }
+
+    try {
+        // Remover todos os registros atuais
+        await Kanban.deleteMany({});
+
+        // Inserir novos dados
+        const insertedData = await Kanban.insertMany(newData);
+
+        // Retornar a base de dados atualizada
+        res.status(200).json(insertedData);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao substituir os dados!', error });
+    }
+});
+
 module.exports = router;

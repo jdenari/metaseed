@@ -37,7 +37,10 @@ export default {
 
             // faceads
             dataFaceAds: {
-            }
+            },
+
+            // kanban
+            kanbanData: []
         }
     },
     mutations: {
@@ -120,7 +123,34 @@ export default {
             }
             // commiting final data
             state.dataFaceAds = data;
-        }
+        },
+        SET_TASK_KANBAN_DATA(state, data){
+            state.kanbanData = data
+        },
+        INCREASE_TASK_STATUS(state, data) {
+            const taskIndex = state.kanbanData.findIndex(task => task.id === data.id);
+            if (taskIndex !== -1) {
+                const currentStatus = data.status;
+        
+                if (currentStatus === 'backlog') {state.kanbanData[taskIndex].status = 'todo';
+                } else if (currentStatus === 'todo') {state.kanbanData[taskIndex].status = 'inprogress';
+                } else if (currentStatus === 'inprogress') {state.kanbanData[taskIndex].status = 'done';
+                } else if (currentStatus === 'done') {state.kanbanData[taskIndex].status = 'done';
+                }
+            }
+        },
+        DECREASE_TASK_STATUS(state, data) {
+            const taskIndex = state.kanbanData.findIndex(task => task.id === data.id);
+            if (taskIndex !== -1) {
+                const currentStatus = data.status;
+        
+                if (currentStatus === 'done') {state.kanbanData[taskIndex].status = 'inprogress';
+                } else if (currentStatus === 'inprogress') {state.kanbanData[taskIndex].status = 'todo';
+                } else if (currentStatus === 'todo') {state.kanbanData[taskIndex].status = 'backlog';
+                } else if (currentStatus === 'backlog') {state.kanbanData[taskIndex].status = 'backlog';
+                }
+            }
+        }, 
     },
     actions: {
         async sendLeadResponse({commit, state, dispatch}, dataLeadObject){
@@ -295,8 +325,6 @@ export default {
 
         async treatGoogleData({commit, state, dispatch}, payload){
 
-            console.log(payload)
-
             await fetch(`${state.url}/api/faceads/googleData`, {
                 method: "POST",
                 headers: {"Content-type": "application/json",},
@@ -327,6 +355,39 @@ export default {
                 commit('RESET_MESSAGE_WARNING')
             }, 5000)
         },
+
+        async getTasksForKanban({commit, state}, payload){
+
+            await fetch(`${state.url}/api/kanban/`, {
+                method: "GET",
+            })
+            .then((resp) => resp.json())
+            .then((data) => { 
+                commit('SET_TASK_KANBAN_DATA', data)
+            })
+        },
+
+        async replaceKanbanData({ commit, state, dispatch }) {
+            const payload = state.kanbanData;
+            const requestOptions = {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            };
+        
+            await fetch(`${state.url}/api/kanban/replace-data`, requestOptions)
+                .then((resp) => resp.json())
+                .then((data) => {
+                    commit("UPDATE_KANBAN_DATA", data);
+                    commit("MESSAGE_RESPONSE", "Base de dados atualizada com sucesso!");
+                    dispatch("hideMessageWarning");
+                })
+                .catch((error) => {
+                    commit("MESSAGE_RESPONSE", "Erro ao atualizar a base de dados!");
+                    dispatch("hideMessageWarning");
+                });
+        },        
+          
         exportToExcel({commit}, payload) {
             const worksheet = XLSX.utils.json_to_sheet(Object.values(payload.data));
             const workbook = XLSX.utils.book_new();

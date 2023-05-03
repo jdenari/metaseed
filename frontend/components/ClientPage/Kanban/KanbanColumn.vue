@@ -2,7 +2,13 @@
     <div class="kanban-column">
         <h3 class="column-title">{{ column.title }}</h3>
         <div class="cards">
-            <KanbanCard v-for="(card, index) in columnCards" :key="index" :card="card" />
+            <KanbanCard
+                v-for="(card, index) in columnCards"
+                :key="index"
+                :card="card"
+                @decrease="handleDecreaseClick($event)"
+                @increase="handleIncreaseClick($event)"
+            />
         </div>
     </div>
 </template>
@@ -20,13 +26,21 @@
                 required: true,
             },
             cards: {
-                type: Array,
-                required: true,
+                    type: Array,
+                    required: true,
+                },
             },
-        },
         computed: {
             columnCards() {
                 return this.cards;
+            },
+        },
+        methods: {
+            handleDecreaseClick(event) {
+                this.$store.commit('DECREASE_TASK_STATUS', event);
+            },
+            handleIncreaseClick(event) {
+                this.$store.commit('INCREASE_TASK_STATUS', event);
             },
         },
     }

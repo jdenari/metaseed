@@ -23,6 +23,9 @@
             , MainHeader
             , MainKanban
         },
+        async asyncData({ store }) {
+            await store.dispatch("getTasksForKanban");
+        },
         // middleware: ['auth']
     }
 </script>
