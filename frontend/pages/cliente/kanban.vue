@@ -28,5 +28,15 @@
 </script>
 
 <style>
+    .h-100 {
+        height: 100%;
+    }
 
+    .flex-grow-1 {
+        flex-grow: 1;
+    }
+
+    .bg-dark-black {
+        min-height: 100vh;
+    }
 </style>
