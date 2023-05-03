@@ -12,22 +12,22 @@
     
     export default {
         components: {
-        KanbanCard,
+            KanbanCard,
         },
         props: {
-        column: {
-            type: Object,
-            required: true,
-        },
-        cards: {
-            type: Array,
-            required: true,
-        },
+            column: {
+                type: Object,
+                required: true,
+            },
+            cards: {
+                type: Array,
+                required: true,
+            },
         },
         computed: {
-        columnCards() {
-            return this.cards;
-        },
+            columnCards() {
+                return this.cards;
+            },
         },
     }
 </script>

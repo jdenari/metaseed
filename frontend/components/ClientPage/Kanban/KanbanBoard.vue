@@ -1,29 +1,29 @@
 <template>
     <div class="kanban-board">
-      <KanbanColumn
-        v-for="(column, index) in columns"
-        :key="index"
-        :column="column"
-        :cards="cards.filter(card => card.status === column.status)"
-      />
+        <KanbanColumn
+            v-for="(column, index) in columns"
+            :key="index"
+            :column="column"
+            :cards="cards.filter(card => card.status === column.status)"
+        />
     </div>
-  </template>
+</template>
   
 <script>
     import KanbanColumn from './KanbanColumn.vue'
     export default {
         components: {
-        KanbanColumn,
+            KanbanColumn,
         },
         props: {
-        columns: {
-            type: Array,
-            required: true,
-        },
-        cards: {
-            type: Array,
-            required: true,
-        },
+            columns: {
+                type: Array,
+                required: true,
+            },
+            cards: {
+                type: Array,
+                required: true,
+            },
         },
     }
 </script>
