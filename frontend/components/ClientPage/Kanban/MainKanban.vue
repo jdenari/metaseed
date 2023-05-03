@@ -42,6 +42,7 @@
     import KanbanBoard from './KanbanBoard.vue';
     import SmallButton from '../../SmallButton.vue';
     import MessageWarning from '../../MessageWarning.vue';
+    import KanbanAddTask from './KanbanAddTask.vue';
     
     export default {
         name: 'MainKanban',
@@ -49,6 +50,7 @@
             KanbanBoard
             , SmallButton
             , MessageWarning
+            , KanbanAddTask
         },
         data() {
             return {
