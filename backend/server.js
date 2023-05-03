@@ -11,6 +11,7 @@ const userRouter = require("./routes/userRoutes.js");
 const leadRouter = require("./routes/leadRoutes.js");
 const automatizationRouter = require("./routes/automatizationRoutes.js");
 const faceadsRouter = require("./routes/faceadsRoutes.js");
+const kanbanRouter = require("./routes/kanbanRoutes.js");
 
 // config
 const port = 5000;
@@ -27,12 +28,12 @@ app.use(express.static("public"));
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
-
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
 app.use("/api/lead", leadRouter)
 app.use("/api/automatization", automatizationRouter)
 app.use("/api/faceads", faceadsRouter)
+app.use("/api/kanban", kanbanRouter)
 
 app.get("/", (req, res) => {
     res.json({ message: "Rota teste"})
