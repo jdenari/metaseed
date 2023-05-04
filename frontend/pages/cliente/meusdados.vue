@@ -5,7 +5,7 @@
         </div>
         <div class="d-block d-xl-flex">
             <SideBar />
-            <div class="w-100 bg-dark-black">
+            <div class="w-100 bg-dark-black main-profile-container">
                 <ProfileDataForm />
             </div>
         </div>
@@ -28,4 +28,7 @@ import ProfileDataForm from '../../components/ClientPage/ProfilePage/ProfileData
 </script>
 
 <style>
+    .main-profile-container {
+        min-height: calc(100vh - 94px);
+    }
 </style>

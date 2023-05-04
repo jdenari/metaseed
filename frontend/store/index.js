@@ -200,7 +200,7 @@ export default {
                 }
                 else {
                     // it takes to the dashboard page and commit all the page with the user info
-                    $nuxt.$router.push('/cliente/home')
+                    $nuxt.$router.push('/cliente/kanban')
                     commit("AUTHENTICATE", {
                         token: data.token, 
                         userId: data.userId, 

@@ -5,7 +5,7 @@
         </div>
         <div class="d-block d-xl-flex">
             <SideBar />
-            <div class="w-100 bg-dark-black">
+            <div class="w-100 bg-dark-black main-kanban-container">
                 <MainKanban />
             </div>
         </div>
@@ -26,20 +26,12 @@
         async asyncData({ store }) {
             await store.dispatch("getTasksForKanban");
         },
-        // middleware: ['auth']
+        middleware: ['auth']
     }
 </script>
 
-<style>
-    .h-100 {
-        height: 100%;
-    }
-
-    .flex-grow-1 {
-        flex-grow: 1;
-    }
-
-    .bg-dark-black {
+<style scoped>
+    .main-kanban-container {
         min-height: calc(100vh - 94px);
     }
 </style>

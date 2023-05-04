@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <h6 class="text-center text-white"> projeto </h6>
+    <div class="m-3 p-3 px-5 bg-white rounded sec-project">
+        <h2 class="text-center mb-3">PROJETO</h2>
+        <div class="text-center m-3">(Em Construção)</div>
     </div>
 </template>
   
@@ -9,3 +10,9 @@
         name: 'MainProject',
     }
 </script>
+
+<style scoped>
+.sec-project{
+    height: 500px;
+}
+</style>

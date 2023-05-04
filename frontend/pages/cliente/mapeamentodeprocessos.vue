@@ -5,7 +5,7 @@
         </div>
         <div class="d-block d-xl-flex">
             <SideBar />
-            <div class="w-100 bg-dark-black">
+            <div class="w-100 bg-dark-black main-process-design-container">
                 <MainProcessMaping />
             </div>
         </div>
@@ -23,7 +23,7 @@
             , MainHeader
             , MainProcessMaping
         },
-        // middleware: ['auth']
+        middleware: ['auth']
     }
 </script>
 

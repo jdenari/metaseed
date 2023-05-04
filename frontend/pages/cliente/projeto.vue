@@ -5,13 +5,12 @@
         </div>
         <div class="d-block d-xl-flex">
             <SideBar />
-            <div class="w-100 bg-dark-black">
+            <div class="main-project-container w-100 bg-dark-black">
                 <MainProject />
             </div>
         </div>
     </div>
 </template>
-
 <script>
     import SideBar from '../../components/ClientPage/SideBar/SideBar.vue';
     import MainHeader from '../../components/MainHeader.vue'
@@ -23,10 +22,11 @@
             , MainHeader
             , MainProject
         },
-        // middleware: ['auth']
+        middleware: ['auth']
     }
 </script>
-
 <style>
-
+.main-project-container {
+    height: calc(100vh - 94px) !important;
+}
 </style>

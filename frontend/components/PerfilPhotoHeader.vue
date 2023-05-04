@@ -4,8 +4,8 @@
             <li class="perfil-photo-li nav-item px-1 d-flex align-items-center">
             <b-avatar
                 href="#bar"
-                src="../static/perfil/joao-vitor-denari-dos-santos.png"
-                class="m-1 bg-white"
+                src="../static/icons/person.svg"
+                class="m-1 p-2 bg-white"
             ></b-avatar>
             <div class="m-2 text-dark">{{ $store.state.firstName }}</div>
             </li>
@@ -55,7 +55,7 @@
         name: "PerfilPhotoHeader",
         methods: {
             goToHome() {
-                this.$router.push("/cliente/home");
+                this.$router.push("/cliente/kanban");
             },
             goToProfile(){
                 this.$router.push("/cliente/meusdados");
