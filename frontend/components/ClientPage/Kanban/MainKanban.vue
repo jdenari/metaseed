@@ -6,34 +6,34 @@
             class="p-1"
         />
         <KanbanBoard :columns="columns" :cards="formattedCards" />
-        <div class="p-3">
+        <div class="p-3 d-flex flex-row-reverse">
             <SmallButton 
                 smallButtonText="Salvar"
                 @event="$bvModal.show('modalSaveTaskKanban')"
             />
         </div>
         <b-modal 
-				id="modalSaveTaskKanban" 
-				ref="modalSaveTaskKanban"
-				ok-only
-				hide-footer
-			>
-			<div class="d-block">Tem certeza que quer salvar suas atividades?</div>
-				<div class="d-flex flex-row-reverse w-100 mt-4">
-					<button 
-						@click="handleSaveKanban();$bvModal.hide('modalSaveTaskKanban')"
-						class="btn btn-primary m-1"
-						type="button"  
-						>Sim
-					</button>
-					<button 
-						@click="$bvModal.hide('modalSaveTaskKanban')"
-						class="btn btn-secondary m-1"
-						type="button" 
-						>Voltar
-					</button>
-				</div>
-			</b-modal>
+            id="modalSaveTaskKanban" 
+            ref="modalSaveTaskKanban"
+            ok-only
+            hide-footer
+        >
+        <div class="d-block">Tem certeza que quer salvar suas atividades?</div>
+            <div class="d-flex flex-row-reverse w-100 mt-4">
+                <button 
+                    @click="handleSaveKanban();$bvModal.hide('modalSaveTaskKanban')"
+                    class="btn btn-primary m-1"
+                    type="button"  
+                    >Sim
+                </button>
+                <button 
+                    @click="$bvModal.hide('modalSaveTaskKanban')"
+                    class="btn btn-secondary m-1"
+                    type="button" 
+                    >Voltar
+                </button>
+            </div>
+        </b-modal>
     </div>
 </template>
   
@@ -42,7 +42,7 @@
     import KanbanBoard from './KanbanBoard.vue';
     import SmallButton from '../../SmallButton.vue';
     import MessageWarning from '../../MessageWarning.vue';
-    import KanbanAddTask from './KanbanAddTask.vue';
+    import KanbanAddTask from './FormAddTask.vue';
     
     export default {
         name: 'MainKanban',

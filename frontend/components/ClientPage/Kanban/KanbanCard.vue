@@ -10,6 +10,9 @@
 				{{ card.footerText }}
 			</div>
 			<div class="button-container col-4 p-0">
+                <button type="button" class="btn btn-outline-secondary px-1 py-0" @click="emitRemoveClick">
+                    <img src="../../../static/icons/x.svg" alt="Ícone 1" class="icon" />
+                </button>
                 <button type="button" class="btn btn-outline-secondary px-1 py-0" @click="emitDecreaseClick">
                     <img src="../../../static/icons/arrow-left-short.svg" alt="Ícone 1" class="icon" />
                 </button>
@@ -55,11 +58,14 @@
                 };
                 this.$emit("increase", cardData);
             },
+            emitRemoveClick(){
+                this.$emit("remove", this.card.id);
+            }
         },
     }
 </script>
   
-<style>
+<style scoped>
 .kanban-card {
     background-color: #fff;
     border: 1px solid #ccc;

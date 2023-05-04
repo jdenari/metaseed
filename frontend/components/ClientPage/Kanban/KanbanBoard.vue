@@ -5,6 +5,7 @@
             :key="index"
             :column="column"
             :cards="cards.filter(card => card.status === column.status)"
+            :status="column.status"
         />
     </div>
 </template>
@@ -28,7 +29,7 @@
     }
 </script>
   
-<style>
+<style scoped>
     .kanban-board {
         display: flex;
         gap: 1rem;

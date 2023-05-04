@@ -40,7 +40,7 @@ export default {
             },
 
             // kanban
-            kanbanData: []
+            kanbanData: [],
         }
     },
     mutations: {
@@ -151,6 +151,16 @@ export default {
                 }
             }
         }, 
+        ADD_TASK_KANBAN_DATA(state, task) {
+            console.log(task)
+            state.kanbanData.push(task);
+        },        
+        REMOVE_TASK(state, payload) {
+            const taskIndex = state.kanbanData.findIndex(task => task.id === payload);
+            if (taskIndex !== -1) {
+                state.kanbanData.splice(taskIndex, 1);
+            }
+        },        
     },
     actions: {
         async sendLeadResponse({commit, state, dispatch}, dataLeadObject){
@@ -369,24 +379,39 @@ export default {
 
         async replaceKanbanData({ commit, state, dispatch }) {
             const payload = state.kanbanData;
-            const requestOptions = {
+            console.log(payload)
+            await fetch(`${state.url}/api/kanban/replace-data`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            };
-        
-            await fetch(`${state.url}/api/kanban/replace-data`, requestOptions)
-                .then((resp) => resp.json())
-                .then((data) => {
-                    commit("UPDATE_KANBAN_DATA", data);
-                    commit("MESSAGE_RESPONSE", "Base de dados atualizada com sucesso!");
-                    dispatch("hideMessageWarning");
-                })
-                .catch((error) => {
-                    commit("MESSAGE_RESPONSE", "Erro ao atualizar a base de dados!");
-                    dispatch("hideMessageWarning");
-                });
-        },        
+                headers: {"Content-type": "application/json",},
+                body: JSON.stringify(payload)
+            })
+            .then((resp) => resp.json())
+            .then(() => { 
+                commit('MESSAGE_RESPONSE', 'Salvo com sucesso!')
+                dispatch('hideMessageWarning')
+            })
+            .catch(() => {
+                commit("MESSAGE_RESPONSE", "Erro ao atualizar!");
+                dispatch("hideMessageWarning");
+            });
+        },
+
+        async addTaskKanbanData({ commit, state, dispatch }, payload) {
+            await fetch(`${state.url}/api/kanban/add-task`, {
+                method: "POST",
+                headers: {"Content-type": "application/json",},
+                body: JSON.stringify(payload)
+            })
+            .then((resp) => resp.json())
+            .then(() => { 
+                commit('MESSAGE_RESPONSE', 'Tarefa adicionada com sucesso!')
+                dispatch('hideMessageWarning')
+            })
+            .catch(() => {
+                commit("MESSAGE_RESPONSE", "Erro ao adicionar a tarefa");
+                dispatch("hideMessageWarning");
+            });
+        },      
           
         exportToExcel({commit}, payload) {
             const worksheet = XLSX.utils.json_to_sheet(Object.values(payload.data));

@@ -40,6 +40,6 @@
     }
 
     .bg-dark-black {
-        min-height: 100vh;
+        min-height: calc(100vh - 94px);
     }
 </style>
