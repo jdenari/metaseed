@@ -1,5 +1,5 @@
 <template>
-    <div class="m-3 p-3 px-5 bg-white rounded">
+    <div class="m-xl-3 mx-3 p-3 px-5 bg-white rounded">
         <h2 class="text-center mb-3">KANBAN</h2>
         <MessageWarning 
             :messageWarning="this.$store.state.messageWarning"

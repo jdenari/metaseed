@@ -1,5 +1,5 @@
 <template>
-    <div class="p-3 m-3">
+    <div class="p-3 m-xl-3">
         <form class="form-update-profile col-11 col-xl-7 col-md-7 p-5 mx-auto bg-white border-bottom shadow-sm bg-body-tertiary rounded">
             <div class="h1">Perfil</div>
             <div class="m-1 my-3 p-3 border">
@@ -120,7 +120,7 @@ export default {
             // all the data needed from password field
             profilePasswordItems: [
                 'Nova senha: ', 
-                'Repita a nova senha: '
+                'Repita nova senha: '
             ],
             listPassword: [
                 { model: "" },

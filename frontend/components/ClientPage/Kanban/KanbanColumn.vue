@@ -127,6 +127,7 @@
         border: 1px solid #ccc;
         padding: 1rem;
         background-color: #f7f7f7;
+        min-width: 202px;
     }
     
     .column-title {
